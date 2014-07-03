@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="744134157">
+    <data-source source="LOCAL" name="formmanagement" uuid="3eb884a2-a316-46fc-abd4-b4b35a6efd37">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\David\Documents\GitHub\formmanagement\src\formmanagement.db</jdbc-url>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+
