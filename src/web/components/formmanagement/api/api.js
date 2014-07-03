@@ -6,8 +6,7 @@
  **/
 
 var api = angular.module("formmanagement.api", [
-    "ngResource",
-    "mgcrea.ngStrap"
+    "ngResource"
 ]);
 
 api.factory("Patient", ["$resource", function ($resource) {
@@ -15,4 +14,4 @@ api.factory("Patient", ["$resource", function ($resource) {
     return $resource("/api/patients/:id", {id: "@id" });
 }]);
 
-console.log("test2")
+

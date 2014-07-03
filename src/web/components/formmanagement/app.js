@@ -9,10 +9,10 @@ var formmanagement = angular.module("formmanagement", [     // declaration of ba
     "ngRoute",                                  // ngRoute directive for realizing routing
     "formmanagement.api",                             // included bankbook modules
     "formmanagement.patients"
-
 ]);
 
 // create routing functionality on singleton $routeProvider and declare default route for non-existing sub pages
+
 formmanagement.config(['$routeProvider',
     function ($routeProvider) {
         // default route for non-existing routes
