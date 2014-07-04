@@ -9,9 +9,145 @@ var api = angular.module("formmanagement.api", [
     "ngResource"
 ]);
 
+/*
+var TYPE_PATIENT = 1;
+var TYPE_PHYSICIAN = 2;
+var TYPE_ADMINISTRATOR = 4;
+api.constant("UserType", {
+    "Patient": TYPE_PATIENT,
+    "Physician": TYPE_PHYSICIAN,
+    "Administrator": TYPE_ADMINISTRATOR
+});
+api.factory("getUserClass", [ "Patient" , "Physician", "Administrator", function (Patient, Physician, Administrator) {
+    return function getUserClass(type) {
+        /* jshint bitwise: false */
+        /*
+        if (type & TYPE_ADMINISTRATOR) {
+            return Administrator;
+        }
+        if (type & TYPE_PHYSICIAN) {
+            return Physician;
+        }
+        if (type & TYPE_PATIENT) {
+            return Patient;
+        }
+    };
+}]); */
+
 api.factory("Patient", ["$resource", function ($resource) {
-    console.log("test")
     return $resource("/api/patients/:id", {id: "@id" });
 }]);
+
+api.factory("Physician", ["$resource", function ($resource) {
+    return $resource("/api/physicians/:id", {id: "@id" });
+}]);
+
+
+/*
+api.service("Session", ["$http", "$q", "getUserClass", "Physician",
+    function ($http, $q, getUserClass, Physician) {
+        var self = this;
+
+        var cache_enabled = false;
+        var sessionStorageKey = "session";
+
+        var data = {};
+
+        // set session details for new session
+        var cacheSession = function (session) {
+            if (!session) {
+                delete sessionStorage[sessionStorageKey];
+            }
+            if (cache_enabled) {
+                sessionStorage[sessionStorageKey] = JSON.stringify(session);
+            }
+        };
+
+        // update existing session details
+        var update = function (session) {
+            cacheSession(session);
+            //Replace this.data with the session info,
+            //but make sure that the JS object reference to session.data doesn't change.
+            for (var key in data) {
+                delete data[key];
+            }
+            if (session && session.user) {
+                var UserClass = getUserClass(session.user.type);
+                data.user = new UserClass(session.user);
+            }
+            if (session && session.physician) {
+                data.physician = new Physician(session.physician);
+            }
+        };
+        var c = sessionStorage[sessionStorageKey];
+
+        // Session.init indicates whether the session could be successfully established on page load.
+        // Do not use this in your directives etc!
+        // $scope.$watch() the object returned by Session.get() instead.
+        var init;
+        if (c) {
+            var deferred = $q.defer();
+            init = deferred.promise;
+            update(JSON.parse(c));
+            deferred.resolve(true);
+        } else {
+            update(undefined);
+            init = $http.get("/api/session").success(function (session) {
+                update(session);
+            });
+        }
+
+        // login function
+        self.login = function (auth) {
+            return $http.post('/api/session', auth)
+                .success(function (session) {
+                    // set session data
+                    update(session);
+                });
+        };
+
+        // logout function
+        self.logout = function () {
+            return $http.delete('/api/session').success(function () {
+                // delete session data
+                update(undefined);
+                // reload page to clean up JS session data
+                window.location.reload();
+            });
+        };
+
+        // must be called before user.$save to persist updated session information in cache.
+        self.updateCache = cacheSession;
+
+        self.init = init;
+
+        // Returns a read-only session object containing user information.
+        self.get = function () {
+            return data;
+        };
+    }]);
+
+api.factory('showLoginDialog', ['$modal', 'Session', 'loadFacebookSDK',
+    function ($modal, Session, loadFacebookSDK) {
+        console.log("test login");
+
+        var LoginDialogCtrl = function ($scope, $modalInstance) {
+
+            $scope.debug_login = function (username) {
+                Session.login({username: username}).success(function () {
+                    $modalInstance.close();
+                });
+            };
+        };
+
+        return function showLoginDialog() {
+            $modal.open({
+                controller: LoginDialogCtrl,
+                templateUrl: '/comformmanagemntbankbook/login/login.html',
+                keyboard: false,
+                backdrop: "static"
+       reasons.
+        };
+    }]);*/
 
 
