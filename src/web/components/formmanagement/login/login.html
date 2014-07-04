@@ -3,53 +3,6 @@
 </div>
 
 <div class="modal-body">
-    <div class="text-center">
-        <button class="facebook-login-button btn btn-lg btn-primary" ng-click="facebook_login()" ng-disabled="!facebook_login">
-            <i ng-show="fb_loading" class="fa fa-fw fa-refresh fa-spin"></i>
-            <i ng-hide="fb_loading" class="fa fa-fw fa-facebook-square"></i>
-            Facebook Login für Kunden
-        </button>
-    </div>
-
-
-    <hr>
-
-
-    <p class="text-muted">
-        <b>Berater-Login:</b>
-    </p>
-
-    <div ng-hide="email_requested">
-        Bitte geben Sie ihre Volksbank-E-Mail-Adresse an.
-
-        <div class="alert alert-danger" ng-show="email_error">
-            Die von Ihnen angegebene E-Mail konnte nicht in unserem System
-            gefunden werden. Bitte überprüfen Sie Ihre Eingabe.
-        </div>
-
-
-        <div class="input-group">
-            <input type="text" class="form-control" ng-model="advisor_email"
-                   placeholder="max.muster@volksbank.de"/>
-                <span class="input-group-btn">
-                    <button class="btn btn-default" ng-click="advisor_login(advisor_email)"><i
-                            class="fa fa-envelope"></i> E-Mail anfordern
-                    </button>
-                </span>
-        </div>
-
-
-    </div>
-
-    <div class="alert alert-success text-center" ng-show="email_requested">
-        Die Login-E-Mail wurde erfolgreich angefordert. Bitte überprüfen
-        Sie ihr E-Mail-Postfach. Sie können diese Webseite nun
-        wieder schließen.
-    </div>
-
-    <hr>
-
-
     <div class="input-group">
         <input type="text" class="form-control" ng-model="debug_username" placeholder="Max Muster"/>
         <span class="input-group-btn">

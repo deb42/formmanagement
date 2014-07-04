@@ -20,3 +20,12 @@ formmanagement.config(['$routeProvider',
             redirectTo: "/"
         });
 }]);
+
+formmanagement.run(["Session", "showLoginDialog", function (Session, showLoginDialog) {
+
+    Session.init.error(function () {
+        showLoginDialog();
+    });
+
+}]);
+

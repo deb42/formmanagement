@@ -6,25 +6,21 @@
  **/
 
 var api = angular.module("formmanagement.api", [
-    "ngResource"
+    "ngResource",
+    "ui.bootstrap.modal",
+    "ui.bootstrap.tpls"
 ]);
 
-/*
+
 var TYPE_PATIENT = 1;
-var TYPE_PHYSICIAN = 2;
-var TYPE_ADMINISTRATOR = 4;
+var TYPE_PHYSICIAN = 2;;
 api.constant("UserType", {
     "Patient": TYPE_PATIENT,
-    "Physician": TYPE_PHYSICIAN,
-    "Administrator": TYPE_ADMINISTRATOR
+    "Physician": TYPE_PHYSICIAN
 });
-api.factory("getUserClass", [ "Patient" , "Physician", "Administrator", function (Patient, Physician, Administrator) {
+api.factory("getUserClass", [ "Patient" , "Physician", function (Patient, Physician) {
     return function getUserClass(type) {
-        /* jshint bitwise: false */
-        /*
-        if (type & TYPE_ADMINISTRATOR) {
-            return Administrator;
-        }
+        /* jshint bitwise: false*/
         if (type & TYPE_PHYSICIAN) {
             return Physician;
         }
@@ -32,7 +28,7 @@ api.factory("getUserClass", [ "Patient" , "Physician", "Administrator", function
             return Patient;
         }
     };
-}]); */
+}]);
 
 api.factory("Patient", ["$resource", function ($resource) {
     return $resource("/api/patients/:id", {id: "@id" });
@@ -43,7 +39,7 @@ api.factory("Physician", ["$resource", function ($resource) {
 }]);
 
 
-/*
+
 api.service("Session", ["$http", "$q", "getUserClass", "Physician",
     function ($http, $q, getUserClass, Physician) {
         var self = this;
@@ -127,8 +123,8 @@ api.service("Session", ["$http", "$q", "getUserClass", "Physician",
         };
     }]);
 
-api.factory('showLoginDialog', ['$modal', 'Session', 'loadFacebookSDK',
-    function ($modal, Session, loadFacebookSDK) {
+api.factory('showLoginDialog', ['$modal', 'Session',
+    function ($modal, Session) {
         console.log("test login");
 
         var LoginDialogCtrl = function ($scope, $modalInstance) {
@@ -143,11 +139,11 @@ api.factory('showLoginDialog', ['$modal', 'Session', 'loadFacebookSDK',
         return function showLoginDialog() {
             $modal.open({
                 controller: LoginDialogCtrl,
-                templateUrl: '/comformmanagemntbankbook/login/login.html',
+                templateUrl: '/components/formmanagement/login/login.html',
                 keyboard: false,
                 backdrop: "static"
-       reasons.
+            });
         };
-    }]);*/
+    }]);
 
 
