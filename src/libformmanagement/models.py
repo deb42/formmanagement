@@ -3,7 +3,8 @@ from __future__ import absolute_import, print_function, division, unicode_litera
 import os
 import binascii
 
-from . import db
+from . import db, utils
+from datetime import date as _date
 
 
 """
@@ -23,9 +24,11 @@ conversation_participants = db.Table(
     db.Column('conversation_id', db.Integer, db.ForeignKey('conversation.id'))
 )
 
-TYPE_PATIENT = 0b001
-TYPE_PHYSICIAN = 0b010
-TYPE_ADMINISTRATOR = 0b100 | TYPE_PHYSICIAN
+TYPE_PATIENT = 0b0001
+TYPE_PHYSICIAN = 0b0010
+TYPE_ADMINISTRATOR = 0b0100 | TYPE_PHYSICIAN
+
+TYPE_HADS = 0b1001
 
 
 class User(db.Model):
@@ -56,7 +59,8 @@ class Patient(User):
         'polymorphic_identity': TYPE_PATIENT
     }
     email = db.Column(db.String(120))
-    diagnosiss = db.relationship("Diagnosis", backref="patient", foreign_keys="Diagnosis.patient_id")
+    diagnoses = db.relationship("Diagnosis", backref="patient", foreign_keys="Diagnosis.patient_id")
+    questionnaires = db.relationship("Reply", backref="patient", foreign_keys="Reply.patient_id")
 
     physician_id = db.Column(db.Integer, db.ForeignKey('physician.id'))
 
@@ -67,7 +71,7 @@ class Physician(User):
     __mapper_args__ = {
         'polymorphic_identity': TYPE_PHYSICIAN
     }
-    diagnosiss = db.relationship("Diagnosis", backref="physician", foreign_keys="Diagnosis.physician_id")
+    diagnoses = db.relationship("Diagnosis", backref="physician", foreign_keys="Diagnosis.physician_id")
     patients = db.relationship("Patient", foreign_keys="Patient.physician_id", backref="physician")
 
 
@@ -138,15 +142,41 @@ class DiagnosisProposal(db.Model):
         return "%s: %s" % (self.title, self.details)
 
 
-class Video(db.Model):
+class Questionnaire(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(140))
-    url = db.Column(db.String(1000))
-    poster_id = db.Column(db.Integer, db.ForeignKey('file.access_token'))
-    poster = db.relationship("File", uselist=False)
+    content = db.Column(utils.JSONType(5000))
+
 
     def __repr__(self):
         return "%s: %s" % (self.title, self.url)
+
+
+class Reply(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    patient_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    date = db.Column(db.Date())
+
+    type = db.Column(db.Integer)
+
+    __mapper_args__ = {
+        'polymorphic_on': type
+    }
+
+    def __repr__(self):
+        return "%s: %s" % (self.patient_id, self.date)
+
+
+class Hads(Reply):
+    id = db.Column(db.Integer, db.ForeignKey('reply.id'), primary_key=True)
+    __mapper_args__ = {
+        'polymorphic_identity': TYPE_HADS
+    }
+
+    anxiety_scale = db.Column(db.Integer)
+    depression_scale = db.Column(db.Integer)
+
+
 
 
 def _random_string():

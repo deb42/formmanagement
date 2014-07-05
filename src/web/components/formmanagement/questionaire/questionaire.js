@@ -10,47 +10,17 @@ var questionaire = angular.module("formmanagement.questionaire", [
     "formmanagement.api"
 ]);
 
-questionaire.controller("questionaireCtrl", ["$scope", "Session", "Patient", "Physician", function ($scope, Session, Patient, Physician) {
+questionaire.controller("questionaireCtrl", ["$scope", "Session", "Patient", "Physician", "Questionnaire", function ($scope, Session, Patient, Physician, Questionnaire) {
 
     $scope.session = Session.get();
-    $scope.questionaire = [
-        {
-            issue: "frage1",
-            awnsers: [
-                {content: "1"},
-                {content: "2"},
-                {content: "3"},
-                {content: "4"}
 
-            ],
-            choice: ""
-        },
-        {issue: "frage2",
-            awnsers: [
-                {content: "1"},
-                {content: "2"},
-                {content: "3"},
-                {content: "5"}
+    $scope.questionaire = Questionnaire.query();
 
 
-            ],
-            choice: ""
-        },
-        {issue: "frage3",
-            awnsers: [
-                {content: "1"},
-                {content: "2"},
-                {content: "3"},
-                {content: "6"}
+    console.log($scope.questionaire.id);
 
-            ],
-            choice: ""
-        }
-    ];
+    $scope.awnsers = new Array();
 
-    console.log($scope.questionaire);
-
-    $scope.awnsers[4] ;
     $scope.setData = function(question, awnser){
         console.log("index: " + question + ", " + awnser);
         $scope.awnsers[question] = awnser;

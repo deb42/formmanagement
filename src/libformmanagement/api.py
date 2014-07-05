@@ -9,7 +9,7 @@ from itsdangerous import URLSafeTimedSerializer, BadData
 from sqlalchemy.orm import joinedload
 
 from .models import *
-from .utils import jsonify
+from .seed import jsonify
 from . import app
 
 
@@ -231,9 +231,9 @@ Videos API
 """
 
 
-@api.route('/videos')
-def video_list():
-    return jsonify(Video.query.all())
+@api.route('/questionnaires')
+def questionnaires_list():
+    return jsonify(Questionnaire.query.all())
 
 
 """

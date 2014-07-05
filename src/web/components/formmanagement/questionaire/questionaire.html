@@ -1,16 +1,13 @@
 <div ng-controller="questionaireCtrl">
     Fragebogen:
-    <div ng-repeat="(i, question) in questionaire track by $index">
-        {{question.issue}}
-        {{question.choice}}
-        {{question.awnsers[0].content}}
-        index : {{i}}
+    <div ng-repeat="(i, question) in questionaire[0].content track by $index">
+        <h3>{{question.issue}}</h3>
         <div ng-repeat="(j, awnser) in question.awnsers track by $index">
-            {{awnser.content}}
             <label class="radio-inline">
                 <input type="radio" ng-model="question.choice" ng-click="setData(i, j)" value="{{awnser.content}}">
             </label>
+            {{awnser.content}}
         </div>
     </div>
-    {{questionaire}}
+    {{questionaire.title}}
 </div>

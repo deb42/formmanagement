@@ -38,6 +38,10 @@ api.factory("Physician", ["$resource", function ($resource) {
     return $resource("/api/physicians/:id", {id: "@id" });
 }]);
 
+api.factory("Questionnaire", ["$resource", function ($resource) {
+    return $resource("/api/questionnaires/:id", {id: "@id" });
+}]);
+
 
 
 api.service("Session", ["$http", "$q", "getUserClass", "Physician",

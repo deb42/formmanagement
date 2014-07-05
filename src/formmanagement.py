@@ -4,7 +4,7 @@ from __future__ import absolute_import, print_function, division, unicode_litera
 import argparse
 import os
 from libformmanagement import app
-from libformmanagement.utils import seed
+from libformmanagement.seed import seed
 
 if __name__ == "__main__":
     # Parse command line arguments
