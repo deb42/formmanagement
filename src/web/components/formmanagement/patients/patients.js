@@ -10,11 +10,13 @@ var patients = angular.module("formmanagement.patients", [
     "formmanagement.api"
 ]);
 
-patients.controller("patientsCtrl", ["$scope", "Patient", "Physician", function($scope, Patient, Physician){
-        $scope.patients = Patient.query();
-        $scope.physicains = Physician.query();
-        console.log($scope.patients);
-        $scope.test = "testing";
+patients.controller("patientsCtrl", ["$scope", "Session", "Patient", "Physician", function ($scope, Session, Patient, Physician) {
+
+    $scope.session = Session.get();
+    $scope.patients = Patient.query();
+    $scope.physicains = Physician.query();
+    console.log($scope.session.user);
+
 }]);
 
 patients.config(['$routeProvider', function ($routeProvider) {

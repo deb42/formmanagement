@@ -1,0 +1,16 @@
+<div ng-controller="questionaireCtrl">
+    Fragebogen:
+    <div ng-repeat="(i, question) in questionaire track by $index">
+        {{question.issue}}
+        {{question.choice}}
+        {{question.awnsers[0].content}}
+        index : {{i}}
+        <div ng-repeat="(j, awnser) in question.awnsers track by $index">
+            {{awnser.content}}
+            <label class="radio-inline">
+                <input type="radio" ng-model="question.choice" ng-click="setData(i, j)" value="{{awnser.content}}">
+            </label>
+        </div>
+    </div>
+    {{questionaire}}
+</div>

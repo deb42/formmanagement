@@ -1,0 +1,59 @@
+[
+    {
+        "issue": "lch fühle mich angespannt oder überreizt",
+        "awnsers": [
+            {
+                "content": "meistens"
+            },
+            {
+                "content": "oft"
+            },
+            {
+                "content": "von Zeit zu Zeit/gelegentlich"
+            },
+            {
+                "content": "uberhaupt nicht"
+            }
+
+        ],
+        "choice": ""
+    },
+    {
+        "issue": "lch kann mich heute noch so freuen wie fruher",
+        "awnsers": [
+            {
+                "content": "ganz genau so "
+            },
+            {
+                "content": "nicht ganz so sehr "
+            },
+            {
+                "content": "nur noch ein wenig "
+            },
+            {
+                "content": "kaum oder gar nicht"
+            }
+
+        ],
+        "choice": ""
+    },
+    {
+        "issue": "Mich uberkommt eine angstliche Vorahnung, dass etwas Schreckliches passieren konnte ",
+        "awnsers": [
+            {
+                "content": "ja, sehr stark "
+            },
+            {
+                "content": "ja, aber nicht allzu stark "
+            },
+            {
+                "content": "etwas, aber es macht mir keine Sorgen"
+            },
+            {
+                "content": "überhaupt nicht "
+            }
+
+        ],
+        "choice": ""
+    }
+]

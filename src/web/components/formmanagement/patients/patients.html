@@ -1,6 +1,7 @@
 <h3>hallo zurück</h3>
 
 <div ng-controller="patientsCtrl">
+    {{session.user.name}}
     <div ng-repeat="patient in patients">
         {{patient.name}}
     </div>

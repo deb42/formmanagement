@@ -8,7 +8,8 @@
 var formmanagement = angular.module("formmanagement", [     // declaration of bankbook (main) module
     "ngRoute",                                  // ngRoute directive for realizing routing
     "formmanagement.api",                             // included bankbook modules
-    "formmanagement.patients"
+    "formmanagement.patients",
+    "formmanagement.questionaire"
 ]);
 
 // create routing functionality on singleton $routeProvider and declare default route for non-existing sub pages
@@ -27,5 +28,11 @@ formmanagement.run(["Session", "showLoginDialog", function (Session, showLoginDi
         showLoginDialog();
     });
 
+}]);
+
+formmanagement.controller("NavbarCtrl", ["$scope", "Session", function ($scope, Session) {
+   $scope.logout = function(){
+       Session.logout();
+   } ;
 }]);
 
