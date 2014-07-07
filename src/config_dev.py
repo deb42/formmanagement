@@ -2,7 +2,7 @@ import os
 
 # dialect+driver://username:password@host:port/database
 SQLALCHEMY_DATABASE_URI = 'sqlite:///%s' % os.path.abspath("formmanagement.db")
-SQLALCHEMY_ECHO = True
+SQLALCHEMY_ECHO = False
 # Evil as errors during .commit() don't get caught.
 # SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 

@@ -1,4 +1,5 @@
 [
+
     {
         "issue": "Wie sehr hat Ihre Haut in den vergangenen 7 Tagen gejuckt, war wund, hat geschmerzt oder gebrannt? ",
         "answers": [
@@ -57,7 +58,7 @@
         "choice": ""
     },
     {
-        "issue":  "Wie sehr hat Ihre Hauterkrankung die Wahl der Kleidung beeinflußt, die Sie in den vergangenen 7 Tagen getragen haben? ",
+        "issue": "Wie sehr hat Ihre Hauterkrankung die Wahl der Kleidung beeinflußt, die Sie in den vergangenen 7 Tagen getragen haben? ",
         "answers": [
             {
                 "content": "überhaupt nicht"

@@ -21,11 +21,22 @@ questionaire.controller("questionaireCtrl", ["$scope", "Session", "Patient", "Ph
 
 
     $scope.selectedQuestionnaire = {"index": 0}
-    $scope.selectQuesionnaire = function (questionnaire) {
-        $scope.selectedQuestionnaire = questionnaire;
-        $scope.selectedQuestionnaire.index = questionnaire.id - 1;
+    $scope.selectQuesionnaire = function (index) {
+        ++index;
+        return Questionnaire.get(
+            {id: index}, //params
+            function (data) {   //success
+                $scope.questionnaire = data;
+            },
+            function (data) {   //failure
+                //error handling goes here
+            });
+        //$scope.selectedQuestionnaire = $scope.questionnaire;
+        //$scope.selectedQuestionnaire.index = questionnaire.id - 1;
 
-    }
+    };
+
+    console.log($scope.selectQuesionnaire(0).content);
 
 
     $scope.blub = function () {
@@ -38,7 +49,7 @@ questionaire.controller("questionaireCtrl", ["$scope", "Session", "Patient", "Ph
 
 
     $scope.proceed = function () {
-        for (var i = 0; i < $scope.selectedQuestionnaire.content.length; ++i) {
+        for (var i = 0; i < $scope.questionnaire.content.length; ++i) {
             if (!$scope.answers[$scope.selectedQuestionnaire.index].data[i]) {
                 alert("fehler");
                 return;
@@ -46,14 +57,23 @@ questionaire.controller("questionaireCtrl", ["$scope", "Session", "Patient", "Ph
 
 
         }
-        $scope.selectedQuestionnaire.index++;
+        $scope.selectQuesionnaire(++$scope.selectedQuestionnaire.index);
     }
 
     $scope.save = function () {
-        console.log($scope.answers[$scope.selectedQuestionnaire.index].data.length);
-        console.log($scope.selectedQuestionnaire.content.length)
-        $scope.selectedQuestionnaire.index++;
+        Hads.save($scope.answers[0]);
     }
+
+    var hads = new Hads({
+            patient: $scope.session.user,
+            date: "21.12.12",
+            data: "bububudibubl",
+            type: 9,
+            anxiety_scale: 13,
+            depression_scale: 12
+        }
+    )
+    hads.$save({id: ""})
 
 
 }]);

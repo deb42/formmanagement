@@ -173,6 +173,7 @@ class Reply(db.Model):
 
 class Hads(Reply):
     id = db.Column(db.Integer, db.ForeignKey('reply.id'), primary_key=True)
+
     __mapper_args__ = {
         'polymorphic_identity': TYPE_HADS
     }
@@ -181,6 +182,9 @@ class Hads(Reply):
     depression_scale = db.Column(db.Integer)
 
 
+class Test(db.Column):
+    id = db.Column(db.Integer, primary_key=True)
+    name=db.Column(db.String(10))
 
 
 def _random_string():

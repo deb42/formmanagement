@@ -4,7 +4,7 @@
         Lorem Ipsum
 
         <div class="row">
-            <button type="button" class="btn btn-default" ng-click="init = true; selectQuesionnaire(questionnaires[0])">
+            <button type="button" class="btn btn-default" ng-click="init = true; selectQuesionnair(0)">
                 Starten
             </button>
 
@@ -16,7 +16,7 @@
             <div class="btn-group">
                 <button type="button" class="btn btn-default"
                         ng-repeat="(i, questionnaire) in questionnaires track by $index"
-                        ng-click="selectQuesionnaire(questionnaire)"
+                        ng-click="selectQuesionnaire(i); selectedQuestionnaire.index = i"
                         ng-class="(selectedQuestionnaire.index == questionnaire.id -1) ? 'selected': ''">
                     {{questionnaire.title}}
                 </button>
