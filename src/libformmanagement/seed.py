@@ -176,6 +176,16 @@ def seed():
 
     db.session.add(hads)
 
+    json_data = open("./libformmanagement/seed/questionnaires/dlqi.json")
+    dlqi_data = json.load(json_data)
+
+    dlqi = Questionnaire(
+        title= "dlqi",
+        content= dlqi_data,
+    )
+
+    db.session.add(dlqi)
+
     hadsresult = Hads(
         patient = patients[1],
         date=date.today(),

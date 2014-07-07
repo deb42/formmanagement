@@ -1,7 +1,7 @@
 [
     {
         "issue": "lch fühle mich angespannt oder überreizt",
-        "awnsers": [
+        "answers": [
             {
                 "content": "meistens"
             },
@@ -20,7 +20,7 @@
     },
     {
         "issue": "lch kann mich heute noch so freuen wie fruher",
-        "awnsers": [
+        "answers": [
             {
                 "content": "ganz genau so "
             },
@@ -39,7 +39,7 @@
     },
     {
         "issue": "Mich uberkommt eine angstliche Vorahnung, dass etwas Schreckliches passieren konnte ",
-        "awnsers": [
+        "answers": [
             {
                 "content": "ja, sehr stark "
             },

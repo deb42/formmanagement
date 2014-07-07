@@ -5781,3 +5781,7 @@ button.close {
 .h3 {
   color: green;
 }
+.selected {
+  color: green;
+  background-color: greenyellow;
+}
