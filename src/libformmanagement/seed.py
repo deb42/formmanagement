@@ -176,6 +176,40 @@ def seed():
 
     db.session.add(hads)
 
+    hadsresult = Hads(
+        patient = patients[1],
+        date=date.today(),
+        data=[0, 1, 1],
+        anxiety_scale =1,
+        depression_scale = 1
+    )
+
+    hadsresult1 = Hads(
+        patient = patients[1],
+        date=date.today(),
+        data=[0, 1, 1],
+        anxiety_scale =1,
+        depression_scale = 1
+    )
+    hadsresult2 = Hads(
+        patient = patients[1],
+        date=date.today(),
+        data=[0, 1, 1],
+        anxiety_scale =1,
+        depression_scale = 1
+    )
+    hadsresult3 = Hads(
+        patient = patients[1],
+        date=date.today(),
+        data=[0, 1, 1],
+        anxiety_scale =1,
+        depression_scale = 1
+    )
+
+    db.session.add(hadsresult)
+    db.session.add(hadsresult1)
+    db.session.add(hadsresult2)
+    db.session.add(hadsresult3)
 
 
     db.session.commit()

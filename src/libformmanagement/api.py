@@ -231,11 +231,56 @@ Videos API
 """
 
 
-@api.route('/questionnaires')
+@api.route('/questionnaires/')
 def questionnaires_list():
     return jsonify(Questionnaire.query.all())
 
+@api.route('/hads/')
+def hads_list():
+    return jsonify(Hads.query.all())
 
+@api.route("/hads/<int:id>")
+def get_hads(id):
+    """
+    GET to patient resource: return single patient.
+    Use .first_or_404() to automatically raise a 404 error if the resource isn't found.
+    """
+    return jsonify(Hads.query.filter_by(id=id).first_or_404())
+
+@api.route("/hads/", methods=["POST"])
+def add_hads():
+    """
+    POST to the list: add a new event.
+    Don't forget to call db.session.commit()
+    """
+    #hads = Event(**request.json)
+    #db.session.add(hads)
+    #db.session.commit()
+    #return jsonify(hads)
+    print("test")
+
+"""
+hads_modifiable_attrs = ["data"]
+
+@api.route("/hads/<int:id>", methods=["POST"])
+def update_hads(id):
+
+    PUT to patient resource: update given patient.
+    Notice how we call get_patient() in the end to return the updated patient.
+    This way, we don't even need to check whether the user exists as
+    get_patient does this for us.
+
+    hads = Hads.query.filter_by(id=id).first_or_404()  # Gibt ein patient/physician object zurück.
+    for attr in hads_modifiable_attrs:
+        # Check if Attribute was used in Request
+        # Then update
+        if attr in request.json:
+            setattr(hads, attr, request.json[attr])
+
+    db.session.commit()
+    return get_hads(id)
+
+"""
 """
 File API
 

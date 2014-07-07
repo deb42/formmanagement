@@ -42,6 +42,12 @@ api.factory("Questionnaire", ["$resource", function ($resource) {
     return $resource("/api/questionnaires/:id", {id: "@id" });
 }]);
 
+api.factory("Hads", ["$resource", function ($resource) {
+    return $resource("/api/hads/:id", {id: "@id" },{
+    });
+}]);
+
+
 
 
 api.service("Session", ["$http", "$q", "getUserClass", "Physician",

@@ -60,7 +60,9 @@ class Patient(User):
     }
     email = db.Column(db.String(120))
     diagnoses = db.relationship("Diagnosis", backref="patient", foreign_keys="Diagnosis.patient_id")
-    questionnaires = db.relationship("Reply", backref="patient", foreign_keys="Reply.patient_id")
+    questionnaires = db.relationship("Questionnaire", backref="patient", foreign_keys="Questionnaire.patient_id")
+    questionnaire_replies = db.relationship("Reply", backref="patient", foreign_keys="Reply.patient_id")
+
 
     physician_id = db.Column(db.Integer, db.ForeignKey('physician.id'))
 
@@ -146,6 +148,7 @@ class Questionnaire(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(140))
     content = db.Column(utils.JSONType(5000))
+    patient_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
     def __repr__(self):
@@ -155,7 +158,8 @@ class Questionnaire(db.Model):
 class Reply(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     patient_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    date = db.Column(db.Date())
+    date = db.Column(db.String(12))
+    data = db.Column(utils.JSONType(5000))
 
     type = db.Column(db.Integer)
 

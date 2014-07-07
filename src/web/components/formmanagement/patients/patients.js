@@ -15,7 +15,7 @@ patients.controller("patientsCtrl", ["$scope", "Session", "Patient", "Physician"
     $scope.session = Session.get();
     $scope.patients = Patient.query();
     $scope.physicains = Physician.query();
-    console.log($scope.patients);
+    console.log($scope.session);
 
 }]);
 
