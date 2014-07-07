@@ -235,6 +235,14 @@ Videos API
 def questionnaires_list():
     return jsonify(Questionnaire.query.all())
 
+@api.route("/questionnaires/<int:id>")
+def get_questionnaires(id):
+    """
+    GET to patient resource: return single patient.
+    Use .first_or_404() to automatically raise a 404 error if the resource isn't found.
+    """
+    return jsonify(Questionnaire.query.filter_by(id=id).first_or_404())
+
 @api.route('/hads/')
 def hads_list():
     return jsonify(Hads.query.all())

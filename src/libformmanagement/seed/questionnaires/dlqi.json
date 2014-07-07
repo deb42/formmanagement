@@ -55,5 +55,24 @@
 
         ],
         "choice": ""
+    },
+    {
+        "issue":  "Wie sehr hat Ihre Hauterkrankung die Wahl der Kleidung beeinflußt, die Sie in den vergangenen 7 Tagen getragen haben? ",
+        "answers": [
+            {
+                "content": "überhaupt nicht"
+            },
+            {
+                "content": "ein bißchen"
+            },
+            {
+                "content": "ziemlich"
+            },
+            {
+                "content": "sehr"
+            }
+
+        ],
+        "choice": ""
     }
 ]

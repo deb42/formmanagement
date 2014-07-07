@@ -1,17 +1,40 @@
 <div ng-controller="questionaireCtrl">
-    Fragebogen:
+    <div ng-show="!init">
 
-    <div class="btn-group">
-        <button type="button" class="btn btn-default"
-                ng-repeat="(i, questionnaire) in questionnaires track by $index"
-                ng-click="selectQuesionnaire(questionnaire)"
-                ng-class="(selectedQuestionnaire.index == questionnaire.id -1) ? 'selected': ''">
-            {{questionnaire.title}}
-        </button>
+        Lorem Ipsum
+
+        <div class="row">
+            <button type="button" class="btn btn-default" ng-click="init = true; selectQuesionnaire(questionnaires[0])">
+                Starten
+            </button>
+
+        </div>
     </div>
 
+    <div ng-show="init">
+        <div class="row">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default"
+                        ng-repeat="(i, questionnaire) in questionnaires track by $index"
+                        ng-click="selectQuesionnaire(questionnaire)"
+                        ng-class="(selectedQuestionnaire.index == questionnaire.id -1) ? 'selected': ''">
+                    {{questionnaire.title}}
+                </button>
+            </div>
+            <div class="pull-right">
+                <button type="button" class="btn btn-default" ng-click="save(selecedQuestionaire)">Speichern</button>
+            </div>
+        </div>
+        <br/>
 
-    <questionnaire-form questionnaire="questionnaires[selectedQuestionnaire.index]" index="selectedQuestionnaire.index" answers="answers[selectedQuestionnaire.index]"></questionnaire-form>
+        <div class="row">
+            <questionnaire-form questionnaire="questionnaires[selectedQuestionnaire.index]"
+                                index="selectedQuestionnaire.index"
+                                answers="answers[selectedQuestionnaire.index]"></questionnaire-form>
+        </div>
 
-    <button ng-click="save()">Speichern</button>
+        <div class="row">
+            <button type="button" class="btn btn-default" ng-click="proceed()">Weiter</button>
+        </div>
+    </div>
 </div>

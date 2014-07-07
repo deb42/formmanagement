@@ -15,6 +15,9 @@ questionaire.controller("questionaireCtrl", ["$scope", "Session", "Patient", "Ph
     $scope.session = Session.get();
     $scope.questionnaires = Questionnaire.query();
     $scope.answers = new Array();
+    for (var i = 0; i < 3; i++) {
+        $scope.answers[i] = {data: []}
+    }
 
 
     $scope.selectedQuestionnaire = {"index": 0}
@@ -26,21 +29,29 @@ questionaire.controller("questionaireCtrl", ["$scope", "Session", "Patient", "Ph
 
 
     $scope.blub = function () {
-        return Questionnaire.query(function (data) {
-            for (var i = 0; i < data.length; ++i) {
-                $scope.answers[i] = {data: []};
-            }
-            console.log($scope.answers);
+        return Questionnaire.query(function () {
+        })
+    };
 
-        });
-        alert("blbu");
-        return "blub";
-    }
+
     var test = $scope.blub();
-    console.log(test.length);
-    console.log($scope.answers);
+
+
+    $scope.proceed = function () {
+        for (var i = 0; i < $scope.selectedQuestionnaire.content.length; ++i) {
+            if (!$scope.answers[$scope.selectedQuestionnaire.index].data[i]) {
+                alert("fehler");
+                return;
+            }
+
+
+        }
+        $scope.selectedQuestionnaire.index++;
+    }
 
     $scope.save = function () {
+        console.log($scope.answers[$scope.selectedQuestionnaire.index].data.length);
+        console.log($scope.selectedQuestionnaire.content.length)
         $scope.selectedQuestionnaire.index++;
     }
 
@@ -78,16 +89,6 @@ questionaire.directive('questionnaireForm', [function () {
         templateUrl: '/components/formmanagement/questionnaire/questionnaie-form.html',
 
         link: function (scope, element, attrs) {
-
-
-            scope.setData = function (question, answer) {
-                //console.log("index: " + question + ", " + answer);
-                //scope.answers.data[question] = answer ;
-                //console.log(scope.answers.data);
-
-                //Answer.set(scope.answers.data, scope.questionnaire.id-1);
-            };
-
             scope.save = function () {
                 console.log(scope.answers);
                 //scope.answers1[scope.index] = {data:[]};

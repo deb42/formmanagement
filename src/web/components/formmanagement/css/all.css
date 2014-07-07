@@ -5778,6 +5778,9 @@ button.close {
 .h2 {
   color: red;
 }
+.panel-header {
+  margin: 10px, 0px, 10px, 0px;
+}
 .h3 {
   color: green;
 }
