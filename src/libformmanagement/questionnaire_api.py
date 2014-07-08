@@ -5,7 +5,7 @@ def init_reply(answers, type, patient):
         hadsresult = Hads(
             patient=patient,
             date="123",
-            data=answers["data"],
+            data=answers,
             anxiety_scale=1,
             depression_scale=1
         )

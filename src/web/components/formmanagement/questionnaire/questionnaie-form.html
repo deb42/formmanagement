@@ -8,7 +8,7 @@
                 <div class="panel-body">
                     <div ng-repeat="(j, answer) in question.answers track by $index">
                         <label class="radio-inline">
-                            <input type="radio" ng-model="answers.data[i]" ng-click="save()"
+                            <input type="radio" ng-model="answers[i]" ng-click="save()"
                                    value="{{j}}">
                         </label>
                         {{answers[i]}}

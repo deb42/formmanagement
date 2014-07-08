@@ -16,7 +16,7 @@ questionaire.controller("questionaireCtrl", ["$scope", "Session", "Patient", "Ph
     $scope.questionnaires = Questionnaire.query();
     $scope.answers = new Array();
     for (var i = 0; i < 3; i++) {
-        $scope.answers[i] = {data: [], anxiety_scale:""}
+        $scope.answers[i] = [];
     }
 
 
@@ -50,12 +50,12 @@ questionaire.controller("questionaireCtrl", ["$scope", "Session", "Patient", "Ph
 
     $scope.proceed = function () {
         for (var i = 0; i < $scope.questionnaire.content.length; ++i) {
-            if (!$scope.answers[$scope.selectedQuestionnaire.index].data[i]) {
+            if (!$scope.answers[$scope.selectedQuestionnaire.index][i]) {
                 alert("fehler");
                 return;
             }
         }
-        if($scope.selectedQuestionnaire.index === 0){
+        /*if($scope.selectedQuestionnaire.index === 0){
             //alert($scope.answers[0].length);
             for(var i=0; i<$scope.questionnaire.content.length; ++i){
                 //alert(i);
@@ -71,22 +71,22 @@ questionaire.controller("questionaireCtrl", ["$scope", "Session", "Patient", "Ph
                 }
             }
         console.log($scope.answers);
-        }
+        }*/
         $scope.selectQuesionnaire(++$scope.selectedQuestionnaire.index);
     }
 
     $scope.save = function () {
        // Hads.save($scope.answers[0]);
-        var id = $scope.session.user;
+        var id = $scope.session.user.id;
         var hads = new Hads({
-                patient_id: id.id,
-                date: "21.12.12",
-                data: $scope.answers[0].data,
-                anxiety_scale: $scope.answers[0].anxiety_scale,
-                depression_scale: 12
+
+
+                data: $scope.answers[0]
+
+
             }
         )
-        hads.$save({id: 0});
+        hads.$save({type: 0, id: id});
     }
 
 

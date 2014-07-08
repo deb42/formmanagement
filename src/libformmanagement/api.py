@@ -261,18 +261,18 @@ def get_hads(id):
     """
     return jsonify(Hads.query.filter_by(id=id).first_or_404())
 
-@api.route("/hads/<int:type>", methods=["POST"])
-def add_hads(type):
+@api.route("/hads/<int:type>/<int:id>", methods=["POST"])
+def add_hads(type,id):
     """
     POST to the list: add a new event.
     Don't forget to call db.session.commit()
     """
     print(type)
     blub = request.json
-    print(blub["date"])
-    patient = Patient.query.filter_by(id=9).first_or_404()
+    print(blub["data"])
+    patient = Patient.query.filter_by(id=id).first_or_404()
     print(patient)
-    hads = init_reply(request.json,type,patient)
+    hads = init_reply(request.json["data"],type,patient)
     db.session.add(hads)
     db.session.commit()
     return jsonify(patient)

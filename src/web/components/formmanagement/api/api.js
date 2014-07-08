@@ -43,7 +43,7 @@ api.factory("Questionnaire", ["$resource", function ($resource) {
 }]);
 
 api.factory("Hads", ["$resource", function ($resource) {
-    return $resource("/api/hads/:id", {id: "@id" });
+    return $resource("/api/hads/:type/:id", {type: "@type", id: "@id"});
 }]);
 
 
