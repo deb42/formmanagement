@@ -16,7 +16,7 @@ questionaire.controller("questionaireCtrl", ["$scope", "Session", "Patient", "Ph
     $scope.questionnaires = Questionnaire.query();
     $scope.answers = new Array();
     for (var i = 0; i < 3; i++) {
-        $scope.answers[i] = {data: []}
+        $scope.answers[i] = {data: [], anxiety_scale:""}
     }
 
 
@@ -54,26 +54,40 @@ questionaire.controller("questionaireCtrl", ["$scope", "Session", "Patient", "Ph
                 alert("fehler");
                 return;
             }
-
-
+        }
+        if($scope.selectedQuestionnaire.index === 0){
+            //alert($scope.answers[0].length);
+            for(var i=0; i<$scope.questionnaire.content.length; ++i){
+                //alert(i);
+                if(i % 2 === 0){
+                    if(i === 0 || i === 4 || i === 7 || i === 8){
+                        $scope.answers[0].anxiety_scale =+ $scope.answers[0].data[i];
+                        alert("a1");
+                    }
+                    else{
+                        $scope.answers[0].anxiety_scale =+ Math.abs($scope.answers[0].data[i] - 3);
+                        alert("a2");
+                    }
+                }
+            }
+        console.log($scope.answers);
         }
         $scope.selectQuesionnaire(++$scope.selectedQuestionnaire.index);
     }
 
     $scope.save = function () {
-        Hads.save($scope.answers[0]);
+       // Hads.save($scope.answers[0]);
+        var id = $scope.session.user;
+        var hads = new Hads({
+                patient_id: id.id,
+                date: "21.12.12",
+                data: $scope.answers[0].data,
+                anxiety_scale: $scope.answers[0].anxiety_scale,
+                depression_scale: 12
+            }
+        )
+        hads.$save();
     }
-
-    var hads = new Hads({
-            patient: $scope.session.user,
-            date: "21.12.12",
-            data: "bububudibubl",
-            type: 9,
-            anxiety_scale: 13,
-            depression_scale: 12
-        }
-    )
-    hads.$save({id: ""})
 
 
 }]);

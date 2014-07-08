@@ -60,7 +60,7 @@ class Patient(User):
     }
     email = db.Column(db.String(120))
     diagnoses = db.relationship("Diagnosis", backref="patient", foreign_keys="Diagnosis.patient_id")
-    questionnaires = db.relationship("Questionnaire", backref="patient", foreign_keys="Questionnaire.patient_id")
+    #questionnaires = db.relationship("Hads", backref="hads", foreign_keys="Hads.patient_id")
     questionnaire_replies = db.relationship("Reply", backref="patient", foreign_keys="Reply.patient_id")
 
 
@@ -173,7 +173,6 @@ class Reply(db.Model):
 
 class Hads(Reply):
     id = db.Column(db.Integer, db.ForeignKey('reply.id'), primary_key=True)
-
     __mapper_args__ = {
         'polymorphic_identity': TYPE_HADS
     }
