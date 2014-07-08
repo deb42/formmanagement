@@ -86,7 +86,7 @@ questionaire.controller("questionaireCtrl", ["$scope", "Session", "Patient", "Ph
                 depression_scale: 12
             }
         )
-        hads.$save();
+        hads.$save({id: 0});
     }
 
 
