@@ -42,8 +42,8 @@ api.factory("Questionnaire", ["$resource", function ($resource) {
     return $resource("/api/questionnaires/:id", {id: "@id" });
 }]);
 
-api.factory("Hads", ["$resource", function ($resource) {
-    return $resource("/api/hads/:type/:id", {type: "@type", id: "@id"});
+api.factory("Reply", ["$resource", function ($resource) {
+    return $resource("/api/reply/:type/:id", {type: "@type", id: "@id"});
 }]);
 
 

@@ -171,7 +171,9 @@ def seed():
 
     hads = Questionnaire(
         title= "hads",
-        content= hads_data,
+        content= hads_data["content"],
+        type=TYPE_HADS,
+        value=hads_data["value"]
     )
 
     db.session.add(hads)
@@ -181,7 +183,9 @@ def seed():
 
     dlqi = Questionnaire(
         title= "dlqi",
-        content= dlqi_data,
+        content= dlqi_data["content"],
+        type=10,
+        value=dlqi_data["value"]
     )
 
     db.session.add(dlqi)

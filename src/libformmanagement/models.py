@@ -24,11 +24,20 @@ conversation_participants = db.Table(
     db.Column('conversation_id', db.Integer, db.ForeignKey('conversation.id'))
 )
 
-TYPE_PATIENT = 0b0001
-TYPE_PHYSICIAN = 0b0010
-TYPE_ADMINISTRATOR = 0b0100 | TYPE_PHYSICIAN
+TYPE_PATIENT        = 0b0001
+TYPE_PHYSICIAN      = 0b0010
+TYPE_ADMINISTRATOR  = 0b0100 | TYPE_PHYSICIAN
+
+"""
+the typs of questionnaires are defined here
+remember: TYPE_HADS has to have the lowest number
+          in case of change: api.py l. 272
+          @api.route("/reply/<int:type>/<int:id>", methods=["POST"]) must be improved
+"""
 
 TYPE_HADS = 0b1001
+TYPE_DLQI = 0b1010
+TYPE_PBI  = 0b1011
 
 
 class User(db.Model):
@@ -147,12 +156,16 @@ class DiagnosisProposal(db.Model):
 class Questionnaire(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(140))
+    type= type = db.Column(db.Integer, unique=True)
     content = db.Column(utils.JSONType(5000))
+    value= db.Column(utils.JSONType(500))
     patient_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
     def __repr__(self):
-        return "%s: %s" % (self.title, self.url)
+        return "%s: %s" % (self.title, self.value)
+    def __getitem__(self, item):
+        if item == "value": return self.value
 
 
 class Reply(db.Model):

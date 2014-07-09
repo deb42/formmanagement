@@ -261,21 +261,19 @@ def get_hads(id):
     """
     return jsonify(Hads.query.filter_by(id=id).first_or_404())
 
-@api.route("/hads/<int:type>/<int:id>", methods=["POST"])
-def add_hads(type,id):
+@api.route("/reply/<int:type>/<int:id>", methods=["POST"])
+def add_reply(type,id):
     """
-    POST to the list: add a new event.
+    POST to the list: add a new reply.
+    The right type will be defined in the function init_reply
     Don't forget to call db.session.commit()
     """
-    print(type)
-    blub = request.json
-    print(blub["data"])
     patient = Patient.query.filter_by(id=id).first_or_404()
-    print(patient)
-    hads = init_reply(request.json["data"],type,patient)
-    db.session.add(hads)
+    questionnaire=Questionnaire.query.filter_by(type=type+9).first_or_404()
+    reply = init_reply(request.json["data"],type,patient,questionnaire["value"])
+    db.session.add(reply)
     db.session.commit()
-    return jsonify(patient)
+    return jsonify(reply)
 
 """
 hads_modifiable_attrs = ["data", "depression_scale", "anxiety_scale"]
