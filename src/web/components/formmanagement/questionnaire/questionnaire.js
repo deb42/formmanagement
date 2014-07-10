@@ -53,40 +53,21 @@ questionaire.controller("questionaireCtrl", ["$scope", "Session", "Patient", "Ph
                     return;
                 }
             }
-            /*if($scope.selectedQuestionnaire.index === 0){
-             //alert($scope.answers[0].length);
-             for(var i=0; i<$scope.questionnaire.content.length; ++i){
-             //alert(i);
-             if(i % 2 === 0){
-             if(i === 0 || i === 4 || i === 7 || i === 8){
-             $scope.answers[0].anxiety_scale =+ $scope.answers[0].data[i];
-             alert("a1");
-             }
-             else{
-             $scope.answers[0].anxiety_scale =+ Math.abs($scope.answers[0].data[i] - 3);
-             alert("a2");
-             }
-             }
-             }
-             console.log($scope.answers);
-             }*/
             $scope.selectQuesionnaire(++$scope.selectedQuestionnaire.index);
+            $scope.answers[$scope.selectedQuestionnaire.index] = new Array();
         }
 
         $scope.save = function () {
-            // Hads.save($scope.answers[0]);
-            var id = $scope.session.user.id;
-            var reply = new Reply({
-
-
-                    data: $scope.answers[0],
-                    patient: $scope.session.user
-
-
-                }
-            )
-            reply.$save({type: 0, id: id});
-        }
+            console.log($scope.answers.length);
+            for (var i=0; i<$scope.answers.length; ++i) {
+                console.log($scope.answers[i]);
+                var reply = new Reply({
+                        data: $scope.answers[i]
+                    }
+                );
+                reply.$save({type: i, id: $scope.session.user.id});
+            }
+        };
 
 
     }]);

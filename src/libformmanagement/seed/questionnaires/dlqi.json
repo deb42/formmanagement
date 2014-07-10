@@ -4,16 +4,16 @@
             "issue": "Wie sehr hat Ihre Haut in den vergangenen 7 Tagen gejuckt, war wund, hat geschmerzt oder gebrannt? ",
             "answers": [
                 {
-                    "content": "überhaupt nicht"
-                },
-                {
-                    "content": "ein bißchen"
+                    "content": "sehr"
                 },
                 {
                     "content": "ziemlich"
                 },
                 {
-                    "content": "sehr"
+                    "content": "ein bißchen"
+                },
+                {
+                    "content": "überhaupt nicht"
                 }
 
             ],
@@ -23,16 +23,16 @@
             "issue": " Wie sehr hat Ihre Hauterkrankung Sie in den vergangenen 7 Tagen verlegen oder befangen gemacht?",
             "answers": [
                 {
-                    "content": "überhaupt nicht"
-                },
-                {
-                    "content": "ein bißchen"
+                    "content": "sehr"
                 },
                 {
                     "content": "ziemlich"
                 },
                 {
-                    "content": "sehr"
+                    "content": "ein bißchen"
+                },
+                {
+                    "content": "überhaupt nicht"
                 }
 
             ],
@@ -42,18 +42,20 @@
             "issue": "Wie sehr hat Ihre Hauterkrankung Sie in den vergangenen 7 Tagen bei Einkäufen oder bei Haus- oder Gartenarbeit behindert? ",
             "answers": [
                 {
-                    "content": "überhaupt nicht"
-                },
-                {
-                    "content": "ein bißchen"
+                    "content": "sehr"
                 },
                 {
                     "content": "ziemlich"
                 },
                 {
-                    "content": "sehr"
+                    "content": "ein bißchen"
+                },
+                {
+                    "content": "überhaupt nicht"
+                },
+                {
+                    "content": "Frage betrifft micht nicht"
                 }
-
             ],
             "choice": ""
         },
@@ -61,16 +63,20 @@
             "issue": "Wie sehr hat Ihre Hauterkrankung die Wahl der Kleidung beeinflußt, die Sie in den vergangenen 7 Tagen getragen haben? ",
             "answers": [
                 {
-                    "content": "überhaupt nicht"
-                },
-                {
-                    "content": "ein bißchen"
+                    "content": "sehr"
                 },
                 {
                     "content": "ziemlich"
                 },
                 {
-                    "content": "sehr"
+                    "content": "ein bißchen"
+                },
+                {
+                    "content": "überhaupt nicht"
+                }
+                ,
+                {
+                    "content": "Frage betrifft micht nicht"
                 }
 
             ],
@@ -79,8 +85,9 @@
     ],
     "value": [
         [3, 2, 1, 0],
-        [0, 1, 2, 3],
-        [3, 2, 1, 0]
+        [3, 2, 1, 0],
+        [3, 2, 1, 0, 0],
+        [3, 2, 1, 0, 0]
     ]
 
 }

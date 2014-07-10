@@ -1,18 +1,11 @@
 # encoding: utf-8
 from __future__ import absolute_import, print_function, division, unicode_literals
-import datetime
 
-import facebook
-import requests
-from flask import Blueprint, request, abort, session, redirect
-from itsdangerous import URLSafeTimedSerializer, BadData
-from sqlalchemy.orm import joinedload
-import json
+from flask import Blueprint, request, abort, session
 
 from .questionnaire_api import init_reply
 from .models import *
 from .seed import jsonify
-from . import app
 
 
 api = Blueprint("api", __name__)
@@ -161,75 +154,7 @@ def update_patient(id):
 
 
 """
-Events API
-
-The Events API implements all RESTful methods for demonstration purposes.
-As you may note, access control is _not_ implemented yet.
-For the moment, that's a feature, so just ignore it.
-"""
-
-
-@api.route("/events/")
-def get_events():
-    """
-    GET to the list: return list of all events.
-    """
-    return jsonify(Event.query
-                   .order_by(Event.startTime.asc())
-                   .filter(Event.endTime >= datetime.datetime.utcnow())
-                   .all())
-
-
-@api.route("/events/", methods=["POST"])
-def add_event():
-    """
-    POST to the list: add a new event.
-    Don't forget to call db.session.commit()
-    """
-    event = Event(**request.json)
-    db.session.add(event)
-    db.session.commit()
-    return jsonify(event)
-
-
-"""
-Appointments API
-
-The Appointments API implements all RESTful methods for demonstration purposes.
-As you may note, access control is _not_ implemented yet.
-For the moment, that's a feature, so just ignore it.
-"""
-
-
-@api.route("/appointments/")
-def get_appointments():
-    """
-    GET to the list: return list of all appointments.
-    """
-    return jsonify(Appointment.query
-                   .options(joinedload("physician"))
-                   .options(joinedload("patient"))
-                   .order_by(Appointment.startTime.asc())
-                   .filter(Appointment.endTime >= datetime.datetime.utcnow())
-                   .filter((Appointment.patient_id == session["user_id"])
-                           | (Appointment.physician_id == session["user_id"]))
-                   .all())
-
-
-@api.route("/appointments/", methods=["POST"])
-def add_appointment():
-    """
-    POST to the list: add a new appointment.
-    Don't forget to call db.session.commit()
-    """
-    appointment = Appointment(**request.json)
-    db.session.add(appointment)
-    db.session.commit()
-    return jsonify(appointment)
-
-
-"""
-Videos API
+Questionnaires API
 """
 
 
@@ -268,8 +193,9 @@ def add_reply(type,id):
     The right type will be defined in the function init_reply
     Don't forget to call db.session.commit()
     """
+    type += TYPE_HADS
     patient = Patient.query.filter_by(id=id).first_or_404()
-    questionnaire=Questionnaire.query.filter_by(type=type+9).first_or_404()
+    questionnaire=Questionnaire.query.filter_by(type=type).first_or_404()
     reply = init_reply(request.json["data"],type,patient,questionnaire["value"])
     db.session.add(reply)
     db.session.commit()
@@ -299,37 +225,5 @@ def update_hads(id):
 
 """
 
-"""
-File API
 
-The File API implements all RESTful methods for demonstration purposes.
-As you may note, access control is _not_ implemented yet.
-For the moment, that's a feature, so just ignore it.
-"""
-
-
-@api.route("/files/<access_token>")
-def get_file_blob(access_token):
-    """
-    return file if access token is correct
-    """
-    f = File.query.filter_by(access_token=access_token).first_or_404()
-    return f.data
-
-
-@api.route('/files', methods=['POST'])
-def upload_file():
-    # Flask's handling for file uploads is a little bit akward.
-    # TL;DR: Get file as string from request.
-    files = request.files.listvalues()
-    if not files:
-        abort(400)
-    file_contents = files[0][0].read()
-
-    db_file = File(data=file_contents)
-    db.session.add(db_file)
-    db.session.commit()
-    return jsonify({
-        "access_token": db_file.access_token
-    })
 

@@ -1,0 +1,131 @@
+{
+    "content": [
+        {
+            "issue": "...schmerzfrei zu sein ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        },
+        {
+            "issue": "...keinen Juckreiz mehr zu empfinden ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        },
+        {
+            "issue": "...kein Brennen an der Haut mehr zu haben ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        },
+        {
+            "issue": "...von allen Hautveränderungen geheilt zu sein ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        },
+        {
+            "issue": "...sich besser konzentrieren zu können ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        }
+    ],
+    "value": [
+        [0,1,2,4,5,0],
+        [0,1,2,4,5,0],
+        [0,1,2,4,5,0],
+        [0,1,2,4,5,0]
+
+    ]
+}

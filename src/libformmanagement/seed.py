@@ -110,60 +110,6 @@ def seed():
     for patient in patients:
         db.session.add(patient)
 
-    callcenter = User(name="Call Center")
-
-    db.session.add(callcenter)
-
-    c1 = Conversation(title="Testgespräch")
-    patients[0].conversations.append(c1)
-    physicians[2].conversations.append(c1)
-    c1.messages.append(Message(author=patients[0], content="Hallo, dies ist ein Test."))
-    c1.messages.append(Message(author=physicians[2], content="Hören Sie auf, mich zu testen!"))
-
-    c2 = Conversation(title="Frage zu Bankwechsel")
-    c2.messages.append(Message(author=patients[1], content="Niemand antwortet mir :-("))
-    c2.users.extend([patients[1], callcenter])
-
-    c3 = Conversation(title="Flotte Dreierverkonversation")
-    c3.users.extend([patients[2], physicians[1], callcenter])
-
-    event1 = Event(title="Volksbank Marathon",
-                   details="laberabarberabarber...",
-                   startTime=datetime(2014, 6, 3, 13, 30),
-                   endTime=datetime(2014, 6, 3, 13, 31))
-    event2 = Event(title="Volksbank Spartag",
-                   details="laberabarberabarber... (2)",
-                   startTime=datetime(2014, 8, 3, 13, 30),
-                   endTime=datetime(2014, 6, 3, 13, 31))
-    db.session.add(event1)
-    db.session.add(event2)
-
-    # Diagnosis seeden
-    diagnosis_datasets = (
-        {
-            "title": "Beratung Bausparvertrag",
-            "details": "Bitte kommen Sie zu mir in die Filiale."
-        },
-        {
-            "title": "Hauskauf",
-            "details": "Ich komme bei Ihnen vorbei."
-        }
-    )
-    for i in range(30):
-        patient = random.choice(patients) if i < 15 else patients[0]  # Zufälligen Kundenberater auswählen
-        starttime = (datetime.now()
-                     + timedelta(days=random.randint(0, 14))
-                     + timedelta(minutes=random.randint(-24 * 60, 24 * 60)))
-        endtime = starttime + timedelta(days=random.randint(0, 1), minutes=random.randint(0, 600))
-
-        diagnosis_data = random.choice(diagnosis_datasets)
-        diagnosis = Diagnosis(title=diagnosis_data["title"],
-                                  patient=patient,
-                                  physician=patient.physician,
-                                  details=diagnosis_data["details"],
-                                  startTime=starttime,
-                                  endTime=endtime)
-        db.session.add(diagnosis)
 
 
     json_data = open("./libformmanagement/seed/questionnaires/hads.json")
@@ -189,6 +135,18 @@ def seed():
     )
 
     db.session.add(dlqi)
+
+    json_data = open("./libformmanagement/seed/questionnaires/pbi.json")
+    pbi_data = json.load(json_data)
+
+    pbi = Questionnaire(
+        title= "pbi",
+        content= pbi_data["content"],
+        type=11,
+        value=pbi_data["value"]
+    )
+
+    db.session.add(pbi)
 
     hadsresult = Hads(
         patient = patients[1],

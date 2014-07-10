@@ -30,12 +30,12 @@ class FileView(ModelView):
 
 # To add a model to the admin interface, simply add it below.
 # admin.add_view(ModelView(User, db.session))
-admin.add_view(FileView(File, db.session))
+#admin.add_view(FileView(File, db.session))
 admin.add_view(ModelView(Patient, db.session))
 admin.add_view(ModelView(Physician, db.session))
 admin.add_view(ModelView(Administrator, db.session))
 admin.add_view(ModelView(Reply, db.session))
 admin.add_view(ModelView(Hads, db.session))
-admin.add_view(ModelView(Event, db.session))
-admin.add_view(ModelView(Diagnosis, db.session))
+admin.add_view(ModelView(Dlqi, db.session))
+admin.add_view(ModelView(Pbi, db.session))
 admin.add_view(ModelView(Questionnaire, db.session))
