@@ -7,11 +7,11 @@
                 </div>
                 <div class="panel-body">
                     <div ng-repeat="(j, answer) in question.answers track by $index">
+                        <hr class="line" ng-show="answer.content == 'betrifft mich nicht'">
                         <label class="radio-inline">
                             <input type="radio" ng-model="answers[i]" ng-click="save()"
                                    value="{{j}}">
                         </label>
-                        {{answers[i]}}
                         {{answer.content}}
                     </div>
                 </div>

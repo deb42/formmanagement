@@ -34,7 +34,6 @@
                 {
                     "content": "überhaupt nicht"
                 }
-
             ],
             "choice": ""
         },
@@ -54,7 +53,7 @@
                     "content": "überhaupt nicht"
                 },
                 {
-                    "content": "Frage betrifft micht nicht"
+                    "content": "betrifft mich nicht"
                 }
             ],
             "choice": ""
@@ -73,10 +72,9 @@
                 },
                 {
                     "content": "überhaupt nicht"
-                }
-                ,
+                },
                 {
-                    "content": "Frage betrifft micht nicht"
+                    "content": "betrifft mich nicht"
                 }
 
             ],
