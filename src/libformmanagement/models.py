@@ -100,7 +100,8 @@ class Reply(db.Model):
     type = db.Column(db.Integer)
 
     __mapper_args__ = {
-        'polymorphic_on': type
+        'polymorphic_on': type,
+        'with_polymorphic': '*'
     }
 
     def __repr__(self):

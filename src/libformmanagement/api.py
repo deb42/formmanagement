@@ -174,17 +174,17 @@ def get_questionnaires(id):
 Videos Hads
 """
 
-@api.route('/hads')
+@api.route('/reply')
 def hads_list():
-    return jsonify(Hads.query.all())
+    return jsonify(Reply.query.with_polymorphic("*").all())
 
-@api.route("/hads/<int:id>")
-def get_hads(id):
+@api.route("/reply/<int:type>/<int:id>")
+def get_reply(type, id):
     """
     GET to hads resource: return single patient.
     Use .first_or_404() to automatically raise a 404 error if the resource isn't found.
     """
-    return jsonify(Hads.query.filter_by(id=id).first_or_404())
+    return jsonify(Reply.query.with_polymorphic("*").filter_by(patient_id=id).filter_by(type=type).all())
 
 @api.route("/reply/<int:type>/<int:id>", methods=["POST"])
 def add_reply(type,id):
