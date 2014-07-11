@@ -16,11 +16,11 @@ patients.controller("patientsCtrl", ["$scope", "Session", "Patient", "Physician"
         $scope.session = Session.get();
         $scope.patients = Patient.query();
         $scope.physicains = Physician.query();
-        $scope.reply = Reply.query({type: 10, id: $scope.session.user.id})
+        $scope.replies = Reply.query({type: 9, id: 9})
         console.log($scope.session);
 
 
-        $scope.updateData = function () {
+        $scope.updateData = function (replies) {
             var chart = document.getElementById("myCoolChart").getAttribute("type");
             switch (chart) {
                 case 'PolarArea':
@@ -33,27 +33,32 @@ patients.controller("patientsCtrl", ["$scope", "Session", "Patient", "Physician"
                     $scope.generatePieData();
                     break;
                 default:
-                    $scope.generateData();
+                    $scope.generateData(replies);
             }
         };
 
-        $scope.generateData = function () {
+        $scope.generateData = function (replies) {
+
+            console.log(replies)
+            console.log(replies[0])
+
+
             var sevenRandNumbers = function () {
                 var numberArray = [];
-                for (var i = 0; i < 7; i++) {
-                    numberArray.push(Math.floor((Math.random() * 100) + 1));
+                for (var i = 0; i < replies.length; i++) {
+                    numberArray.push(replies[0]["anxiety_scale"]);
                 }
                 return numberArray;
             };
             var data = {
-                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                labels: ["January", "February", "March", "April", "May"],
                 datasets: [
                     {
                         fillColor: "rgba(220,220,220,0.5)",
                         strokeColor: "rgba(220,220,220,1)",
                         pointColor: "rgba(220,220,220,1)",
                         pointStrokeColor: "#fff",
-                        data: sevenRandNumbers()
+                        data: [1,2,0,4,5]
                     },
                     {
                         fillColor: "rgba(151,187,205,0.5)",
@@ -115,7 +120,7 @@ patients.controller("patientsCtrl", ["$scope", "Session", "Patient", "Physician"
             $scope.updateData();
         };
 
-        $scope.generateData();
+        //$scope.generateData();
 
 
     }])
