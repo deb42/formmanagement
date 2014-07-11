@@ -5,4 +5,80 @@
     <div ng-repeat="patient in patients">
         {{patient.name}}
     </div>
+
+    <div class="row">
+        <div class="span12">
+            <h1>Angular Chartjs Directive</h1>
+            <hr>
+            <p></p>
+        </div>
+    </div>
+
+
+    <hr>
+    <div class="row">
+        <div class="span12">
+            <h2>In action</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="span6">
+            <chart value="myChart" id="myCoolChart"></chart>
+            <p>^ This is a chart</p>
+            <button ng-click="updateData()" class="btn btn-success">
+                Update Data
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="span12">
+            <h3>Tag Parameters</h3>
+            <ul>
+                <li><code>value</code> (default: "Line")</li>
+                <li><code>width</code> (default: 600)</li>
+                <li><code>height</code> (default: 400)</li>
+            </ul>
+
+            <p>value can be any of the chartjs chart types:</p>
+            <ul>
+                <li>
+                    <button ng-click="line()" class="btn btn-success">
+                        Line
+                    </button>
+                </li>
+                <br/>
+                <li>
+                    <button ng-click="bar()" class="btn btn-success">
+                        Bar
+                    </button>
+                </li>
+                <br/>
+                <li>
+                    <button ng-click="radar()" class="btn btn-success">
+                        Radar
+                    </button>
+                </li>
+                <br/>
+                <li>
+                    <button ng-click="polarArea()" class="btn btn-success">
+                        Polar
+                    </button>
+                </li>
+                <br/>
+                <li>
+                    <button ng-click="pie()" class="btn btn-success">
+                        Pie
+                    </button>
+                </li>
+                <br/>
+                <li>
+                    <button ng-click="doughnut()" class="btn btn-success">
+                        Doughnut
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>

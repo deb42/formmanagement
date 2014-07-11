@@ -21,7 +21,8 @@
     <script src="/components/formmanagement/app.js"></script>
     <script src="/components/formmanagement/api/api.js"></script>
     <script src="/components/formmanagement/patients/patients.js"></script>
-    <script src="/components/formmanagement//questionnaire/questionnaire.js"></script>
+    <script src="/components/formmanagement/questionnaire/questionnaire.js"></script>
+    <script src="/components/formmanagement/lib/Chart.min.js"></script>
 
 </head>
 <body>
@@ -37,7 +38,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Brand</a>
+                <a class="navbar-brand" href="#"><img style="height: 50px" src="http://www.klinikum.uni-muenster.de/fileadmin/tpl_ukm_internet/img/ukm_logo_small.png"> </a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -46,7 +47,7 @@
                     <li class="active"><a href="#/patients">Patienten</a></li>
                     <li><a href="#/questionnaire">Fragebogen</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{session.user.name}} <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a ng-click="logout()">Logout</a></li>
                             <li><a href="#">Another action</a></li>
@@ -64,6 +65,7 @@
         <!-- /.container-fluid -->
     </nav>
 </div>
+{{session.userClass}}
 
 <div class="container">
     <ng-view></ng-view>
