@@ -10,14 +10,23 @@ var patients = angular.module("formmanagement.patients", [
     "formmanagement.api"
 ]);
 
-patients.controller("patientsCtrl", ["$scope", "Session", "Patient", "Physician", "Reply",
-    function ($scope, Session, Patient, Physician, Reply) {
+patients.controller("patientsCtrl", ["$scope", "Session", "Patient", "Physician", "Reply", "Questionnaire",
+    function ($scope, Session, Patient, Physician, Reply, Questionnaire) {
 
         $scope.session = Session.get();
         $scope.patients = Patient.query();
         $scope.physicains = Physician.query();
+        $scope.questionnaires = Questionnaire.query();
         $scope.replies = Reply.query({type: 9, id: 9})
+        $scope.selectedQuestionnaire = {index: 0};
+
+        $scope.$watch('selectedQuestionnaire.index', function(){
+            $scope.replies = Reply.query({type: $scope.selectedQuestionnaire.index+9, id: 9})
+            console.log("watch")
+            console.log($scope.replies)
+        })
         console.log($scope.session);
+
 
 
         $scope.updateData = function (replies) {
@@ -43,33 +52,45 @@ patients.controller("patientsCtrl", ["$scope", "Session", "Patient", "Physician"
             console.log(replies[0])
 
 
-            var sevenRandNumbers = function () {
+            var scores = function () {
+                console.log($scope.selectedQuestionnaire.index)
                 var numberArray = [];
                 for (var i = 0; i < replies.length; i++) {
-                    numberArray.push(replies[0]["anxiety_scale"]);
+                    numberArray.push(replies[i][$scope.questionnaires[$scope.selectedQuestionnaire.index].scores[0]]);
+                    console.log(replies[i][$scope.questionnaires[$scope.selectedQuestionnaire.index].scores[0]]);
                 }
                 return numberArray;
             };
+
+            var dates = function(){
+                var numberArray = [];
+                for (var i = 0; i < replies.length; i++) {
+                    numberArray.push(replies[i]["date"]);
+                    console.log(replies[i]["date"])
+                }
+                return numberArray;
+            };
+
             var data = {
-                labels: ["January", "February", "March", "April", "May"],
+                labels: dates(),
                 datasets: [
                     {
                         fillColor: "rgba(220,220,220,0.5)",
                         strokeColor: "rgba(220,220,220,1)",
                         pointColor: "rgba(220,220,220,1)",
                         pointStrokeColor: "#fff",
-                        data: [1,2,0,4,5]
+                        data: [1, 2, 0, 4]
                     },
                     {
                         fillColor: "rgba(151,187,205,0.5)",
                         strokeColor: "rgba(151,187,205,1)",
                         pointColor: "rgba(151,187,205,1)",
                         pointStrokeColor: "#fff",
-                        data: sevenRandNumbers()
+                        data: scores()
                     }
                 ]
             };
-            $scope.myChart = {"data": data, "options": {} };
+            $scope.myChart = {"data": data, "options": {datasetFill : false} };
         };
 
         $scope.generatePieData = function () {

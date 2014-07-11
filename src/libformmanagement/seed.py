@@ -119,7 +119,8 @@ def seed():
         title= "hads",
         content= hads_data["content"],
         type=TYPE_HADS,
-        value=hads_data["value"]
+        value=hads_data["value"],
+        scores = ["anxiety_scale", "depression_scale"]
     )
 
     db.session.add(hads)
@@ -131,7 +132,8 @@ def seed():
         title= "dlqi",
         content= dlqi_data["content"],
         type=10,
-        value=dlqi_data["value"]
+        value=dlqi_data["value"],
+        scores = ["score"]
     )
 
     db.session.add(dlqi)
