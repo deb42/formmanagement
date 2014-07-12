@@ -1,95 +1,97 @@
-<h3>hallo zurück</h3>
-
 <div ng-controller="patientsCtrl">
-    {{session.user.name}}
-    <div ng-repeat="patient in patients">
-        {{patient.name}}
-    </div>
-    {{reply}}
 
-    <div class="row">
-        <div class="span12">
-            <h1>Angular Chartjs Directive</h1>
-            <hr>
-            <p></p>
-        </div>
+
+    <div class="form-group">
+        <label for="patient">Patient</label>
+         <span class="nullable">
+            <select class="form-control dropdown-menu-right" id="patient" ng-model="selectedPatient">
+                <option value="" selected="selected"></option>
+                <option value="{{patient.id}}" ng-repeat="patient in patients">{{patient.name}}</option>
+            </select>
+         </span>
     </div>
 
+    <div ng-show="selectedPatient">
+        <ul class="nav nav-tabs" role="tablist">
+            <li ng-repeat="(i, questionnaire) in questionnaires track by $index"
+                ng-click="selectQuestionnaire(i)"
+                ng-class="(selectedQuestionnaire.index == questionnaire.id -1) ? 'active': ''">
+                <a><label>{{questionnaire.title}}</label></a>
+            </li>
+        </ul>
+        <br>
 
-    <hr>
-    <div class="row">
-        <div class="span12">
-            <h2>In action</h2>
-        </div>
-    </div>
+        <div ng-show="selectedPatient">
 
-    <div class="btn-group">
-        <button type="button" class="btn btn-default"
-                ng-repeat="(i, questionnaire) in questionnaires track by $index"
-                ng-click="selectQuesionnaire(i); selectedQuestionnaire.index = i"
-                ng-class="(selectedQuestionnaire.index == questionnaire.id -1) ? 'selected': ''">
-            {{questionnaire.title}} {{i}}
-        </button>
-    </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th ng-repeat="reply in replies[selectedQuestionnaire.index]">
+                            {{reply.date}}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="score in questionnaires[selectedQuestionnaire.index].scores">
+                        <th>{{score.name}}</th>
+                        <td class="score" ng-repeat="(i, reply) in replies[selectedQuestionnaire.index] track by $index">
+                            <button type="button" class="btn btn-link btn-gray" ng-click="chooseReply(i)">
+                                {{reply[score.type]}}
+                            </button>
+                        </td>
+                    </tr>
 
-
-    <div class="row">
-        <div class="span6">
-            <chart value="myChart" id="myCoolChart"></chart>
-            <p>^ This is a chart</p>
-            <button ng-click="updateData(replies)" class="btn btn-success">
-                Update Data
-            </button>
-        </div>
-    </div>
-    <!--
-        <div class="row">
-            <div class="span12">
-                <h3>Tag Parameters</h3>
-                <ul>
-                    <li><code>value</code> (default: "Line")</li>
-                    <li><code>width</code> (default: 600)</li>
-                    <li><code>height</code> (default: 400)</li>
-                </ul>
-
-                <p>value can be any of the chartjs chart types:</p>
-                <ul>
-                    <li>
-                        <button ng-click="line()" class="btn btn-success">
-                            Line
-                        </button>
-                    </li>
-                    <br/>
-                    <li>
-                        <button ng-click="bar()" class="btn btn-success">
-                            Bar
-                        </button>
-                    </li>
-                    <br/>
-                    <li>
-                        <button ng-click="radar()" class="btn btn-success">
-                            Radar
-                        </button>
-                    </li>
-                    <br/>
-                    <li>
-                        <button ng-click="polarArea()" class="btn btn-success">
-                            Polar
-                        </button>
-                    </li>
-                    <br/>
-                    <li>
-                        <button ng-click="pie()" class="btn btn-success">
-                            Pie
-                        </button>
-                    </li>
-                    <br/>
-                    <li>
-                        <button ng-click="doughnut()" class="btn btn-success">
-                            Doughnut
-                        </button>
-                    </li>
-                </ul>
+                    </tbody>
+                </table>
             </div>
-        </div>-->
+
+            <div class="row" ng-show="showReply">
+                <div class="container">
+                    <div class="jumbotron">
+                        <div class="row">
+                            <button aria-hidden="true" class="close" ng-click="closeReply()"
+                                    ng-if="!first_choice">&times;</button>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <questionnaire-form questionnaire="questionnaires[selectedQuestionnaire.index]"
+                                                index="selectedQuestionnaire.index"
+                                                answers="replies[selectedQuestionnaire.index][selectedReply].data"
+                                                reply="false"></questionnaire-form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="span12">
+                    <h2>In action</h2>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-default"
+                        ng-repeat="(i, questionnaire) in questionnaires track by $index"
+                        ng-click="selectQuesionnaire(i); selectedQuestionnaire.index = i; updateData(replies[selectedQuestionnaire.index])"
+                        ng-class="(selectedQuestionnaire.index == questionnaire.id -1) ? 'selected': ''">
+                    {{questionnaire.title}}
+                </button>
+            </div>
+
+
+            <div class="row">
+                <div class="span6">
+                    <chart value="myChart" id="myCoolChart"></chart>
+                    <p>^ This is a chart</p>
+
+
+                    <button ng-click="updateData(replies[selectedQuestionnaire.index])">
+                        Update Data
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

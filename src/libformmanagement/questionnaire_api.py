@@ -6,6 +6,7 @@ from datetime import date
 def anxiety_scale(answers, value):
     anxiety_scale = 0
     for i in range(0,answers.__len__(),2):
+        print(int(value[i][int(answers[i])]))
         anxiety_scale += int(value[i][int(answers[i])])
     return anxiety_scale
 

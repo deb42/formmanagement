@@ -20,6 +20,25 @@
             "choice": ""
         },
         {
+            "issue": "lch tuhle mich in meinen Aktivitaten gebremst",
+            "answers": [
+                {
+                    "content": "fast immer "
+                },
+                {
+                    "content": "sehr oft"
+                },
+                {
+                    "content": "manchmal"
+                },
+                {
+                    "content": "überhaupt nicht"
+                }
+
+            ],
+            "choice": ""
+        },
+        {
             "issue": "lch kann mich heute noch so freuen wie fruher",
             "answers": [
                 {
@@ -33,6 +52,25 @@
                 },
                 {
                     "content": "kaum oder gar nicht"
+                }
+
+            ],
+            "choice": ""
+        },
+        {
+            "issue": "lch habe manchmal ein angstliches Getuhl in der Magengegend",
+            "answers": [
+                {
+                    "content": "überhaupt nicht"
+                },
+                {
+                    "content": "gelegentlich"
+                },
+                {
+                    "content": "ziemlich oft "
+                },
+                {
+                    "content": "sehr oft"
                 }
 
             ],
@@ -56,11 +94,203 @@
 
             ],
             "choice": ""
+        },
+        {
+            "issue": "lch habe das Interesse an meiner außeren Erscheinung verloren ",
+            "answers": [
+                {
+                    "content": "ja, stimmt genau "
+                },
+                {
+                    "content": "ich kummere mich nicht so sehr darum, wie ich sollte "
+                },
+                {
+                    "content": "moglicherweise kummere ich mich zu  wenig darum "
+                },
+                {
+                    "content": "ich kummere mich so viel darum wie immer"
+                }
+
+            ],
+            "choice": ""
+        },
+        {
+            "issue": "Ich kann lachen und die lustige Seite der Dinge sehen ",
+            "answers": [
+                {
+                    "content": "ja, so viel wie immer"
+                },
+                {
+                    "content": "nicht mehr ganz so viel"
+                },
+                {
+                    "content": "inzwischen viel weniger"
+                },
+                {
+                    "content": "uberhaupt nicht"
+                }
+
+            ],
+            "choice": ""
+        },
+        {
+            "issue": "lch fühle mich rastlos, muss immer in Bewegung sein ",
+            "answers": [
+                {
+                    "content": "ja, tatsächlich sehr "
+                },
+                {
+                    "content": "ziemlich "
+                },
+                {
+                    "content": "nicht sehr "
+                },
+                {
+                    "content": "überhaupt nicht"
+                }
+
+            ],
+            "choice": ""
+        },
+        {
+            "issue": "Mir gehen beunruhigende Gedanken durch den Kopf ",
+            "answers": [
+                {
+                    "content": "einen GroBteil der Zeit "
+                },
+                {
+                    "content": "verhaltnismaBig oft"
+                },
+                {
+                    "content": "von Zeit zu Zeit, aber nicht allzu oft "
+                },
+                {
+                    "content": "nur gelegentlich/nie"
+                }
+
+            ],
+            "choice": ""
+        },
+        {
+            "issue": "lch blicke mit Freude in die Zukunft ",
+            "answers": [
+                {
+                    "content": "ja, sehr"
+                },
+                {
+                    "content": " eher weniger als fruher "
+                },
+                {
+                    "content": "viel weniger als fruher"
+                },
+                {
+                    "content": "kaum bis gar nicht "
+                }
+
+            ],
+            "choice": ""
+        },
+        {
+            "issue": "lch fühle mich glücklich ",
+            "answers": [
+                {
+                    "content": "uberhaupt nicht "
+                },
+                {
+                    "content": "selten "
+                },
+                {
+                    "content": "manchmal "
+                },
+                {
+                    "content": "meistens"
+                }
+
+            ],
+            "choice": ""
+        },
+        {
+            "issue": "Mich uberkommt plotzlich ein panikartiger Zustand",
+            "answers": [
+                {
+                    "content": "ja, tatsachlich sehr oft "
+                },
+                {
+                    "content": "ziemlich oft "
+                },
+                {
+                    "content": "nicht sehr oft"
+                },
+                {
+                    "content": "uberhaupt nicht"
+                }
+
+            ],
+            "choice": ""
+        },
+        {
+            "issue": "lch kann behaglich dasitzen und mich entspannen ",
+            "answers": [
+                {
+                    "content": "ja, natUrlich "
+                },
+                {
+                    "content": "gewohnlich schon "
+                },
+                {
+                    "content": "nicht oft "
+                },
+                {
+                    "content": "uberhaupt nicht "
+                }
+
+            ],
+            "choice": ""
+        },
+        {
+            "issue": "Ich kann mich an einem guten Buch, einer Radio- oder Fernsehsendung freuen ",
+            "answers": [
+                {
+                    "content": "oft "
+                },
+                {
+                    "content": "manchmal "
+                },
+                {
+                    "content": "eher selten "
+                },
+                {
+                    "content": "sehr selten "
+                }
+
+            ],
+            "choice": ""
         }
     ],
     "value": [
         [3, 2, 1, 0],
+        [3, 2, 1, 0],
         [0, 1, 2, 3],
-        [3, 2, 1, 0]
+        [0, 1, 2, 3],
+        [3, 2, 1, 0],
+        [3, 2, 1, 0],
+        [0, 1, 2, 3],
+        [3, 2, 1, 0],
+        [3, 2, 1, 0],
+        [0, 1, 2, 3],
+        [3, 2, 1, 0],
+        [3, 2, 1, 0],
+        [0, 1, 2, 3],
+        [0, 1, 2, 3]
+    ],
+    "scores": [
+        {
+            "name": "Angstskale",
+            "type": "anxiety_scale"
+        },
+        {
+            "name": "Depressivitätsskala",
+            "type": "depression_scale"
+        }
     ]
 }

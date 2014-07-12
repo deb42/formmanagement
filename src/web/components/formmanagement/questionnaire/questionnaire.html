@@ -13,14 +13,14 @@
 
     <div ng-show="init">
         <div class="row">
-            <div class="btn-group">
-                <button type="button" class="btn btn-default"
-                        ng-repeat="(i, questionnaire) in questionnaires track by $index"
-                        ng-click="selectQuesionnaire(i); selectedQuestionnaire.index = i"
-                        ng-class="(selectedQuestionnaire.index == questionnaire.id -1) ? 'selected': ''">
-                    {{questionnaire.title}}
-                </button>
-            </div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li ng-repeat="(i, questionnaire) in questionnaires track by $index"
+                    ng-click="selectQuesionnaire(i); selectedQuestionnaire.index = i; updateData(replies)"
+                    ng-class="(selectedQuestionnaire.index == questionnaire.id -1) ? 'active': ''">
+                    <a>{{questionnaire.title}}</a>
+                </li>
+            </ul>
+
             <div class="pull-right">
                 <button type="button" class="btn btn-default" ng-click="save(selecedQuestionaire)">Speichern</button>
             </div>
@@ -30,7 +30,8 @@
         <div class="row">
             <questionnaire-form questionnaire="questionnaires[selectedQuestionnaire.index]"
                                 index="selectedQuestionnaire.index"
-                                answers="answers[selectedQuestionnaire.index]"></questionnaire-form>
+                                answers="answers[selectedQuestionnaire.index]"
+                                reply="true"></questionnaire-form>
         </div>
 
         <div class="row">

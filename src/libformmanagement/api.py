@@ -184,7 +184,12 @@ def get_reply(type, id):
     GET to hads resource: return single patient.
     Use .first_or_404() to automatically raise a 404 error if the resource isn't found.
     """
-    return jsonify(Reply.query.with_polymorphic("*").filter_by(patient_id=id).filter_by(type=type).all())
+    return jsonify(Reply.query
+                   .with_polymorphic("*")
+                   .order_by(Hads.date.asc())
+                   .filter_by(patient_id=id)
+                   .filter_by(type=type)
+                   .all())
 
 @api.route("/reply/<int:type>/<int:id>", methods=["POST"])
 def add_reply(type,id):

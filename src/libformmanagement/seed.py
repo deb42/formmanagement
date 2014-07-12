@@ -9,12 +9,16 @@ import json
 
 from .models import *
 from . import app
+from .questionnaire_api import anxiety_scale, depression_scale, dlqi_score
 
 
 # Flask's jsonify doesn't allow arrays to be returned by default,
 # as this might be problematic for EcmaScript 4 patients.
 # We don't care about ES4 patients (IE <= 8).
 # http://flask.pocoo.org/docs/security/#json-security
+
+
+
 def jsonify(*args, **kwargs):
     if len(args) == 1 and not kwargs and type(args[0]) == list:
         return flask.Response(flask.json.dumps(args[0], indent=2), mimetype='application/json')
@@ -120,7 +124,7 @@ def seed():
         content= hads_data["content"],
         type=TYPE_HADS,
         value=hads_data["value"],
-        scores = ["anxiety_scale", "depression_scale"]
+        scores = hads_data["scores"]
     )
 
     db.session.add(hads)
@@ -133,7 +137,7 @@ def seed():
         content= dlqi_data["content"],
         type=10,
         value=dlqi_data["value"],
-        scores = ["score"]
+        scores = dlqi_data["scores"]
     )
 
     db.session.add(dlqi)
@@ -150,40 +154,38 @@ def seed():
 
     db.session.add(pbi)
 
-    hadsresult = Hads(
-        patient = patients[1],
-        date=date.today(),
-        data=[0, 1, 1],
-        anxiety_scale =1,
-        depression_scale = 1
-    )
+    db.session.commit()
 
-    hadsresult1 = Hads(
-        patient = patients[1],
-        date=date.today(),
-        data=[0, 1, 1],
-        anxiety_scale =1,
-        depression_scale = 1
-    )
-    hadsresult2 = Hads(
-        patient = patients[1],
-        date=date.today(),
-        data=[0, 1, 1],
-        anxiety_scale =1,
-        depression_scale = 1
-    )
-    hadsresult3 = Hads(
-        patient = patients[1],
-        date=date.today(),
-        data=[0, 1, 1],
-        anxiety_scale =1,
-        depression_scale = 1
-    )
+    for i in range(0,30,2):
+        answers = []
+        for j in range(0,14):
+            answers.append(random.randint(0,3))
+        questionnaire = Questionnaire.query.filter_by(type=TYPE_HADS).first_or_404()
+        hadsresult = Hads(
+            patient = patients[1],
+            date= date.today()-timedelta(days=i*7),
+            data=answers,
+            anxiety_scale = anxiety_scale(answers, questionnaire["value"]),
+            depression_scale = depression_scale(answers,questionnaire["value"])
+        )
+        db.session.add(hadsresult)
 
-    db.session.add(hadsresult)
-    db.session.add(hadsresult1)
-    db.session.add(hadsresult2)
-    db.session.add(hadsresult3)
+
+    for i in range(0,30,2):
+        answers = []
+        for j in range(0,3):
+            answers.append(random.randint(0,3))
+            print(answers)
+        questionnaire = Questionnaire.query.filter_by(type=TYPE_HADS).first_or_404()
+        print(questionnaire["value"])
+        hadsresult = Dlqi(
+            patient = patients[1],
+            date= date.today()-timedelta(days=i*7),
+            data=answers,
+            score = dlqi_score(answers, questionnaire["value"]),
+
+        )
+        db.session.add(hadsresult)
 
 
     db.session.commit()

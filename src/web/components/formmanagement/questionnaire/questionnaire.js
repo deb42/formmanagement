@@ -98,7 +98,8 @@ questionaire.directive('questionnaireForm', [function () {
         scope: {
             questionnaire: "=",
             index: "=",
-            answers: "="
+            answers: "=",
+            reply: "="
         },
         templateUrl: '/components/formmanagement/questionnaire/questionnaie-form.html',
 

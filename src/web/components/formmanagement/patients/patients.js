@@ -17,99 +17,74 @@ patients.controller("patientsCtrl", ["$scope", "Session", "Patient", "Physician"
         $scope.patients = Patient.query();
         $scope.physicains = Physician.query();
         $scope.questionnaires = Questionnaire.query();
-        $scope.replies = Reply.query({type: 9, id: 9})
+        //$scope.replies = Reply.query({type: 9, id: 9})
         $scope.selectedQuestionnaire = {index: 0};
 
-        $scope.$watch('selectedQuestionnaire.index', function(){
-            $scope.replies = Reply.query({type: $scope.selectedQuestionnaire.index+9, id: 9})
-            console.log("watch")
-            console.log($scope.replies)
-        })
-        console.log($scope.session);
-
-
-
-        $scope.updateData = function (replies) {
-            var chart = document.getElementById("myCoolChart").getAttribute("type");
-            switch (chart) {
-                case 'PolarArea':
-                    $scope.generatePieData();
-                    break;
-                case 'Pie':
-                    $scope.generatePieData();
-                    break;
-                case 'Doughnut':
-                    $scope.generatePieData();
-                    break;
-                default:
-                    $scope.generateData(replies);
+        $scope.$watchCollection('[selectedQuestionnaire.index, selectedPatient]', function () {
+            if ($scope.selectedPatient) {
+                $scope.replies = new Array();
+                for (var i = 0; i < $scope.questionnaires.length; ++i) {
+                    $scope.replies.push(Reply.query({type: i + 9, id: $scope.selectedPatient}));
+                }
+                $scope.updateData($scope.replies)
             }
+        });
+
+        /*setInterval(function () {
+         console.log($scope.replies)
+         if ($scope.replies) {
+         $scope.updateData($scope.replies);
+         }
+         }, 1000);*/
+
+        $scope.selectQuestionnaire = function (index) {
+            $scope.selectedQuestionnaire.index = index;
+            // setTimeout(function(){
+            $scope.updateData($scope.replies[index]);
+            console.log($scope.replies[index])
+            //alert("data updated");
+            // }, 3000)
         };
 
-        $scope.generateData = function (replies) {
+        $scope.updateData = function (replies) {
+            var colors = ["green", "blue", "yellow"];
 
-            console.log(replies)
-            console.log(replies[0])
-
-
-            var scores = function () {
-                console.log($scope.selectedQuestionnaire.index)
-                var numberArray = [];
-                for (var i = 0; i < replies.length; i++) {
-                    numberArray.push(replies[i][$scope.questionnaires[$scope.selectedQuestionnaire.index].scores[0]]);
-                    console.log(replies[i][$scope.questionnaires[$scope.selectedQuestionnaire.index].scores[0]]);
-                }
-                return numberArray;
-            };
-
-            var dates = function(){
+            var dates = function () {
                 var numberArray = [];
                 for (var i = 0; i < replies.length; i++) {
                     numberArray.push(replies[i]["date"]);
-                    console.log(replies[i]["date"])
                 }
                 return numberArray;
             };
 
-            var data = {
-                labels: dates(),
-                datasets: [
+            var data = {labels: dates(), datasets: [
+                {pointColor: "#fffff", data: [0]}
+            ]};
+
+            for (var j = 0; j < $scope.questionnaires[$scope.selectedQuestionnaire.index].scores.length; ++j) {
+                var scores = function () {
+                    var numberArray = [];
+                    for (var i = 0; i < replies.length; i++) {
+                        numberArray.push(replies[i][$scope.questionnaires[$scope.selectedQuestionnaire.index].scores[j].type]);
+                    }
+                    return numberArray;
+                };
+
+
+                data.datasets.push(
                     {
-                        fillColor: "rgba(220,220,220,0.5)",
-                        strokeColor: "rgba(220,220,220,1)",
-                        pointColor: "rgba(220,220,220,1)",
-                        pointStrokeColor: "#fff",
-                        data: [1, 2, 0, 4]
-                    },
-                    {
-                        fillColor: "rgba(151,187,205,0.5)",
-                        strokeColor: "rgba(151,187,205,1)",
-                        pointColor: "rgba(151,187,205,1)",
+                        fillColor: colors[j],
+                        strokeColor: colors[j],
+                        pointColor: colors[j],
                         pointStrokeColor: "#fff",
                         data: scores()
                     }
-                ]
-            };
-            $scope.myChart = {"data": data, "options": {datasetFill : false} };
+                );
+
+            }
+            $scope.myChart = {"data": data, "options": { scaleStartValue: 0, datasetFill: false} };
         };
 
-        $scope.generatePieData = function () {
-            var data = [
-                {
-                    value: Math.floor((Math.random() * 100) + 1),
-                    color: "#F38630"
-                },
-                {
-                    value: Math.floor((Math.random() * 100) + 1),
-                    color: "#E0E4CC"
-                },
-                {
-                    value: Math.floor((Math.random() * 100) + 1),
-                    color: "#69D2E7"
-                }
-            ]
-            $scope.myChart = {"data": data, "options": {} };
-        };
 
         $scope.line = function () {
             document.getElementById('myCoolChart').setAttribute('type', 'Line');
@@ -121,29 +96,14 @@ patients.controller("patientsCtrl", ["$scope", "Session", "Patient", "Physician"
             $scope.updateData();
         };
 
-        $scope.radar = function () {
-            document.getElementById('myCoolChart').setAttribute('type', 'Radar');
-            $scope.updateData();
-        };
+        $scope.chooseReply = function (i) {
+            $scope.selectedReply = i;
+            $scope.showReply = true;
+        }
 
-        $scope.polarArea = function () {
-            document.getElementById('myCoolChart').setAttribute('type', 'PolarArea');
-            $scope.updateData();
-        };
-
-        $scope.pie = function () {
-            document.getElementById('myCoolChart').setAttribute('type', 'Pie');
-            $scope.updateData();
-        };
-
-        $scope.doughnut = function () {
-            document.getElementById('myCoolChart').setAttribute('type', 'Doughnut');
-            $scope.updateData();
-        };
-
-        //$scope.generateData();
-
-
+        $scope.closeReply = function () {
+            $scope.showReply = false;
+        }
     }])
 ;
 
