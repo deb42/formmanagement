@@ -19,6 +19,7 @@ patients.controller("patientsCtrl", ["$scope", "Session", "Patient", "Physician"
         $scope.questionnaires = Questionnaire.query();
         //$scope.replies = Reply.query({type: 9, id: 9})
         $scope.selectedQuestionnaire = {index: 0};
+        $scope.collapsed = true;
 
         $scope.$watchCollection('[selectedQuestionnaire.index, selectedPatient]', function () {
             if ($scope.selectedPatient) {
@@ -42,9 +43,15 @@ patients.controller("patientsCtrl", ["$scope", "Session", "Patient", "Physician"
             // setTimeout(function(){
             $scope.updateData($scope.replies[index]);
             console.log($scope.replies[index])
+            $scope.collapsed = true;
             //alert("data updated");
             // }, 3000)
         };
+
+        $scope.toggle_collapse = function (replies) {
+                    $scope.collapsed = !$scope.collapsed;
+                    $scope.updateData(replies);
+            };
 
         $scope.updateData = function (replies) {
             var colors = ["green", "blue", "yellow"];

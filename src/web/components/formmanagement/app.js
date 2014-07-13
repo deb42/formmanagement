@@ -42,8 +42,8 @@ formmanagement.controller("NavbarCtrl", ["$scope", "Session", "getUserClass", fu
 }]);
 
 formmanagement.directive('chart', function () {
-    var baseWidth = 600;
-    var baseHeight = 400;
+    var baseWidth = 800;
+    var baseHeight = 600;
 
     return {
       restrict: 'E',

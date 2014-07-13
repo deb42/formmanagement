@@ -4,6 +4,10 @@
 .h2 {
   color: red;
 }
-.panel-header {
+.panel {
+  border-radius: 0px;
+}
+.panel-heading {
   margin: 10px, 0px, 10px, 0px;
+  background-color: rgba(66, 139, 202, 0.35);
 }

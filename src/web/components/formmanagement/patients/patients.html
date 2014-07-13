@@ -36,7 +36,8 @@
                     <tbody>
                     <tr ng-repeat="score in questionnaires[selectedQuestionnaire.index].scores">
                         <th>{{score.name}}</th>
-                        <td class="score" ng-repeat="(i, reply) in replies[selectedQuestionnaire.index] track by $index">
+                        <td class="score"
+                            ng-repeat="(i, reply) in replies[selectedQuestionnaire.index] track by $index">
                             <button type="button" class="btn btn-link btn-gray" ng-click="chooseReply(i)">
                                 {{reply[score.type]}}
                             </button>
@@ -55,6 +56,7 @@
                                     ng-if="!first_choice">&times;</button>
                         </div>
                         <br>
+
                         <div class="row">
                             <questionnaire-form questionnaire="questionnaires[selectedQuestionnaire.index]"
                                                 index="selectedQuestionnaire.index"
@@ -65,32 +67,26 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="span12">
-                    <h2>In action</h2>
-                </div>
-            </div>
-
-            <div class="btn-group">
-                <button type="button" class="btn btn-default"
-                        ng-repeat="(i, questionnaire) in questionnaires track by $index"
-                        ng-click="selectQuesionnaire(i); selectedQuestionnaire.index = i; updateData(replies[selectedQuestionnaire.index])"
-                        ng-class="(selectedQuestionnaire.index == questionnaire.id -1) ? 'selected': ''">
-                    {{questionnaire.title}}
-                </button>
-            </div>
-
 
             <div class="row">
-                <div class="span6">
-                    <chart value="myChart" id="myCoolChart"></chart>
-                    <p>^ This is a chart</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading toggle" ng-click="toggle_collapse(replies[selectedQuestionnaire.index])">
 
+                        <span class="panel-title">Grafik</span>
 
-                    <button ng-click="updateData(replies[selectedQuestionnaire.index])">
-                        Update Data
-                    </button>
+                        <i class="chevron fa fa-fw fa-chevron-right pull-right" ng-show="collapsed"></i>
+                        <i class="chevron fa fa-fw fa-chevron-down pull-right" ng-hide="collapsed"></i>
+
+                    </div>
+                    <div class="panel-body" ng-hide="collapsed">
+                        <!--    <div class="span6"> -->
+                        <chart value="myChart" id="myCoolChart"></chart>
+                        <!--<button ng-click="updateData(replies[selectedQuestionnaire.index])">
+                            Update Data
+                        </button>-->
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
