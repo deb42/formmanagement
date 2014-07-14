@@ -14,22 +14,30 @@ patients.controller("patientsCtrl", ["$scope", "Session", "Patient", "Physician"
     function ($scope, Session, Patient, Physician, Reply, Questionnaire) {
 
         $scope.session = Session.get();
-        $scope.patients = Patient.query();
+        $scope.patients = Patient.query({physician_id: $scope.session.user.id});
         $scope.physicains = Physician.query();
         $scope.questionnaires = Questionnaire.query();
         //$scope.replies = Reply.query({type: 9, id: 9})
         $scope.selectedQuestionnaire = {index: 0};
+        $scope.selectedPatient = new Object(); //{birthday:"","email":"","forename":"","gender":"",id:9,"physician_id":null,"surname":"","type":1,"username":""}
         $scope.collapsed = true;
+        //console.log($scope.selectedPatient.id)
 
-        $scope.$watchCollection('[selectedQuestionnaire.index, selectedPatient]', function () {
-            if ($scope.selectedPatient) {
+        $scope.$watchCollection('[selectedQuestionnaire.index, patient]', function () {
+            if ($scope.patient) {
+                console.log($scope.patient.id)
                 $scope.replies = new Array();
                 for (var i = 0; i < $scope.questionnaires.length; ++i) {
-                    $scope.replies.push(Reply.query({type: i + 9, id: $scope.selectedPatient}));
+                    $scope.replies.push(Reply.query({type: i + 9, id: $scope.patient.id}));
                 }
                 $scope.updateData($scope.replies)
             }
-        });
+        },true);
+
+        $scope.selectPatient = function(patient){
+            console.log("selecht");
+            $scope.patient = patient;
+        }
 
         /*setInterval(function () {
          console.log($scope.replies)
@@ -113,6 +121,27 @@ patients.controller("patientsCtrl", ["$scope", "Session", "Patient", "Physician"
         }
     }])
 ;
+
+patients.directive('questionnaireLorm', [function () {
+    return{
+        restrict: "E",
+        scope: {
+            questionnaire: "=",
+            index: "=",
+            answers: "=",
+            reply: "="
+        },
+        templateUrl: '/components/formmanagement/common/questionnaie-form.html',
+
+        link: function (scope, element, attrs) {
+            scope.save = function () {
+                console.log(scope.answers);
+                //scope.answers1[scope.index] = {data:[]};
+                //Awer.set(scope.answers, scope.index);
+            };
+        }
+    };
+}]);
 
 patients.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/patients', {

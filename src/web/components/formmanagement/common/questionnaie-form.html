@@ -9,7 +9,7 @@
                     <div ng-repeat="(j, answer) in question.answers track by $index" ng-show="reply || answers[i] == j">
                         <hr class="line" ng-show="answer.content == 'betrifft mich nicht'">
                         <label class="radio-inline">
-                            <input type="radio" ng-model="answers[i]" ng-click="save()" ng-show="reply"
+                            <input type="radio" ng-model="answers[i]" ng-show="reply"
                                    value="{{j}}">
                         </label>
                         {{answer.content}}

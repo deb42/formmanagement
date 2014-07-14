@@ -13,7 +13,8 @@ var api = angular.module("formmanagement.api", [
 
 
 var TYPE_PATIENT = 1;
-var TYPE_PHYSICIAN = 2;;
+var TYPE_PHYSICIAN = 2;
+;
 api.constant("UserType", {
     "Patient": TYPE_PATIENT,
     "Physician": TYPE_PHYSICIAN
@@ -31,7 +32,7 @@ api.factory("getUserClass", [ "Patient" , "Physician", function (Patient, Physic
 }]);
 
 api.factory("Patient", ["$resource", function ($resource) {
-    return $resource("/api/patients/:id", {id: "@id" });
+    return $resource("/api/patients/:username/:physician_id", {username: "@id", physician_id: "@id"});
 }]);
 
 api.factory("Physician", ["$resource", function ($resource) {
@@ -45,8 +46,6 @@ api.factory("Questionnaire", ["$resource", function ($resource) {
 api.factory("Reply", ["$resource", function ($resource) {
     return $resource("/api/reply/:type/:id", {type: "@type", id: "@id"});
 }]);
-
-
 
 
 api.service("Session", ["$http", "$q", "getUserClass", "Physician",
@@ -132,15 +131,49 @@ api.service("Session", ["$http", "$q", "getUserClass", "Physician",
         };
     }]);
 
-api.factory('showLoginDialog', ['$modal', 'Session',
-    function ($modal, Session) {
+api.factory('showLoginDialog', ['$modal', '$http', 'Session', 'Patient',
+    function ($modal, $http, Session, Patient) {
         var LoginDialogCtrl = function ($scope, $modalInstance) {
             $scope.debug_login = function (username) {
                 Session.login({username: username}).success(function () {
                     $modalInstance.close();
                 });
             };
+            $scope.new_patient = function () {
+                console.log("test");
+                $modal.open({
+                    controller: NewPatientCtrl,
+                    templateUrl: '/components/formmanagement/login/new-patient.html',
+                    keyboard: false,
+                    backdrop: "static"
+                });
+                $modalInstance.close();
+            };
         };
+        var NewPatientCtrl = function ($scope, $modalInstance) {
+            $scope.patient = {surname: "", forename: "", username: ""};
+
+            $scope.save = function () {
+
+                var newPatient = new Patient({
+                    username: $scope.patient.username,
+                    forename: $scope.patient.forename,
+                    surname: $scope.patient.surname,
+                    physician_id: 0
+                });
+                console.log(newPatient)
+                var path = 'api/patients/' + $scope.patient.username;
+                $http.get(path)
+                    .error(function () {
+                        newPatient.$save()
+                    })
+                    .success(function () {
+                        alert("username bereits vorhanden")
+                        return false;
+                    });
+            }
+        }
+
 
         return function showLoginDialog() {
             $modal.open({
@@ -150,6 +183,8 @@ api.factory('showLoginDialog', ['$modal', 'Session',
                 backdrop: "static"
             });
         };
-    }]);
+    }
+])
+;
 
 

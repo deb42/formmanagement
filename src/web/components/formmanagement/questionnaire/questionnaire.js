@@ -17,7 +17,6 @@ questionaire.controller("questionaireCtrl", ["$scope", "Session", "Patient", "Ph
         $scope.questionnaires = Questionnaire.query();
         $scope.answers = new Array(new Array());
 
-
         $scope.selectedQuestionnaire = {"index": 0}
         $scope.selectQuesionnaire = function (index) {
             ++index;
@@ -29,22 +28,9 @@ questionaire.controller("questionaireCtrl", ["$scope", "Session", "Patient", "Ph
                 function (data) {   //failure
                     //error handling goes here
                 });
-            //$scope.selectedQuestionnaire = $scope.questionnaire;
-            //$scope.selectedQuestionnaire.index = questionnaire.id - 1;
-
         };
 
-        console.log($scope.selectQuesionnaire(0).content);
-
-
-        $scope.blub = function () {
-            return Questionnaire.query(function () {
-            })
-        };
-
-
-        var test = $scope.blub();
-
+        $scope.selectQuesionnaire(0);
 
         $scope.proceed = function () {
             for (var i = 0; i < $scope.questionnaire.content.length; ++i) {
@@ -68,50 +54,7 @@ questionaire.controller("questionaireCtrl", ["$scope", "Session", "Patient", "Ph
                 reply.$save({type: i, id: $scope.session.user.id});
             }
         };
-
-
     }]);
-
-questionaire.service('Answer', [function () {
-    var self = this;
-    var answers = Array();
-
-    self.get = function (i) {
-        console.log(answers);
-        return answers[i];
-    }
-
-    self.all = function () {
-        console.log(answers);
-        return answers;
-    }
-
-    self.set = function (pAnswer, i) {
-        console.log(answers[i]);
-        answers[i] = pAnswer;
-    }
-}]);
-
-questionaire.directive('questionnaireForm', [function () {
-    return{
-        restrict: "E",
-        scope: {
-            questionnaire: "=",
-            index: "=",
-            answers: "=",
-            reply: "="
-        },
-        templateUrl: '/components/formmanagement/questionnaire/questionnaie-form.html',
-
-        link: function (scope, element, attrs) {
-            scope.save = function () {
-                console.log(scope.answers);
-                //scope.answers1[scope.index] = {data:[]};
-                //Awer.set(scope.answers, scope.index);
-            };
-        }
-    };
-}]);
 
 questionaire.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/questionnaire', {

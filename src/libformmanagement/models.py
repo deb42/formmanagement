@@ -35,7 +35,9 @@ TYPE_PBI  = 0b1011
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80))
+    username = db.Column(db.String(80), unique=True)
+    forename = db.Column(db.String(80))
+    surname = db.Column(db.String(80))
     # Contains Type of current object, needed for inheritance
     type = db.Column(db.Integer)
 
@@ -44,8 +46,7 @@ class User(db.Model):
     }
 
     def __repr__(self):
-        return self.name
-
+        return self.surname
 
 class Patient(User):
     id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
@@ -53,6 +54,8 @@ class Patient(User):
         'polymorphic_identity': TYPE_PATIENT
     }
     email = db.Column(db.String(120))
+    birthday = db.Column(db.String(12))
+    gender = db.Column(db.String(8))
     #questionnaires = db.relationship("Hads", backref="hads", foreign_keys="Hads.patient_id")
     questionnaire_replies = db.relationship("Reply", backref="patient", foreign_keys="Reply.patient_id")
 

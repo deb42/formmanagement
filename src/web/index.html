@@ -20,6 +20,7 @@
     <!-- Internal Components -->
     <script src="/components/formmanagement/app.js"></script>
     <script src="/components/formmanagement/api/api.js"></script>
+    <script src="/components/formmanagement/common/common.js"></script>
     <script src="/components/formmanagement/patients/patients.js"></script>
     <script src="/components/formmanagement/questionnaire/questionnaire.js"></script>
     <script src="/components/formmanagement/lib/Chart.min.js"></script>
@@ -44,10 +45,12 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#/patients">Patienten</a></li>
+                    <li class="active"><a href="#/patients">Patientenübersicht</a></li>
+                    <li class="active"><a href="#/patients/new">neuer Patient</a></li>
+                    <li class="active"><a href="#/patients/actuell">heutige Patienten</a></li>
                     <li><a href="#/questionnaire">Fragebogen</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{session.user.name}} <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{session.user.surname}}Hallo2 <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a ng-click="logout()">Logout</a></li>
                             <li><a href="#">Another action</a></li>
@@ -65,7 +68,7 @@
         <!-- /.container-fluid -->
     </nav>
 </div>
-{{session.userClass}}
+{{session}}
 
 <div class="container">
     <ng-view></ng-view>

@@ -46,7 +46,7 @@ def check_auth():
     auth_request = request.get_json()
 
     if "username" in auth_request:  # and app.config["DEBUG"]:
-        user = User.query.filter_by(name=auth_request["username"]).first_or_404()
+        user = User.query.filter_by(surname=auth_request["username"]).first_or_404()
 
 
     else:
@@ -70,7 +70,7 @@ physician API
 """
 
 
-@api.route("/physicians/")
+@api.route("/physicians")
 def get_physicians():
     """
     GET to the list: return list of all physicians.
@@ -114,25 +114,38 @@ patient API
 """
 
 
-@api.route("/patients/")
-def get_patients():
+@api.route("/patients/<int:physician_id>")
+def get_patients(physician_id):
     """
     GET to the list: return list of all patients belonging to physician.
     """
-    return jsonify(Patient.query.all())
+    return jsonify(Patient.query
+                   .order_by(Patient.surname.asc())
+                   .filter_by(physician_id=physician_id).all())
 
 
-@api.route("/patients/<int:id>")
-def get_patient(id):
+@api.route("/patients/<string:username>")
+def get_patient(username):
     """
     GET to patient resource: return single patient.
     Use .first_or_404() to automatically raise a 404 error if the resource isn't found.
     """
-    return jsonify(Patient.query.filter_by(id=id).first_or_404())
+    return jsonify(Patient.query.filter_by(username=username).first_or_404())
 
 
 patient_modifiable_attrs = user_modifiable_attrs + ["physician_id"]
 
+@api.route("/patients", methods=["POST"])
+def add_event():
+    """
+    POST to the list: add a new event.
+    Don't forget to call db.session.commit()
+    """
+
+    patient = Patient(**request.json)
+    db.session.add(patient)
+    db.session.commit()
+    return jsonify(patient)
 
 @api.route("/patients/<int:id>", methods=["POST"])
 def update_patient(id):

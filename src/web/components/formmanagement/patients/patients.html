@@ -1,17 +1,28 @@
 <div ng-controller="patientsCtrl">
 
 
-    <div class="form-group">
-        <label for="patient">Patient</label>
-         <span class="nullable">
-            <select class="form-control dropdown-menu-right" id="patient" ng-model="selectedPatient">
-                <option value="" selected="selected"></option>
-                <option value="{{patient.id}}" ng-repeat="patient in patients">{{patient.name}}</option>
-            </select>
-         </span>
-    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div ng-show="patient">
+                <h3>{{patient.forename}} {{patient.surname}}</h3> <br>
+                Geschlecht: {{patient.gender}}<br>
+                Geburtsdatum: {{patient.birthday}}<br>
+            </div>
+        </div>
+        <div class="col-md-4">
 
-    <div ng-show="selectedPatient">
+            <div class="form-group">
+                <label for="patient">Patient</label>
+                <select class="form-control dropdown-menu-right" id="patient"
+                        ng-model="patient"
+                        ng-options="patient.surname for patient in patients track by patient.id">
+
+                </select>
+            </div>
+        </div>
+    </div> <br><br>
+
+    <div ng-show="patient">
         <ul class="nav nav-tabs" role="tablist">
             <li ng-repeat="(i, questionnaire) in questionnaires track by $index"
                 ng-click="selectQuestionnaire(i)"
@@ -21,8 +32,7 @@
         </ul>
         <br>
 
-        <div ng-show="selectedPatient">
-
+        <div>
             <div class="table-responsive">
                 <table class="table table-bordered table-striped">
                     <thead>
@@ -68,26 +78,25 @@
             </div>
 
 
-            <div class="row">
-                <div class="panel panel-default">
-                    <div class="panel-heading toggle" ng-click="toggle_collapse(replies[selectedQuestionnaire.index])">
+            <div class="panel panel-default">
+                <div class="panel-heading toggle" ng-click="toggle_collapse(replies[selectedQuestionnaire.index])">
 
-                        <span class="panel-title">Grafik</span>
+                    <span class="panel-title">Graphische Entwicklung</span>
 
-                        <i class="chevron fa fa-fw fa-chevron-right pull-right" ng-show="collapsed"></i>
-                        <i class="chevron fa fa-fw fa-chevron-down pull-right" ng-hide="collapsed"></i>
+                    <i class="chevron fa fa-fw fa-chevron-right pull-right" ng-show="collapsed"></i>
+                    <i class="chevron fa fa-fw fa-chevron-down pull-right" ng-hide="collapsed"></i>
 
-                    </div>
-                    <div class="panel-body" ng-hide="collapsed">
-                        <!--    <div class="span6"> -->
-                        <chart value="myChart" id="myCoolChart"></chart>
-                        <!--<button ng-click="updateData(replies[selectedQuestionnaire.index])">
-                            Update Data
-                        </button>-->
-                    </div>
                 </div>
-
+                <div class="panel-body" ng-hide="collapsed">
+                    <!--    <div class="span6"> -->
+                    <chart value="myChart" id="myCoolChart"></chart>
+                    <!--<button ng-click="updateData(replies[selectedQuestionnaire.index])">
+                        Update Data
+                    </button>-->
+                </div>
             </div>
+
         </div>
+
     </div>
 </div>

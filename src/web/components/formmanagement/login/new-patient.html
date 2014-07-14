@@ -1,0 +1,61 @@
+<div class="modal-header">
+    <h4 class="modal-title">Neuanmeldung</h4>
+</div>
+
+<div class="modal-body">
+
+    <!-- forename -->
+    <div class="form-group">
+        <label for="surname">Nachname</label>
+        <input ng-model="patient.surname" type="text" class="form-control"
+               id="surname" placeholder="Nachnamen eingeben">
+    </div>
+
+    <!-- surname  -->
+    <div class="form-group">
+        <label for="forename">Vorname</label>
+        <input ng-model="patient.forename" type="text" class="form-control"
+               id="forename" placeholder="Vornamen eingeben">
+    </div>
+
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input ng-model="patient.username" type="text" class="form-control"
+               id="username" placeholder="Vornamen eingeben">
+    </div>
+
+    <!-- birthday -->
+    <div class="form-group">
+        <label for="birthday"></label>
+        <input ng-model="patient.birthday" type="text" class="form-control"
+               id="birthday" placeholder=" eingeben">
+    </div>
+
+    <!-- Geschlecht -->
+    <div class="form-group">
+        <label>Geschlecht</label><br>
+        <label class="radio-inline">
+            <input type="radio" ng-model="patient.gender" value="männlich"> männlich
+        </label>
+        <label class="radio-inline">
+            <input type="radio" ng-model="patient.gender" value="weiblich"> weiblich
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleInputPassword1">Passwort</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+
+    <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">Passwort bestätigen</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+        </div>
+    </div>
+
+
+    <button class="btn btn-default" ng-click="save()">
+        <i class="fa fa-code"></i> Debug Login
+    </button>
+</div>

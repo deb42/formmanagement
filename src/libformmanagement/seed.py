@@ -45,31 +45,31 @@ def seed():
     # Kundenberater seeden
     physician_datasets = (
         {
-            "name": "Verena Meier"
+            "surname": "Verena Meier"
         },
         {
-            "name": "Anna Gaul"
+            "surname": "Anna Gaul"
         },
         {
-            "name": "Peter Hubner"
+            "surname": "Peter Hubner"
         },
         {
-            "name": "Herbert Becker"
+            "surname": "Herbert Becker"
         },
         {
-            "name": "Jörg Bayer"
+            "surname": "Jörg Bayer"
         },
         {
-            "name": "Oliver Meier"
+            "surname": "Oliver Meier"
         },
         {
-            "name": "Yannic Wulf"
+            "surname": "Yannic Wulf"
         }
     )
 
 
 
-    physicians = [Physician(name=physician_datasets[i]["name"])
+    physicians = [Physician(surname=physician_datasets[i]["surname"])
                 for i in range(len(physician_datasets))]
     for i in range(len(physician_datasets)):
         db.session.add(physicians[i])
@@ -77,25 +77,31 @@ def seed():
     # Kunden seeden
     patient_datasets = (
         {
-            "name": "Siegrun Kreft"
+            "username": "kreft",
+            "forename": "Siegrun",
+            "surname": "Kreft"
         },
         {
-            "name": "Lena Laengerich"
+            "username": "laengerich",
+            "forename": "Lena",
+            "surname": "Laengerich",
+            "birthday": "12.04.1983",
+            "gender": "weiblich"
         },
         {
-            "name": "Dr. Peter Becker"
+            "username": "becker",
+            "forename": "Peter",
+            "surname": "Becker"
         },
         {
-            "name": "Lilo Meier"
+            "username": "meier",
+            "forename": "",
+            "surname": "Lilo Meier"
         },
         {
-            "name": "Hardmut Forster"
-        },
-        {
-            "name": "Dieter Dormeier"
-        },
-        {
-            "name": "Prof. Dr. Dr. Julian von Anhalt"
+            "username": "meier1",
+            "forename": "",
+            "surname": "Hardmut Meier"
         }
     )
 
@@ -104,8 +110,12 @@ def seed():
         physician =  physicians[1]
         patients.append(
             Patient(
-                name=patient_datasets[i]["name"],
-                email="kunde" + str(i) + "@example.com",
+                username=patient_datasets[i]["username"],
+                forename=patient_datasets[i]["forename"],
+                surname=patient_datasets[i]["surname"],
+                gender = patient_datasets[i].get("gender", ""),
+                birthday =patient_datasets[i].get("birthday",""),
+                #email="kunde" + str(i) + "@example.com",
                 # Kundenberater zufällig zuweisen
                 physician=physician
             )
@@ -175,9 +185,7 @@ def seed():
         answers = []
         for j in range(0,3):
             answers.append(random.randint(0,3))
-            print(answers)
         questionnaire = Questionnaire.query.filter_by(type=TYPE_HADS).first_or_404()
-        print(questionnaire["value"])
         hadsresult = Dlqi(
             patient = patients[1],
             date= date.today()-timedelta(days=i*7),
