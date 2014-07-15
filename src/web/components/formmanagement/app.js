@@ -23,17 +23,37 @@ formmanagement.config(['$routeProvider',
         });
     }]);
 
-formmanagement.run(["Session", "LoginDialog", function (Session, showLoginDialog) {
+formmanagement.run(["Session", "$rootScope","showLoginDialog", "$location", "isPatient", function (Session, $rootScope, showLoginDialog, $location, isPatient) {
 
-    Session.init.error(function () {
-        showLoginDialog.showLogin();
+    Session.init
+        .error(function () {
+            showLoginDialog();
+        });
+
+
+    var session = Session.get();
+    // show modal for choosing advisor, if client and no advisor is set
+    $rootScope.$watch(function () {
+        return session.user;
+    }, function () {
+        /* jshint bitwise:false */
+        var user = session.user;
+        if (user && isPatient(user)) {
+            $location.path("/questionnaire");
+        }
     });
 
 }]);
 
-formmanagement.controller("NavbarCtrl", ["$scope", "Session", "getUserClass", function ($scope, Session, getUserClass) {
+formmanagement.controller("NavbarCtrl", ["$scope", "Session", "isPhysician",function ($scope, Session, isPhysician) {
 
     $scope.session = Session.get();
+    $scope.isPhysician = isPhysician;
+
+    /*$scope.$watch($scope.session, function () {
+        $scope.isPhysician = isPhysician($scope.session.user);
+        console.log($scope.session);
+    })*/
 
     $scope.logout = function () {
         Session.logout();

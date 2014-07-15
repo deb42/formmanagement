@@ -11,3 +11,7 @@
   margin: 10px, 0px, 10px, 0px;
   background-color: rgba(66, 139, 202, 0.35);
 }
+.main-content {
+  background-color: white;
+  padding: 2em 30px 2em;
+}

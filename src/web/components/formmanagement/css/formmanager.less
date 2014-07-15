@@ -1,17 +1,60 @@
-.h1{
+.h1 {
   color: green;
 }
 
-.h2{
+.h2 {
   color: red;
 }
 
-.panel{
+.panel {
   border-radius: 0px;
 }
 
-.panel-heading{
+.panel-heading {
   margin: 10px, 0px, 10px, 0px;
   background-color: rgba(66, 139, 202, 0.35);
+}
+
+.vb-background-dark {
+  background-color: #0066b3;
+}
+
+.vb-background-light {
+  background-color: @vb-background-light;
+}
+
+#header {
+
+  h1 {
+    color: white;
+    padding: 0.5em 0;
+  }
+
+  //background-image instead of darkblue
+  //.vb-background-dark {
+  //.container {
+  //background-image: url(https://www.vr.de/privatkunden/_jcr_content/kampagnenbereich/karussell/parsys/kampagnecomponent/kampagne/bild.img.png/1400245546069.png);
+  //min-height: 300px;
+  //}
+  //}
+
+  .breadcrumb {
+    //padding: @breadcrumb-padding-vertical 0;
+    margin-bottom: 0;
+    background-color: transparent;
+    border-radius: @border-radius-base @border-radius-base 0 0;
+
+    > li > a {
+      color: @breadcrumb-color;
+    }
+    > .active {
+      color: white;
+    }
+  }
+}
+
+.main-content {
+  background-color: white;
+  padding: 2em 30px 2em;
 }
 

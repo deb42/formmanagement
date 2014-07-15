@@ -44,7 +44,7 @@ api.factory("Questionnaire", ["$resource", function ($resource) {
 }]);
 
 api.factory("Reply", ["$resource", function ($resource) {
-    return $resource("/api/reply/:type/:id", {type: "@type", id: "@id"});
+            return $resource("/api/reply/:type/:id", {type: "@type", id: "@id"});
 }]);
 
 
@@ -139,10 +139,8 @@ api.service("Session", ["$http", "$q", "getUserClass", "Physician",
         };
     }]);
 
-api.service('LoginDialog', ['$modal', '$http', '$location', 'Session', 'Patient',
-    function ($modal, $http, $location, Session, Patient) {
-
-        var self = this;
+api.factory('showLoginDialog', ['$modal', '$http', '$location', 'Session', 'showSingUpDialog',
+    function ($modal, $http, $location, Session, showSingUpDialog) {
 
         var LoginDialogCtrl = function ($scope, $modalInstance) {
             $scope.login = function (user) {
@@ -151,6 +149,7 @@ api.service('LoginDialog', ['$modal', '$http', '$location', 'Session', 'Patient'
                     Session.login(user)
                         .success(function () {
                             $modalInstance.close();
+                            //window.location.reload();
                         })
                         .error(function () {
                             $scope.noLogin = true;
@@ -161,61 +160,14 @@ api.service('LoginDialog', ['$modal', '$http', '$location', 'Session', 'Patient'
 
             };
             $scope.new_patient = function () {
-                showSingUp();
+                showSingUpDialog();
                 $modalInstance.close();
             };
         };
-        var NewPatientCtrl = function ($scope, $modalInstance, $location) {
-            $scope.patient = {surname: "", forename: "", gender: "", birthday: "", username: "", password: ""};
-
-            $scope.save = function () {
-                $scope.forename = $scope.surname = $scope.gender = $scope.birthday = $scope.username = $scope.usernameExists = $scope.password = $scope.passwordUnequal = false;
-                if (!$scope.patient.forename) {
-                    $scope.forename = true;
-                } else if (!$scope.patient.surname) {
-                    $scope.surname = true;
-                } else if (!$scope.patient.birthday) {
-                    $scope.birthday = true;
-                } else if (!$scope.patient.gender) {
-                    $scope.gender = true;
-                } else if (!$scope.patient.username) {
-                    $scope.username = true;
-                } else if (!$scope.patient.password) {
-                    $scope.password = true;
-                } else if ($scope.patient.comparePassword !== $scope.patient.password) {
-                    $scope.passwordUnequal = true;
-                } else {
-
-                    var newPatient = new Patient({
-                        username: $scope.patient.username,
-                        pw_hash: $scope.patient.password,
-                        name: $scope.patient.forename + " " + $scope.patient.surname,
-                        physician_id: 0
-                    });
-
-                    var path = 'api/users/' + $scope.patient.username;
-                    $http.get(path)
-                        .error(function () {
-                            Session.signup(newPatient).success(function () {
-                                $modalInstance.close();
-                                $location.path('/questionnaire');
-                            });
-                        })
-                        .success(function () {
-                            $scope.usernameExists = true;
-                        });
-                }
-            };
-
-            $scope.back = function () {
-                $modalInstance.close();
-                self.showLogin();
-            }
-
-        }
 
 
-        self.showLogin = function () {
+
+        return function showLoginDialog() {
             $modal.open({
                 controller: LoginDialogCtrl,
                 templateUrl: '/components/formmanagement/login/login.html',
@@ -223,18 +175,6 @@ api.service('LoginDialog', ['$modal', '$http', '$location', 'Session', 'Patient'
                 backdrop: "static"
             });
         };
-
-        var showSingUp = function () {
-            $modal.open({
-                controller: NewPatientCtrl,
-                templateUrl: '/components/formmanagement/login/new-patient.html',
-                keyboard: false,
-                backdrop: "static"
-            });
-        }
-
     }
-])
-;
-
+]);
 

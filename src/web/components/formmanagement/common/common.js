@@ -3,6 +3,86 @@ var common = angular.module("formmanagement.common", [
     "formmanagement.api"
 ]);
 
+
+common.factory('isPatient', ['UserType', function (UserType) {
+    return function (user) {
+        /* jshint bitwise: false */
+        return (user && (user.type & UserType.Patient));
+    };
+}]);
+
+common.factory('isPhysician', ['UserType', function (UserType) {
+    return function (user) {
+        /* jshint bitwise: false */
+        return (user && (user.type & UserType.Physician));
+    };
+}]);
+
+common.factory('showSingUpDialog', ['$modal', '$timeout', 'Session',
+    function ($modal, $timeout, Session) {
+
+        var NewPatientCtrl = function ($scope, $modalInstance, $location) {
+            $scope.patient = {surname: "", forename: "", gender: "", birthday: "", username: "", password: ""};
+
+            $scope.save = function () {
+                $scope.forename = $scope.surname = $scope.gender = $scope.birthday = $scope.username = $scope.usernameExists = $scope.password = $scope.passwordUnequal = false;
+                if (!$scope.patient.forename) {
+                    $scope.forename = true;
+                } else if (!$scope.patient.surname) {
+                    $scope.surname = true;
+                } else if (!$scope.patient.birthday) {
+                    $scope.birthday = true;
+                } else if (!$scope.patient.gender) {
+                    $scope.gender = true;
+                } else if (!$scope.patient.username) {
+                    $scope.username = true;
+                } else if (!$scope.patient.password) {
+                    $scope.password = true;
+                } else if ($scope.patient.comparePassword !== $scope.patient.password) {
+                    $scope.passwordUnequal = true;
+                } else {
+
+                    var newPatient = new Patient({
+                        username: $scope.patient.username,
+                        pw_hash: $scope.patient.password,
+                        name: $scope.patient.forename + " " + $scope.patient.surname,
+                        physician_id: 0
+                    });
+
+                    var path = 'api/users/' + $scope.patient.username;
+                    $http.get(path)
+                        .error(function () {
+                            Session.signup(newPatient).success(function () {
+                                $modalInstance.close();
+                                $location.path('/questionnaire');
+                            });
+                        })
+                        .success(function () {
+                            $scope.usernameExists = true;
+                        });
+                }
+            };
+
+            $scope.back = function () {
+                $modalInstance.close();
+                window.location.reload();
+            };
+
+
+        };
+
+        return function showSingUpDialog() {
+            $modal.open({
+                controller: NewPatientCtrl,
+                templateUrl: '/components/formmanagement/login/new-patient.html',
+                keyboard: false,
+                backdrop: "static"
+            });
+        };
+
+    }]);
+
+
 common.directive('questionnaireForm', [function () {
     return{
         restrict: "E",

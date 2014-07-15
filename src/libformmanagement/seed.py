@@ -119,8 +119,7 @@ def seed():
         patients.append(
             Patient(
                 username=patient_datasets[i]["username"],
-                pw_hash='123456',
-                #forename=patient_datasets[i]["forename"],
+                pw_hash=generate_password_hash('123456'),
                 name=patient_datasets[i]["surname"],
                 gender = patient_datasets[i].get("gender", ""),
                 birthday =patient_datasets[i].get("birthday",""),
