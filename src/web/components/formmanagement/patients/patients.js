@@ -10,142 +10,150 @@ var patients = angular.module("formmanagement.patients", [
     "formmanagement.api"
 ]);
 
-patients.controller("patientsCtrl", ["$scope", "Session", "Patient", "Physician", "Reply", "Questionnaire",
-    function ($scope, Session, Patient, Physician, Reply, Questionnaire) {
+patients.controller("PatientsNewCtrl", ["$scope", "Session", "Patient", "Questionnaire",
+    function ($scope, Session, Patient, Questionnaire) {
+
+        $scope.session = Session.get();
+        $scope.patients = Patient.query({physician_id: 0});
+        $scope.questionnaires = Questionnaire.query();
+
+        $scope.choosePatient = function (pPatient) {
+            var patient = new Patient({physician_id: $scope.session.user.id})
+            patient.$save({id: pPatient.id})
+            $scope.patientChoosen = true;
+            $scope.choosenPatient = new Array(pPatient);
+        }
+
+    }]);
+
+patients.controller("PatientsTodayCtrl", ["$scope", "Session", "Patient", "Questionnaire",
+    function ($scope, Session, Patient, Questionnaire) {
 
         $scope.session = Session.get();
         $scope.patients = Patient.query({physician_id: $scope.session.user.id});
-        $scope.physicains = Physician.query();
         $scope.questionnaires = Questionnaire.query();
-        //$scope.replies = Reply.query({type: 9, id: 9})
-        $scope.selectedQuestionnaire = {index: 0};
-        $scope.selectedPatient = new Object(); //{birthday:"","email":"","forename":"","gender":"",id:9,"physician_id":null,"surname":"","type":1,"username":""}
-        $scope.collapsed = true;
-        //console.log($scope.selectedPatient.id)
 
-        $scope.$watchCollection('[selectedQuestionnaire.index, patient]', function () {
-            if ($scope.patient) {
-                console.log($scope.patient.id)
-                $scope.replies = new Array();
-                for (var i = 0; i < $scope.questionnaires.length; ++i) {
-                    $scope.replies.push(Reply.query({type: i + 9, id: $scope.patient.id}));
+
+    }]);
+
+patients.controller("PatientsAllCtrl", ["$scope", "Session", "Patient", "Questionnaire",
+    function ($scope, Session, Patient, Questionnaire) {
+
+        $scope.session = Session.get();
+        $scope.patients = Patient.query({physician_id: $scope.session.user.id});
+        $scope.questionnaires = Questionnaire.query();
+
+
+    }]);
+
+patients.directive('patientOverview', ["Questionnaire", "Reply", function (Questionnaire, Reply) {
+    return{
+        restrict: "E",
+        scope: {
+            patients: "=",
+            questionnaires: "="
+        },
+        templateUrl: '/components/formmanagement/patients/patients-overview.html',
+
+        link: function (scope, element, attrs) {
+
+            console.log(scope.patients);
+
+            //scope.questionnaires = Questionnaire.query();
+            scope.selectedQuestionnaire = {index: 0};
+
+
+            //scope.patient = {id: patients;
+
+            scope.collapsed = true;
+
+            scope.$watchCollection('[selectedQuestionnaire.index, patient]', function () {
+                if (scope.patient) {
+                    scope.replies = new Array();
+                    for (var i = 0; i < scope.questionnaires.length; ++i) {
+                        scope.replies.push(Reply.query({type: i + 9, id: scope.patient.id}));
+                    }
+                    scope.updateData(scope.replies)
                 }
-                $scope.updateData($scope.replies)
-            }
-        },true);
+            }, true);
 
-        $scope.selectPatient = function(patient){
-            console.log("selecht");
-            $scope.patient = patient;
-        }
-
-        /*setInterval(function () {
-         console.log($scope.replies)
-         if ($scope.replies) {
-         $scope.updateData($scope.replies);
-         }
-         }, 1000);*/
-
-        $scope.selectQuestionnaire = function (index) {
-            $scope.selectedQuestionnaire.index = index;
-            // setTimeout(function(){
-            $scope.updateData($scope.replies[index]);
-            console.log($scope.replies[index])
-            $scope.collapsed = true;
-            //alert("data updated");
-            // }, 3000)
-        };
-
-        $scope.toggle_collapse = function (replies) {
-                    $scope.collapsed = !$scope.collapsed;
-                    $scope.updateData(replies);
+            scope.selectQuestionnaire = function (index) {
+                scope.selectedQuestionnaire.index = index;
+                scope.collapsed = true;
             };
 
-        $scope.updateData = function (replies) {
-            var colors = ["green", "blue", "yellow"];
-
-            var dates = function () {
-                var numberArray = [];
-                for (var i = 0; i < replies.length; i++) {
-                    numberArray.push(replies[i]["date"]);
-                }
-                return numberArray;
+            scope.toggle_collapse = function (replies) {
+                scope.collapsed = !scope.collapsed;
+                scope.updateData(replies);
             };
 
-            var data = {labels: dates(), datasets: [
-                {pointColor: "#fffff", data: [0]}
-            ]};
+            scope.updateData = function (replies) {
+                var colors = ["green", "blue", "yellow"];
 
-            for (var j = 0; j < $scope.questionnaires[$scope.selectedQuestionnaire.index].scores.length; ++j) {
-                var scores = function () {
+                var dates = function () {
                     var numberArray = [];
                     for (var i = 0; i < replies.length; i++) {
-                        numberArray.push(replies[i][$scope.questionnaires[$scope.selectedQuestionnaire.index].scores[j].type]);
+                        numberArray.push(replies[i]["date"]);
                     }
                     return numberArray;
                 };
 
+                var data = {labels: dates(), datasets: [
+                    {pointColor: "#fffff", data: [0]}
+                ]};
 
-                data.datasets.push(
-                    {
-                        fillColor: colors[j],
-                        strokeColor: colors[j],
-                        pointColor: colors[j],
-                        pointStrokeColor: "#fff",
-                        data: scores()
-                    }
-                );
-
-            }
-            $scope.myChart = {"data": data, "options": { scaleStartValue: 0, datasetFill: false} };
-        };
+                for (var j = 0; j < scope.questionnaires[scope.selectedQuestionnaire.index].scores.length; ++j) {
+                    var scores = function () {
+                        var numberArray = [];
+                        for (var i = 0; i < replies.length; i++) {
+                            numberArray.push(replies[i][scope.questionnaires[scope.selectedQuestionnaire.index].scores[j].type]);
+                        }
+                        return numberArray;
+                    };
 
 
-        $scope.line = function () {
-            document.getElementById('myCoolChart').setAttribute('type', 'Line');
-            $scope.updateData();
-        };
+                    data.datasets.push(
+                        {
+                            fillColor: colors[j],
+                            strokeColor: colors[j],
+                            pointColor: colors[j],
+                            pointStrokeColor: "#fff",
+                            data: scores()
+                        }
+                    );
 
-        $scope.bar = function () {
-            document.getElementById('myCoolChart').setAttribute('type', 'Bar');
-            $scope.updateData();
-        };
-
-        $scope.chooseReply = function (i) {
-            $scope.selectedReply = i;
-            $scope.showReply = true;
-        }
-
-        $scope.closeReply = function () {
-            $scope.showReply = false;
-        }
-    }])
-;
-
-patients.directive('questionnaireLorm', [function () {
-    return{
-        restrict: "E",
-        scope: {
-            questionnaire: "=",
-            index: "=",
-            answers: "=",
-            reply: "="
-        },
-        templateUrl: '/components/formmanagement/common/questionnaie-form.html',
-
-        link: function (scope, element, attrs) {
-            scope.save = function () {
-                console.log(scope.answers);
-                //scope.answers1[scope.index] = {data:[]};
-                //Awer.set(scope.answers, scope.index);
+                }
+                scope.myChart = {"data": data, "options": { scaleStartValue: 0, datasetFill: false} };
             };
+
+            scope.chooseReply = function (i) {
+                scope.selectedReply = i;
+                scope.showReply = true;
+            };
+
+            scope.closeReply = function () {
+                scope.showReply = false;
+            };
+
+
+            scope.patient = angular.copy(scope.patients[0]);
         }
     };
 }]);
 
 patients.config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/patients', {
-        templateUrl: '/components/formmanagement/patients/patients.html'
+    $routeProvider.when('/patients/new', {
+        templateUrl: '/components/formmanagement/patients/patients-new.html'
     });
 }]);
 
+patients.config(['$routeProvider', function ($routeProvider) {
+    $routeProvider.when('/patients/today', {
+        templateUrl: '/components/formmanagement/patients/patients-today.html'
+    });
+}]);
+patients.config(['$routeProvider', function ($routeProvider) {
+    $routeProvider.when('/patients/all', {
+        templateUrl: '/components/formmanagement/patients/patients-all.html'
+    });
+}]);

@@ -62,7 +62,6 @@ def logout():
     return ""
 
 
-
 user_modifiable_attrs = ["name"]
 
 """
@@ -135,8 +134,9 @@ def get_patient(username):
 
 patient_modifiable_attrs = user_modifiable_attrs + ["physician_id"]
 
+
 @api.route("/patients", methods=["POST"])
-def add_event():
+def add_patient():
     """
     POST to the list: add a new event.
     Don't forget to call db.session.commit()
@@ -147,6 +147,7 @@ def add_event():
     db.session.commit()
     return jsonify(patient)
 
+
 @api.route("/patients/<int:id>", methods=["POST"])
 def update_patient(id):
     """
@@ -155,7 +156,9 @@ def update_patient(id):
     This way, we don't even need to check whether the user exists as
     get_patient does this for us.
     """
+    print(id)
     patient = Patient.query.filter_by(id=id).first_or_404()  # Gibt ein patient/physician object zurück.
+    print(patient)
     for attr in patient_modifiable_attrs:
         # Check if Attribute was used in Request
         # Then update
@@ -163,7 +166,7 @@ def update_patient(id):
             setattr(patient, attr, request.json[attr])
 
     db.session.commit()
-    return get_patient(id)
+    return get_patient(patient.__repr__())
 
 
 """
@@ -175,6 +178,7 @@ Questionnaires API
 def questionnaires_list():
     return jsonify(Questionnaire.query.all())
 
+
 @api.route("/questionnaires/<int:id>")
 def get_questionnaires(id):
     """
@@ -183,13 +187,16 @@ def get_questionnaires(id):
     """
     return jsonify(Questionnaire.query.filter_by(id=id).first_or_404())
 
+
 """
 Videos Hads
 """
 
+
 @api.route('/reply')
 def hads_list():
     return jsonify(Reply.query.with_polymorphic("*").all())
+
 
 @api.route("/reply/<int:type>/<int:id>")
 def get_reply(type, id):
@@ -204,8 +211,9 @@ def get_reply(type, id):
                    .filter_by(type=type)
                    .all())
 
+
 @api.route("/reply/<int:type>/<int:id>", methods=["POST"])
-def add_reply(type,id):
+def add_reply(type, id):
     """
     POST to the list: add a new reply.
     The right type will be defined in the function init_reply
@@ -213,11 +221,12 @@ def add_reply(type,id):
     """
     type += TYPE_HADS
     patient = Patient.query.filter_by(id=id).first_or_404()
-    questionnaire=Questionnaire.query.filter_by(type=type).first_or_404()
-    reply = init_reply(request.json["data"],type,patient,questionnaire["value"])
+    questionnaire = Questionnaire.query.filter_by(type=type).first_or_404()
+    reply = init_reply(request.json["data"], type, patient, questionnaire["value"])
     db.session.add(reply)
     db.session.commit()
     return jsonify(reply)
+
 
 """
 hads_modifiable_attrs = ["data", "depression_scale", "anxiety_scale"]

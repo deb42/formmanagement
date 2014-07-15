@@ -1,0 +1,22 @@
+<div ng-controller="PatientsNewCtrl">
+    <div class="col-md-offset-8" ng-if="!patientChoosen">
+        <div class="form-group">
+            <label for="patient">Patient</label>
+
+            <div class="input-group">
+                <select class="form-control dropdown-menu-right" id="patient"
+                        ng-model="patient"
+                        ng-options="patient.surname for patient in patients track by patient.id">
+                </select>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="choosePatient(patient)">Go!</button>
+                  </span>
+            </div>
+            <!-- /input-group -->
+        </div>
+    </div>
+    <div ng-if="patientChoosen">
+        {{patientChoosen}}
+        <patient-overview patients="choosenPatient" questionnaires="questionnaires"></patient-overview>
+    </div>
+</div>

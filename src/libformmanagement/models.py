@@ -46,7 +46,7 @@ class User(db.Model):
     }
 
     def __repr__(self):
-        return self.surname
+        return self.username
 
 class Patient(User):
     id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)

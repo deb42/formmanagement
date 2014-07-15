@@ -117,7 +117,7 @@ def seed():
                 birthday =patient_datasets[i].get("birthday",""),
                 #email="kunde" + str(i) + "@example.com",
                 # Kundenberater zufällig zuweisen
-                physician=physician
+                physician_id=0
             )
         )
 

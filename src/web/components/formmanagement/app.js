@@ -34,8 +34,6 @@ formmanagement.run(["Session", "showLoginDialog", function (Session, showLoginDi
 formmanagement.controller("NavbarCtrl", ["$scope", "Session", "getUserClass", function ($scope, Session, getUserClass) {
 
     $scope.session = Session.get();
-    console.log($scope.session.user);
-    // $scope.userClass = getUserClass($scope.session.user.type);
 
     $scope.logout = function () {
         Session.logout();
