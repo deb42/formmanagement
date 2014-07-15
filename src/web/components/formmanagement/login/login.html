@@ -3,14 +3,30 @@
 </div>
 
 <div class="modal-body">
-    <div class="input-group">
-        <input type="text" class="form-control" ng-model="debug_username" placeholder="Max Muster"/>
-        <span class="input-group-btn">
-            <button class="btn btn-default" ng-click="debug_login(debug_username)">
-                <i class="fa fa-code"></i> Debug Login
-            </button>
-        </span>
-    </div>
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label for="username" class="col-sm-2 control-label">Username</label>
+
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="username" placeholder="Username"
+                        ng-model="user.username">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword" class="col-sm-2 control-label">Passwort</label>
+
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="inputPassword" placeholder="Passwor"
+                        ng-model="user.password">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default" ng-click="login(user)">Anmelden</button>
+            </div>
+        </div>
+    </form>
+    <hr>
     <div>
         Sie besuchen diese Website das erste Mal, clicken sie hier:
         <button class="btn btn-default" ng-click="new_patient()">

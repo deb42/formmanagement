@@ -142,8 +142,8 @@ api.service("Session", ["$http", "$q", "getUserClass", "Physician",
 api.factory('showLoginDialog', ['$modal', '$http', 'Session', 'Patient',
     function ($modal, $http, Session, Patient) {
         var LoginDialogCtrl = function ($scope, $modalInstance) {
-            $scope.debug_login = function (username) {
-                Session.login({username: username}).success(function () {
+            $scope.login = function (user) {
+                Session.login(user).success(function () {
                     $modalInstance.close();
                 });
             };

@@ -45,15 +45,17 @@ def check_auth():
     """
     auth_request = request.get_json()
 
-    if "username" in auth_request:  # and app.config["DEBUG"]:
-        user = User.query.filter_by(name=auth_request["username"]).first_or_404()
-
-
+    if "username" in auth_request: 
+        print("if")
+        user = User.query.filter_by(username=auth_request["username"]).first_or_404()
     else:
         abort(403)
 
-    session['user_id'] = user.id
-    return get_session_obj()
+    if user.check_password(auth_request["password"]):
+        session['user_id'] = user.id
+        return get_session_obj()
+    else:
+        abort(403)
 
 @api.route("/session/new", methods=["POST"])
 def sing_up_patient():
