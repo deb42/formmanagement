@@ -23,10 +23,10 @@ formmanagement.config(['$routeProvider',
         });
     }]);
 
-formmanagement.run(["Session", "showLoginDialog", function (Session, showLoginDialog) {
+formmanagement.run(["Session", "LoginDialog", function (Session, showLoginDialog) {
 
     Session.init.error(function () {
-        showLoginDialog();
+        showLoginDialog.showLogin();
     });
 
 }]);

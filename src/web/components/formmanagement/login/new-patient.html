@@ -1,17 +1,23 @@
 <div class="modal-header">
-    <h4 class="modal-title">Neuanmeldung</h4>
+    <h4 class="modal-title">Registrierung</h4>
 </div>
 
 <div class="modal-body">
 
-    <!-- surname  -->
+    <!-- forename  -->
+    <div class="alert alert-danger alert-dismissible" role="alert" ng-show="forename">
+        <strong>Vorname fehtl!</strong> Bitte tragen Sie Ihren Vornamen ein.
+    </div>
     <div class="form-group">
         <label for="forename">Vorname</label>
         <input ng-model="patient.forename" type="text" class="form-control"
                id="forename" placeholder="Vornamen eingeben">
     </div>
 
-    <!-- forename -->
+    <!-- surname -->
+    <div class="alert alert-danger alert-dismissible" role="alert" ng-show="surname">
+        <strong>Nachname fehtl!</strong> Bitte tragen Sie Ihren Nachname ein.
+    </div>
     <div class="form-group">
         <label for="surname">Nachname</label>
         <input ng-model="patient.surname" type="text" class="form-control"
@@ -19,13 +25,19 @@
     </div>
 
     <!-- birthday -->
+    <div class="alert alert-danger alert-dismissible" role="alert" ng-show="birthday">
+        <strong>Geburtstag fehtl!</strong> Bitte tragen Sie Ihren Geburtstag ein.
+    </div>
     <div class="form-group">
-        <label for="birthday"></label>
+        <label for="birthday">Geburtstag</label>
         <input ng-model="patient.birthday" type="text" class="form-control"
                id="birthday" placeholder=" eingeben">
     </div>
 
     <!-- Geschlecht -->
+    <div class="alert alert-danger alert-dismissible" role="alert" ng-show="gender">
+        <strong>Geschlecht fehtl!</strong> Bitte geben Sie Ihr Geschlecht an.
+    </div>
     <div class="form-group">
         <label>Geschlecht</label><br>
         <label class="radio-inline">
@@ -39,30 +51,41 @@
     <hr>
 
     <div class="form-group">
+        <div class="alert alert-danger alert-dismissible" role="alert" ng-show="username">
+            <strong>Username fehtl!</strong> Bitte geben Sie Ihr Username an.
+        </div>
+        <div class="alert alert-danger alert-dismissible" role="alert" ng-show="usernameExists">
+            <strong>Username exerstiert bereits!</strong> Bitte geben Sie einen anderen Usernamen an.
+        </div>
         <label for="username">Username</label>
         <input ng-model="patient.username" type="text" class="form-control"
-               id="username" placeholder="Vornamen eingeben">
+               id="username" placeholder="Usernamen eingeben">
     </div>
 
     <div class="form-group">
+        <div class="alert alert-danger alert-dismissible" role="alert" ng-show="password">
+            <strong>Passwort fehtl!</strong> Bitte geben Sie ein Passwort an.
+        </div>
         <label for="inputPassword">Passwort</label>
         <input ng-model="patient.password" type="password" class="form-control" id="inputPassword"
                placeholder="Password">
     </div>
 
     <div class="form-group">
+        <div class="alert alert-danger alert-dismissible" role="alert" ng-show="passwordUnequal">
+            <strong>Passwort ungleich!</strong> Bitte geben Sie das Passwort nochmals ein.
+        </div>
         <label for="passwordRepeat">Passwort bestätigen</label>
-        <input type="password" class="form-control" id="passwordRepeat" placeholder="Password">
+        <input ng-model="patient.comparePassword" type="password" class="form-control" id="passwordRepeat"
+               placeholder="Password">
     </div>
-
-
-    <button class="btn btn-default" ng-click="save()">
-        <i class="fa fa-code"></i> Debug Login
-    </button>
 </div>
 
 <div class="modal-footer">
+    <button class="btn btn-default pull-left" ng-click="back()">
+        <i class="fa fa-arrow-circle-o-left"></i> Zurück
+    </button>
     <button class="btn btn-default" ng-click="save()">
-        <i class="fa fa-code"></i> Debug Login
+        <i class="fa fa-save"></i> Registrieren
     </button>
 </div>

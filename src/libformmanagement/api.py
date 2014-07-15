@@ -40,12 +40,11 @@ def check_auth():
     """
     Receives a JSON object that contains the login type
     Examples:
-        {facebook: {... facebook auth data ...}}
-        {username: "Max Muster"}
+        {username: "Max Muster", password: 123456}
     """
     auth_request = request.get_json()
 
-    if "username" in auth_request: 
+    if "username" in auth_request:
         print("if")
         user = User.query.filter_by(username=auth_request["username"]).first_or_404()
     else:
@@ -70,9 +69,6 @@ def sing_up_patient():
     patient = Patient(**new_patient_request)
     db.session.add(patient)
     db.session.commit()
-   #return jsonify(patient)
-
-    #auth_request = request.get_json()
 
     user = User.query.filter_by(username=new_patient_request["username"]).first_or_404()
 
@@ -87,6 +83,15 @@ def logout():
 
 
 user_modifiable_attrs = ["name"]
+
+@api.route("/users/<string:username>")
+def get_user(username):
+    """
+    GET to patient resource: return single patient.
+    Use .first_or_404() to automatically raise a 404 error if the resource isn't found.
+    """
+    print(username)
+    return jsonify(User.query.filter_by(username=username).first_or_404())
 
 """
 physician API
@@ -142,6 +147,7 @@ def get_patients(physician_id):
     """
     GET to the list: return list of all patients belonging to physician.
     """
+    print("physician_id")
     return jsonify(Patient.query
                    .order_by(Patient.name.asc())
                    .filter_by(physician_id=physician_id).all())
@@ -153,25 +159,11 @@ def get_patient(username):
     GET to patient resource: return single patient.
     Use .first_or_404() to automatically raise a 404 error if the resource isn't found.
     """
+    print(username)
     return jsonify(Patient.query.filter_by(username=username).first_or_404())
 
 
 patient_modifiable_attrs = user_modifiable_attrs + ["physician_id"]
-
-
-@api.route("/patients", methods=["POST"])
-def add_patient():
-    """
-    POST to the list: add a new event.
-    Don't forget to call db.session.commit()
-    """
-    thisRequest = request.json
-    thisRequest["pw_hash"] = generate_password_hash(thisRequest["pw_hash"])
-    patient = Patient(**thisRequest)
-    db.session.add(patient)
-    db.session.commit()
-    return jsonify(patient)
-
 
 @api.route("/patients/<int:id>", methods=["POST"])
 def update_patient(id):

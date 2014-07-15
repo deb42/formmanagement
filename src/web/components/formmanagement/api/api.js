@@ -139,53 +139,83 @@ api.service("Session", ["$http", "$q", "getUserClass", "Physician",
         };
     }]);
 
-api.factory('showLoginDialog', ['$modal', '$http', 'Session', 'Patient',
-    function ($modal, $http, Session, Patient) {
+api.service('LoginDialog', ['$modal', '$http', '$location', 'Session', 'Patient',
+    function ($modal, $http, $location, Session, Patient) {
+
+        var self = this;
+
         var LoginDialogCtrl = function ($scope, $modalInstance) {
             $scope.login = function (user) {
-                Session.login(user).success(function () {
-                    $modalInstance.close();
-                });
+                $scope.noLogin = $scope.noUser = false;
+                if (user && user.username && user.password) {
+                    Session.login(user)
+                        .success(function () {
+                            $modalInstance.close();
+                        })
+                        .error(function () {
+                            $scope.noLogin = true;
+                        });
+                }else{
+                    $scope.noUser = true;
+                }
+
             };
             $scope.new_patient = function () {
-                console.log("test");
-                $modal.open({
-                    controller: NewPatientCtrl,
-                    templateUrl: '/components/formmanagement/login/new-patient.html',
-                    keyboard: false,
-                    backdrop: "static"
-                });
+                showSingUp();
                 $modalInstance.close();
             };
         };
-        var NewPatientCtrl = function ($scope, $modalInstance) {
-            $scope.patient = {surname: "", forename: "", username: "", password: ""};
+        var NewPatientCtrl = function ($scope, $modalInstance, $location) {
+            $scope.patient = {surname: "", forename: "", gender: "", birthday: "", username: "", password: ""};
 
             $scope.save = function () {
+                $scope.forename = $scope.surname = $scope.gender = $scope.birthday = $scope.username = $scope.usernameExists = $scope.password = $scope.passwordUnequal = false;
+                if (!$scope.patient.forename) {
+                    $scope.forename = true;
+                } else if (!$scope.patient.surname) {
+                    $scope.surname = true;
+                } else if (!$scope.patient.birthday) {
+                    $scope.birthday = true;
+                } else if (!$scope.patient.gender) {
+                    $scope.gender = true;
+                } else if (!$scope.patient.username) {
+                    $scope.username = true;
+                } else if (!$scope.patient.password) {
+                    $scope.password = true;
+                } else if ($scope.patient.comparePassword !== $scope.patient.password) {
+                    $scope.passwordUnequal = true;
+                } else {
 
-                var newPatient = new Patient({
-                    username: $scope.patient.username,
-                    pw_hash: $scope.patient.password,
-                    name: $scope.patient.forename + " " + $scope.patient.surname,
-                    physician_id: 0
-                });
-                console.log(newPatient)
-                var path = 'api/patients/' + $scope.patient.username;
-                $http.get(path)
-                    .error(function () {
-                        Session.signup(newPatient).success(function () {
-                            $modalInstance.close();
-                        });
-                    })
-                    .success(function () {
-                        alert("username bereits vorhanden");
-                        return false;
+                    var newPatient = new Patient({
+                        username: $scope.patient.username,
+                        pw_hash: $scope.patient.password,
+                        name: $scope.patient.forename + " " + $scope.patient.surname,
+                        physician_id: 0
                     });
+
+                    var path = 'api/users/' + $scope.patient.username;
+                    $http.get(path)
+                        .error(function () {
+                            Session.signup(newPatient).success(function () {
+                                $modalInstance.close();
+                                $location.path('/questionnaire');
+                            });
+                        })
+                        .success(function () {
+                            $scope.usernameExists = true;
+                        });
+                }
+            };
+
+            $scope.back = function () {
+                $modalInstance.close();
+                self.showLogin();
             }
+
         }
 
 
-        return function showLoginDialog() {
+        self.showLogin = function () {
             $modal.open({
                 controller: LoginDialogCtrl,
                 templateUrl: '/components/formmanagement/login/login.html',
@@ -193,6 +223,16 @@ api.factory('showLoginDialog', ['$modal', '$http', 'Session', 'Patient',
                 backdrop: "static"
             });
         };
+
+        var showSingUp = function () {
+            $modal.open({
+                controller: NewPatientCtrl,
+                templateUrl: '/components/formmanagement/login/new-patient.html',
+                keyboard: false,
+                backdrop: "static"
+            });
+        }
+
     }
 ])
 ;
