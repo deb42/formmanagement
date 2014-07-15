@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-8">
         <div ng-show="patient">
-            <h3>{{patient.forename}} {{patient.surname}}</h3> <br>
+            <h3>{{patient.name}}</h3> <br>
             Geschlecht: {{patient.gender}}<br>
             Geburtsdatum: {{patient.birthday}}<br>
         </div>
@@ -12,7 +12,7 @@
             <label for="patient">Patient</label>
             <select class="form-control dropdown-menu-right" id="patient"
                     ng-model="patient"
-                    ng-options="patient.surname for patient in patients track by patient.id">
+                    ng-options="patient.name for patient in patients track by patient.id">
 
             </select>
         </div>

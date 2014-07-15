@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="652385748">
-    <data-source source="LOCAL" name="formmanagement" uuid="d4502cc2-9843-4e9f-8a95-1443dba8f169">
+  <component name="DataSourceManagerImpl" format="xml" hash="1699236639">
+    <data-source source="LOCAL" name="formmanagement" uuid="6983d0ce-35dc-4137-a2c0-7d2fa1398eca">
       <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\David\Documents\GitHub\formmanagement\src\formmanagement.db</jdbc-url>
       <libraries />

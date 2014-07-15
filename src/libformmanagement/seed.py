@@ -2,6 +2,7 @@
 from __future__ import absolute_import, print_function, division, unicode_literals
 from datetime import *
 import random
+from werkzeug.security import generate_password_hash
 import string
 
 import flask
@@ -45,34 +46,41 @@ def seed():
     # Kundenberater seeden
     physician_datasets = (
         {
-            "surname": "Verena Meier"
+            "username":"meier",
+            "password": "12345",
+            "name": "Verena Meier"
         },
         {
-            "surname": "Anna Gaul"
+            "name": "Anna Gaul"
         },
         {
-            "surname": "Peter Hubner"
+            "name": "Peter Hubner"
         },
         {
-            "surname": "Herbert Becker"
+            "name": "Herbert Becker"
         },
         {
-            "surname": "Jörg Bayer"
+            "name": "Jörg Bayer"
         },
         {
-            "surname": "Oliver Meier"
+            "name": "Oliver Meier"
         },
         {
-            "surname": "Yannic Wulf"
+            "name": "Yannic Wulf"
         }
     )
 
 
 
-    physicians = [Physician(surname=physician_datasets[i]["surname"])
-                for i in range(len(physician_datasets))]
-    for i in range(len(physician_datasets)):
-        db.session.add(physicians[i])
+    physicians = Physician(
+                username=physician_datasets[0]["username"],
+                pw_hash=generate_password_hash(physician_datasets[0]["password"]),
+                name=physician_datasets[0]["name"]
+    )
+     #physician_datasets[0]["username"], physician_datasets[0]["password"], physician_datasets[0]["name"]
+                #for i in range(len(physician_datasets))]
+    #for i in range(len(physician_datasets)):
+    db.session.add(physicians)
 
     # Kunden seeden
     patient_datasets = (
@@ -94,7 +102,7 @@ def seed():
             "surname": "Becker"
         },
         {
-            "username": "meier",
+            "username": "meier3",
             "forename": "",
             "surname": "Lilo Meier"
         },
@@ -107,17 +115,18 @@ def seed():
 
     patients = []
     for i in range(len(patient_datasets)):
-        physician =  physicians[1]
+        physician =  physicians
         patients.append(
             Patient(
                 username=patient_datasets[i]["username"],
-                forename=patient_datasets[i]["forename"],
-                surname=patient_datasets[i]["surname"],
+                pw_hash='123456',
+                #forename=patient_datasets[i]["forename"],
+                name=patient_datasets[i]["surname"],
                 gender = patient_datasets[i].get("gender", ""),
                 birthday =patient_datasets[i].get("birthday",""),
-                #email="kunde" + str(i) + "@example.com",
+                email="kunde" + str(i) + "@example.com",
                 # Kundenberater zufällig zuweisen
-                physician_id=0
+                physician=physician
             )
         )
 

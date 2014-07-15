@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source source="LOCAL" name="formmanagement" uuid="d4502cc2-9843-4e9f-8a95-1443dba8f169">
+  <data-source source="LOCAL" name="formmanagement" uuid="6983d0ce-35dc-4137-a2c0-7d2fa1398eca">
     <database-info product="SQLite" version="3.7.6.3" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native"/>
     <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed"/>
     <schema name="" catalog=""/>
@@ -9,18 +9,118 @@
       <primary-key columns="id"/>
       <foreign-key name="#FAKE_administrator_1" columns="id" ref-table="user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
     </table>
+    <table name="advisor" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="skype_account" sqlType="VARCHAR(50)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_advisor_1" columns="id" ref-table="user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="#FAKE_client_1" table="client" schema="" catalog="" columns="advisor_id"/>
+    </table>
+    <table name="appointment" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="physician_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="patient_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="title" sqlType="VARCHAR(140)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="details" sqlType="VARCHAR(1000)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="startTime" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="endTime" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_appointment_1" columns="patient_id" ref-table="user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_appointment_2" columns="physician_id" ref-table="user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+    </table>
+    <table name="appointment_proposal" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="physician_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="patient_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="title" sqlType="VARCHAR(140)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="details" sqlType="VARCHAR(1000)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="accepted" sqlType="BOOLEAN" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="proposal" sqlType="VARCHAR" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_appointment_proposal_1" columns="patient_id" ref-table="user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_appointment_proposal_2" columns="physician_id" ref-table="user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+    </table>
+    <table name="client" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="advisor_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="facebook_id" sqlType="VARCHAR(256)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="facebook_token" sqlType="VARCHAR(256)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_client_1" columns="advisor_id" ref-table="advisor" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_client_2" columns="id" ref-table="user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+    </table>
+    <table name="conversation" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="title" sqlType="VARCHAR(140)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <primary-key columns="id"/>
+      <exported-key name="#FAKE_conversation_members_1" table="conversation_members" schema="" catalog="" columns="conversation_id"/>
+      <exported-key name="#FAKE_message_2" table="message" schema="" catalog="" columns="conversation_id"/>
+    </table>
+    <table name="conversation_members" schema="" catalog="" type="TABLE">
+      <column name="user_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="conversation_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <foreign-key name="#FAKE_conversation_members_1" columns="conversation_id" ref-table="conversation" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_conversation_members_2" columns="user_id" ref-table="user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+    </table>
+    <table name="diagnosis" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="physician_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="patient_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="title" sqlType="VARCHAR(140)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="details" sqlType="VARCHAR(1000)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="startTime" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="endTime" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_diagnosis_1" columns="patient_id" ref-table="user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_diagnosis_2" columns="physician_id" ref-table="user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+    </table>
+    <table name="diagnosis_proposal" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="physician_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="patient_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="title" sqlType="VARCHAR(140)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="details" sqlType="VARCHAR(1000)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="accepted" sqlType="BOOLEAN" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="proposal" sqlType="VARCHAR" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_diagnosis_proposal_1" columns="patient_id" ref-table="user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_diagnosis_proposal_2" columns="physician_id" ref-table="user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+    </table>
+    <table name="dlqi" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="score" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_dlqi_1" columns="id" ref-table="reply" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+    </table>
+    <table name="event" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="title" sqlType="VARCHAR(140)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="details" sqlType="VARCHAR(1000)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="startTime" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="endTime" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <primary-key columns="id"/>
+    </table>
     <table name="file" schema="" catalog="" type="TABLE">
       <column name="access_token" sqlType="VARCHAR(16)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="data" sqlType="BLOB" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
       <primary-key columns="access_token"/>
+      <exported-key name="#FAKE_video_1" table="video" schema="" catalog="" columns="poster_id"/>
     </table>
     <table name="hads" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
-      <column name="patient_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
-      <column name="code" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
-      <column name="date" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="anxiety_scale" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="depression_scale" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
       <primary-key columns="id"/>
-      <foreign-key name="#FAKE_hads_1" columns="patient_id" ref-table="patient" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_hads_1" columns="id" ref-table="reply" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+    </table>
+    <table name="message" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="conversation_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="user_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="content" sqlType="VARCHAR(1000)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_message_1" columns="user_id" ref-table="user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_message_2" columns="conversation_id" ref-table="conversation" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
     </table>
     <table name="nurse" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
@@ -29,27 +129,81 @@
     </table>
     <table name="patient" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
-      <column name="treatments" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="email" sqlType="VARCHAR(120)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="birthday" sqlType="VARCHAR(12)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="gender" sqlType="VARCHAR(8)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="physician_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
       <primary-key columns="id"/>
-      <foreign-key name="#FAKE_patient_1" columns="id" ref-table="user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <exported-key name="#FAKE_hads_1" table="hads" schema="" catalog="" columns="patient_id"/>
+      <foreign-key name="#FAKE_patient_1" columns="physician_id" ref-table="physician" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_patient_2" columns="id" ref-table="user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+    </table>
+    <table name="pbi" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_pbi_1" columns="id" ref-table="reply" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
     </table>
     <table name="physician" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <primary-key columns="id"/>
       <foreign-key name="#FAKE_physician_1" columns="id" ref-table="user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="#FAKE_patient_1" table="patient" schema="" catalog="" columns="physician_id"/>
+    </table>
+    <table name="questionnaire" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="title" sqlType="VARCHAR(140)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="type" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="content" sqlType="VARCHAR(5000)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="value" sqlType="VARCHAR(500)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="scores" sqlType="VARCHAR(500)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="patient_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_questionnaire_1" columns="patient_id" ref-table="user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+    </table>
+    <table name="reply" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="patient_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="date" sqlType="VARCHAR(12)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="data" sqlType="VARCHAR(5000)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="type" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_reply_1" columns="patient_id" ref-table="user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="#FAKE_dlqi_1" table="dlqi" schema="" catalog="" columns="id"/>
+      <exported-key name="#FAKE_hads_1" table="hads" schema="" catalog="" columns="id"/>
+      <exported-key name="#FAKE_pbi_1" table="pbi" schema="" catalog="" columns="id"/>
     </table>
     <table name="user" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
-      <column name="login_id" sqlType="VARCHAR(8)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
-      <column name="forename" sqlType="VARCHAR(40)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
-      <column name="surname" sqlType="VARCHAR(80)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="username" sqlType="VARCHAR(80)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="pw_hash" sqlType="VARCHAR(100)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR(80)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
       <column name="type" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
       <primary-key columns="id"/>
       <exported-key name="#FAKE_administrator_1" table="administrator" schema="" catalog="" columns="id"/>
+      <exported-key name="#FAKE_advisor_1" table="advisor" schema="" catalog="" columns="id"/>
+      <exported-key name="#FAKE_appointment_1" table="appointment" schema="" catalog="" columns="patient_id"/>
+      <exported-key name="#FAKE_appointment_2" table="appointment" schema="" catalog="" columns="physician_id"/>
+      <exported-key name="#FAKE_appointment_proposal_1" table="appointment_proposal" schema="" catalog="" columns="patient_id"/>
+      <exported-key name="#FAKE_appointment_proposal_2" table="appointment_proposal" schema="" catalog="" columns="physician_id"/>
+      <exported-key name="#FAKE_client_2" table="client" schema="" catalog="" columns="id"/>
+      <exported-key name="#FAKE_conversation_members_2" table="conversation_members" schema="" catalog="" columns="user_id"/>
+      <exported-key name="#FAKE_diagnosis_1" table="diagnosis" schema="" catalog="" columns="patient_id"/>
+      <exported-key name="#FAKE_diagnosis_2" table="diagnosis" schema="" catalog="" columns="physician_id"/>
+      <exported-key name="#FAKE_diagnosis_proposal_1" table="diagnosis_proposal" schema="" catalog="" columns="patient_id"/>
+      <exported-key name="#FAKE_diagnosis_proposal_2" table="diagnosis_proposal" schema="" catalog="" columns="physician_id"/>
+      <exported-key name="#FAKE_message_1" table="message" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_nurse_1" table="nurse" schema="" catalog="" columns="id"/>
-      <exported-key name="#FAKE_patient_1" table="patient" schema="" catalog="" columns="id"/>
+      <exported-key name="#FAKE_patient_2" table="patient" schema="" catalog="" columns="id"/>
       <exported-key name="#FAKE_physician_1" table="physician" schema="" catalog="" columns="id"/>
+      <exported-key name="#FAKE_questionnaire_1" table="questionnaire" schema="" catalog="" columns="patient_id"/>
+      <exported-key name="#FAKE_reply_1" table="reply" schema="" catalog="" columns="patient_id"/>
+    </table>
+    <table name="video" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="title" sqlType="VARCHAR(140)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="url" sqlType="VARCHAR(1000)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="poster_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_video_1" columns="poster_id" ref-table="file" ref-schema="" ref-catalog="" ref-columns="access_token" update-rule="3" delete-rule="3" deferrability="1"/>
     </table>
   </data-source>
 </component>

@@ -32,7 +32,7 @@ api.factory("getUserClass", [ "Patient" , "Physician", function (Patient, Physic
 }]);
 
 api.factory("Patient", ["$resource", function ($resource) {
-    return $resource("/api/patients/:id/:username/:physician_id", {id: "@id", username: "@username", physician_id: "@username"});
+    return $resource("/api/patients/:id/:physician_id", {id: "@id", physician_id: "@patient_id"});
 }]);
 
 api.factory("Physician", ["$resource", function ($resource) {
@@ -120,6 +120,14 @@ api.service("Session", ["$http", "$q", "getUserClass", "Physician",
             });
         };
 
+        self.signup = function (patient) {
+            return $http.post('/api/session/new', patient)
+                .success(function (session) {
+                    // set session data
+                    update(session);
+                });
+        }
+
         // must be called before user.$save to persist updated session information in cache.
         self.updateCache = cacheSession;
 
@@ -151,24 +159,26 @@ api.factory('showLoginDialog', ['$modal', '$http', 'Session', 'Patient',
             };
         };
         var NewPatientCtrl = function ($scope, $modalInstance) {
-            $scope.patient = {surname: "", forename: "", username: ""};
+            $scope.patient = {surname: "", forename: "", username: "", password: ""};
 
             $scope.save = function () {
 
                 var newPatient = new Patient({
                     username: $scope.patient.username,
-                    forename: $scope.patient.forename,
-                    surname: $scope.patient.surname,
+                    pw_hash: $scope.patient.password,
+                    name: $scope.patient.forename + " " + $scope.patient.surname,
                     physician_id: 0
                 });
                 console.log(newPatient)
                 var path = 'api/patients/' + $scope.patient.username;
                 $http.get(path)
                     .error(function () {
-                        newPatient.$save()
+                        Session.signup(newPatient).success(function () {
+                            $modalInstance.close();
+                        });
                     })
                     .success(function () {
-                        alert("username bereits vorhanden")
+                        alert("username bereits vorhanden");
                         return false;
                     });
             }

@@ -4,13 +4,6 @@
 
 <div class="modal-body">
 
-    <!-- forename -->
-    <div class="form-group">
-        <label for="surname">Nachname</label>
-        <input ng-model="patient.surname" type="text" class="form-control"
-               id="surname" placeholder="Nachnamen eingeben">
-    </div>
-
     <!-- surname  -->
     <div class="form-group">
         <label for="forename">Vorname</label>
@@ -18,10 +11,11 @@
                id="forename" placeholder="Vornamen eingeben">
     </div>
 
+    <!-- forename -->
     <div class="form-group">
-        <label for="username">Username</label>
-        <input ng-model="patient.username" type="text" class="form-control"
-               id="username" placeholder="Vornamen eingeben">
+        <label for="surname">Nachname</label>
+        <input ng-model="patient.surname" type="text" class="form-control"
+               id="surname" placeholder="Nachnamen eingeben">
     </div>
 
     <!-- birthday -->
@@ -42,19 +36,32 @@
         </label>
     </div>
 
+    <hr>
+
     <div class="form-group">
-        <label for="exampleInputPassword1">Passwort</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        <label for="username">Username</label>
+        <input ng-model="patient.username" type="text" class="form-control"
+               id="username" placeholder="Vornamen eingeben">
     </div>
 
     <div class="form-group">
-        <label for="inputPassword3" class="col-sm-2 control-label">Passwort bestätigen</label>
-        <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-        </div>
+        <label for="inputPassword">Passwort</label>
+        <input ng-model="patient.password" type="password" class="form-control" id="inputPassword"
+               placeholder="Password">
+    </div>
+
+    <div class="form-group">
+        <label for="passwordRepeat">Passwort bestätigen</label>
+        <input type="password" class="form-control" id="passwordRepeat" placeholder="Password">
     </div>
 
 
+    <button class="btn btn-default" ng-click="save()">
+        <i class="fa fa-code"></i> Debug Login
+    </button>
+</div>
+
+<div class="modal-footer">
     <button class="btn btn-default" ng-click="save()">
         <i class="fa fa-code"></i> Debug Login
     </button>

@@ -46,11 +46,33 @@ def check_auth():
     auth_request = request.get_json()
 
     if "username" in auth_request:  # and app.config["DEBUG"]:
-        user = User.query.filter_by(surname=auth_request["username"]).first_or_404()
+        user = User.query.filter_by(name=auth_request["username"]).first_or_404()
 
 
     else:
         abort(403)
+
+    session['user_id'] = user.id
+    return get_session_obj()
+
+@api.route("/session/new", methods=["POST"])
+def sing_up_patient():
+    """
+    Receives a JSON object that contains the login type
+    Examples:
+        {facebook: {... facebook auth data ...}}
+        {username: "Max Muster"}
+    """
+    new_patient_request = request.json
+    new_patient_request["pw_hash"] = generate_password_hash(new_patient_request["pw_hash"])
+    patient = Patient(**new_patient_request)
+    db.session.add(patient)
+    db.session.commit()
+   #return jsonify(patient)
+
+    #auth_request = request.get_json()
+
+    user = User.query.filter_by(username=new_patient_request["username"]).first_or_404()
 
     session['user_id'] = user.id
     return get_session_obj()
@@ -119,7 +141,7 @@ def get_patients(physician_id):
     GET to the list: return list of all patients belonging to physician.
     """
     return jsonify(Patient.query
-                   .order_by(Patient.surname.asc())
+                   .order_by(Patient.name.asc())
                    .filter_by(physician_id=physician_id).all())
 
 
@@ -141,8 +163,9 @@ def add_patient():
     POST to the list: add a new event.
     Don't forget to call db.session.commit()
     """
-
-    patient = Patient(**request.json)
+    thisRequest = request.json
+    thisRequest["pw_hash"] = generate_password_hash(thisRequest["pw_hash"])
+    patient = Patient(**thisRequest)
     db.session.add(patient)
     db.session.commit()
     return jsonify(patient)
