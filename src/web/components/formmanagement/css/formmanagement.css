@@ -47,3 +47,6 @@ body {
   border-bottom-left-radius: 10px;
   height: 60px;
 }
+.question-title {
+  min-height: 55px;
+}

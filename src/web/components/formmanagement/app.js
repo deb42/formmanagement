@@ -23,7 +23,7 @@ formmanagement.config(['$routeProvider',
         });
     }]);
 
-formmanagement.run(["Session", "$rootScope","showLoginDialog", "$location", "isPatient", function (Session, $rootScope, showLoginDialog, $location, isPatient) {
+formmanagement.run(["Session", "$rootScope", "showLoginDialog", "$location", "isPatient", function (Session, $rootScope, showLoginDialog, $location, isPatient) {
 
     Session.init
         .error(function () {
@@ -45,19 +45,21 @@ formmanagement.run(["Session", "$rootScope","showLoginDialog", "$location", "isP
 
 }]);
 
-formmanagement.controller("NavbarCtrl", ["$scope", "Session", "isPhysician",function ($scope, Session, isPhysician) {
+formmanagement.controller("NavbarCtrl", ["$scope", "Session", "isPhysician", "isPatient",
+    function ($scope, Session, isPhysician, isPatient) {
 
-    $scope.session = Session.get();
-    $scope.isPhysician = isPhysician;
+        $scope.session = Session.get();
+        $scope.isPhysician = isPhysician;
+        $scope.isPatient = isPatient;
 
-    /*$scope.$watch($scope.session, function () {
-        $scope.isPhysician = isPhysician($scope.session.user);
-        console.log($scope.session);
-    })*/
+        /*$scope.$watch($scope.session, function () {
+         $scope.isPhysician = isPhysician($scope.session.user);
+         console.log($scope.session);
+         })*/
 
-    $scope.logout = function () {
-        Session.logout();
-    };
-}]);
+        $scope.logout = function () {
+            Session.logout();
+        };
+    }]);
 
 

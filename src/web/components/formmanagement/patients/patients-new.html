@@ -6,11 +6,15 @@
             <div class="input-group">
                 <select class="form-control dropdown-menu-right" id="patient"
                         ng-model="patient"
-                        ng-options="patient.surname for patient in patients track by patient.id">
+                        ng-options="patient.name for patient in patients track by patient.id">
                 </select>
                   <span class="input-group-btn">
                     <button class="btn btn-default" type="button" ng-click="choosePatient(patient)">Go!</button>
                   </span>
+            </div>
+            <br>
+            <div class="alert alert-danger alert-dismissible" role="alert" ng-show="noNewPatient">
+                <strong>Kein neuer Patient!</strong> Wählen sie eine andere Option aus.
             </div>
             <!-- /input-group -->
         </div>

@@ -32,7 +32,7 @@ api.factory("getUserClass", [ "Patient" , "Physician", function (Patient, Physic
 }]);
 
 api.factory("Patient", ["$resource", function ($resource) {
-    return $resource("/api/patients/:id/:physician_id", {id: "@id", physician_id: "@patient_id"});
+    return $resource("/api/patients/:type", {type: "@type"});
 }]);
 
 api.factory("Physician", ["$resource", function ($resource) {

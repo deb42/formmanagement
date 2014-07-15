@@ -14,14 +14,19 @@ patients.controller("PatientsNewCtrl", ["$scope", "Session", "Patient", "Questio
     function ($scope, Session, Patient, Questionnaire) {
 
         $scope.session = Session.get();
-        $scope.patients = Patient.query({physician_id: 0});
+        $scope.patients = Patient.query({type: 0});
         $scope.questionnaires = Questionnaire.query();
 
         $scope.choosePatient = function (pPatient) {
-            var patient = new Patient({physician_id: $scope.session.user.id})
-            patient.$save({id: pPatient.id})
-            $scope.patientChoosen = true;
-            $scope.choosenPatient = new Array(pPatient);
+            if (pPatient) {
+                var patient = new Patient({physician_id: $scope.session.user.id})
+                patient.$save({id: pPatient.id})
+                $scope.patientChoosen = true;
+                $scope.choosenPatient = new Array(pPatient);
+            } else {
+                $scope.noNewPatient = true;
+            }
+
         }
 
     }]);
@@ -30,7 +35,10 @@ patients.controller("PatientsTodayCtrl", ["$scope", "Session", "Patient", "Quest
     function ($scope, Session, Patient, Questionnaire) {
 
         $scope.session = Session.get();
-        $scope.patients = Patient.query({physician_id: $scope.session.user.id});
+        $scope.patients = Patient.query({type: 2}); //1}); //
+
+
+        console.log("new");
         $scope.questionnaires = Questionnaire.query();
 
 
@@ -40,7 +48,7 @@ patients.controller("PatientsAllCtrl", ["$scope", "Session", "Patient", "Questio
     function ($scope, Session, Patient, Questionnaire) {
 
         $scope.session = Session.get();
-        $scope.patients = Patient.query({physician_id: $scope.session.user.id});
+        $scope.patients = Patient.query({type: 1});
         $scope.questionnaires = Questionnaire.query();
 
 
@@ -58,6 +66,10 @@ patients.directive('patientOverview', ["Questionnaire", "Reply", function (Quest
         link: function (scope, element, attrs) {
 
             console.log(scope.patients);
+            for (var i = 0; i < 3; ++i) {
+                console.log("test");
+                console.log(scope.patients);
+            }
 
             //scope.questionnaires = Questionnaire.query();
             scope.selectedQuestionnaire = {index: 0};
@@ -137,6 +149,7 @@ patients.directive('patientOverview', ["Questionnaire", "Reply", function (Quest
 
 
             scope.patient = angular.copy(scope.patients[0]);
+            console.log(scope.patient);
         }
     };
 }]);

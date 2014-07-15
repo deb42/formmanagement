@@ -18,8 +18,8 @@ common.factory('isPhysician', ['UserType', function (UserType) {
     };
 }]);
 
-common.factory('showSingUpDialog', ['$modal', '$timeout', 'Session',
-    function ($modal, $timeout, Session) {
+common.factory('showSingUpDialog', ['$modal', '$http', 'Session', 'Patient',
+    function ($modal, $http, Session, Patient) {
 
         var NewPatientCtrl = function ($scope, $modalInstance, $location) {
             $scope.patient = {surname: "", forename: "", gender: "", birthday: "", username: "", password: ""};

@@ -2,6 +2,9 @@
 from __future__ import absolute_import, print_function, division, unicode_literals
 
 from flask import Blueprint, request, abort, session
+from sqlalchemy.orm import joinedload
+from sqlalchemy import func
+from datetime import *
 
 from .questionnaire_api import init_reply
 from .models import *
@@ -56,6 +59,7 @@ def check_auth():
     else:
         abort(403)
 
+
 @api.route("/session/new", methods=["POST"])
 def sing_up_patient():
     """
@@ -84,6 +88,7 @@ def logout():
 
 user_modifiable_attrs = ["name"]
 
+
 @api.route("/users/<string:username>")
 def get_user(username):
     """
@@ -92,6 +97,7 @@ def get_user(username):
     """
     print(username)
     return jsonify(User.query.filter_by(username=username).first_or_404())
+
 
 """
 physician API
@@ -142,15 +148,22 @@ patient API
 """
 
 
-@api.route("/patients/<int:physician_id>")
-def get_patients(physician_id):
+@api.route("/patients/<int:type>")
+def get_patients(type):
     """
     GET to the list: return list of all patients belonging to physician.
     """
-    print("physician_id")
-    return jsonify(Patient.query
-                   .order_by(Patient.name.asc())
-                   .filter_by(physician_id=physician_id).all())
+    if type == 0:
+        return jsonify(Patient.query
+                       .order_by(Patient.name.asc())
+                       .filter_by(physician_id=0).all())
+    elif type == 1:
+        return jsonify(Patient.query
+                       .order_by(Patient.name.asc())
+                       .filter_by(physician_id=session["user_id"]).all())
+    else:
+        return jsonify(Patient.query
+                       .join("questionnaire_replies").filter(Reply.date == date.today()).all())
 
 
 @api.route("/patients/<string:username>")
@@ -164,6 +177,7 @@ def get_patient(username):
 
 
 patient_modifiable_attrs = user_modifiable_attrs + ["physician_id"]
+
 
 @api.route("/patients/<int:id>", methods=["POST"])
 def update_patient(id):

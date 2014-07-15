@@ -1,44 +1,46 @@
 <div ng-controller="questionaireCtrl">
-    <div ng-show="!init">
+    <div class="content">
+        <div ng-show="!init">
 
-        Lorem Ipsum
+            Lorem Ipsum
 
-        <div class="row">
-            <button type="button" class="btn btn-default" ng-click="init = true; selectQuesionnair(0)">
-                Starten
-            </button>
-
-        </div>
-    </div>
-
-    <div ng-show="init">
-        <div class="row">
-            <ul class="nav nav-tabs" role="tablist">
-                <li ng-repeat="(i, questionnaire) in questionnaires track by $index"
-                    ng-click="selectQuesionnaire(i); selectedQuestionnaire.index = i; updateData(replies)"
-                    ng-class="(selectedQuestionnaire.index == questionnaire.id -1) ? 'active': ''">
-                    <a>{{questionnaire.title}}</a>
-                </li>
-            </ul>
-
-            <div class="pull-right">
-                <button type="button" class="btn btn-default" ng-click="save(selecedQuestionaire)">
-                    <i class="fa fa-save fa-lg"></i>
-                        Speichern
+            <div class="row">
+                <button type="button" class="btn btn-default" ng-click="init = true; selectQuesionnair(0)">
+                    Starten
                 </button>
+
             </div>
         </div>
-        <br/>
 
-        <div class="row">
-            <questionnaire-form questionnaire="questionnaires[selectedQuestionnaire.index]"
-                                index="selectedQuestionnaire.index"
-                                answers="answers[selectedQuestionnaire.index]"
-                                reply="true"></questionnaire-form>
-        </div>
+        <div ng-show="init">
+            <div class="row">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li ng-repeat="(i, questionnaire) in questionnaires track by $index"
+                        ng-click="selectQuesionnaire(i); selectedQuestionnaire.index = i; updateData(replies)"
+                        ng-class="(selectedQuestionnaire.index == questionnaire.id -1) ? 'active': ''">
+                        <a>{{questionnaire.title}}</a>
+                    </li>
+                </ul>
 
-        <div class="row">
-            <button type="button" class="btn btn-default" ng-click="proceed()">Weiter</button>
+                <div class="pull-right">
+                    <button type="button" class="btn btn-default" ng-click="save(selecedQuestionaire)">
+                        <i class="fa fa-save fa-lg"></i>
+                        Speichern
+                    </button>
+                </div>
+            </div>
+            <br/>
+
+            <div class="row">
+                <questionnaire-form questionnaire="questionnaires[selectedQuestionnaire.index]"
+                                    index="selectedQuestionnaire.index"
+                                    answers="answers[selectedQuestionnaire.index]"
+                                    reply="true"></questionnaire-form>
+            </div>
+
+            <div class="row">
+                <button type="button" class="btn btn-default" ng-click="proceed()">Weiter</button>
+            </div>
         </div>
     </div>
 </div>

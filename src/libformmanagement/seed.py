@@ -189,6 +189,35 @@ def seed():
         db.session.add(hadsresult)
 
 
+    for i in range(1,30,2):
+        answers = []
+        for j in range(0,3):
+            answers.append(random.randint(0,3))
+        questionnaire = Questionnaire.query.filter_by(type=TYPE_HADS).first_or_404()
+        hadsresult = Dlqi(
+            patient = patients[0],
+            date= date.today()-timedelta(days=i*7),
+            data=answers,
+            score = dlqi_score(answers, questionnaire["value"]),
+
+        )
+        db.session.add(hadsresult)
+
+    for i in range(1,30,2):
+        answers = []
+        for j in range(0,14):
+            answers.append(random.randint(0,3))
+        questionnaire = Questionnaire.query.first_or_404()
+        hadsresult = Hads(
+            patient = patients[0],
+            date= date.today()-timedelta(days=i*7),
+            data=answers,
+            anxiety_scale = anxiety_scale(answers, questionnaire["value"]),
+            depression_scale = depression_scale(answers,questionnaire["value"])
+        )
+        db.session.add(hadsresult)
+
+
     for i in range(0,30,2):
         answers = []
         for j in range(0,3):
