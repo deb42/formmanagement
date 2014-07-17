@@ -6,17 +6,6 @@
             Geburtsdatum: {{patient.birthday}}<br>
         </div>
     </div>
-    <div class="col-md-4">
-
-        <div class="form-group">
-            <label for="patient">Patient</label>
-            <select class="form-control dropdown-menu-right" id="patient"
-                    ng-model="patient"
-                    ng-options="patient.name for patient in patients track by patient.id">
-
-            </select>
-        </div>
-    </div>
 </div> <br><br>
 
 <div ng-show="patient">

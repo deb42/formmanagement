@@ -23,34 +23,49 @@ formmanagement.config(['$routeProvider',
         });
     }]);
 
-formmanagement.run(["Session", "$rootScope", "showLoginDialog", "$location", "isPatient", function (Session, $rootScope, showLoginDialog, $location, isPatient) {
+formmanagement.run(["Session", "$rootScope", "showLoginDialog", "$location", "isPatient", "isPhysician",
+    function (Session, $rootScope, showLoginDialog, $location, isPatient, isPhysician) {
 
-    Session.init
-        .error(function () {
-            showLoginDialog();
+        Session.init
+            .error(function () {
+                showLoginDialog();
+            });
+
+
+        var session = Session.get();
+        // show modal for choosing advisor, if client and no advisor is set
+        $rootScope.$watch(function () {
+            return session.user;
+        }, function () {
+            /* jshint bitwise:false */
+            var user = session.user;
+            if (user && isPatient(user)) {
+                $location.path("/questionnaire");
+            }
+            if (user && isPhysician(user)) {
+                $location.path("/patients/all");
+            }
         });
 
+    }]);
 
-    var session = Session.get();
-    // show modal for choosing advisor, if client and no advisor is set
-    $rootScope.$watch(function () {
-        return session.user;
-    }, function () {
-        /* jshint bitwise:false */
-        var user = session.user;
-        if (user && isPatient(user)) {
-            $location.path("/questionnaire");
-        }
-    });
-
-}]);
-
-formmanagement.controller("NavbarCtrl", ["$scope", "Session", "isPhysician", "isPatient",
-    function ($scope, Session, isPhysician, isPatient) {
+formmanagement.controller("NavbarCtrl", ["$scope", "$location", "Session", "isPhysician", "isPatient",
+    function ($scope, $location, Session, isPhysician, isPatient) {
 
         $scope.session = Session.get();
         $scope.isPhysician = isPhysician;
         $scope.isPatient = isPatient;
+
+        $scope.getNavActiveClass = function (path) {
+            if (path === "/") {
+                return $location.path() === "/" ? "active" : "";
+            }
+            if ($location.path().substr(0, path.length) === path) {
+                return "navbar-element-selected";
+            } else {
+                return "";
+            }
+        };
 
         /*$scope.$watch($scope.session, function () {
          $scope.isPhysician = isPhysician($scope.session.user);

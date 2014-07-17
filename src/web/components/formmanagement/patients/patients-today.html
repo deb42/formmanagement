@@ -1,3 +1,13 @@
 <div ng-controller="PatientsTodayCtrl">
-    <patient-overview patients="patients" questionnaires="questionnaires"></patient-overview>
+    <div class="form-group col-md-offset-8">
+        <label for="patient">Patient</label>
+        <select class="form-control dropdown-menu-right" id="patient"
+                ng-model="patient"
+                ng-options="patient.name for patient in patients track by patient.id">
+
+        </select>
+    </div>
+    <div ng-if="patientChoosen">
+        <patient-overview patient="choosenPatient" questionnaires="questionnaires"></patient-overview>
+    </div>
 </div>

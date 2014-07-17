@@ -36,10 +36,14 @@ patients.controller("PatientsTodayCtrl", ["$scope", "Session", "Patient", "Quest
 
         $scope.session = Session.get();
         $scope.patients = Patient.query({type: 2}); //1}); //
-
-
-        console.log("new");
         $scope.questionnaires = Questionnaire.query();
+
+        $scope.$watchCollection('[patient]', function () {
+            if ($scope.patient) {
+                $scope.patientChoosen = true;
+                $scope.choosenPatient = $scope.patient;
+            }
+        }, true);
 
 
     }]);
@@ -52,8 +56,8 @@ patients.controller("PatientsAllCtrl", ["$scope", "Session", "Patient", "Questio
         $scope.questionnaires = Questionnaire.query();
 
         $scope.choosePatient = function (pPatient) {
-                $scope.patientChoosen = true;
-                $scope.choosenPatient = pPatient;
+            $scope.patientChoosen = true;
+            $scope.choosenPatient = pPatient;
         };
     }]);
 
