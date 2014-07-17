@@ -7343,6 +7343,7 @@ body {
   min-height: 100%;
 }
 body {
+  min-width: 800px;
   overflow-y: scroll;
   background-image: linear-gradient(to bottom, #ffffff 110px, #006db0);
 }
@@ -7356,6 +7357,7 @@ body {
   height: 64px;
   border-bottom-right-radius: 10px;
   padding: 11px;
+  padding-left: 16px;
   color: white;
 }
 .fm-body {
@@ -7387,6 +7389,13 @@ body {
   border-bottom-left-radius: 10px;
   height: 60px;
 }
+.navbar-element-selected {
+  padding-top: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background-image: linear-gradient(to bottom, #006db0 10px, #005487);
+  height: 60px;
+}
 .question-title {
   min-height: 55px;
 }
@@ -7398,6 +7407,18 @@ body {
 }
 .score:hover {
   color: darkgray;
+}
+.patient-search-group {
+  margin-left: 80px;
+  max-width: 500px;
+}
+.panel-patient {
+  margin-bottom: 0px;
+  margin-left: 80px;
+  max-width: 500px;
+}
+.panel-patient:hover {
+  background-color: rgba(0, 109, 176, 0.3);
 }
 .line {
   margin-left: -5px;

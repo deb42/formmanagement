@@ -1,3 +1,32 @@
 <div ng-controller="PatientsAllCtrl">
-    <patient-overview patients="patients" questionnaires="questionnaires"></patient-overview>
+    <div ng-hide="patientChoosen">
+        <div class="row">
+            <div class="form-group patient-search-group">
+                <label for="name" class="col-sm-4 control-label">Patientensuche</label>
+
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="name" placeholder="Name"
+                           ng-model="filter.name">
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div ng-repeat="patient in patients | filter: filter">
+                <div class="panel panel-default panel-patient" ng-click="choosePatient(patient)">
+                    <div class="panel-body">
+                        <a class="fa fa-user"></a> {{patient.name}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="patientChoosen">
+        <button type="button" class="btn btn-default pull-right" ng-click="$parent.patientChoosen = false; $parent.filter = undefined">
+            <i class="fa fa-reply"></i>
+            Zurück zur Auswahl
+        </button>
+        <patient-overview patient="choosenPatient" questionnaires="questionnaires"></patient-overview>
+    </div>
 </div>

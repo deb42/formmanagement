@@ -51,24 +51,27 @@ patients.controller("PatientsAllCtrl", ["$scope", "Session", "Patient", "Questio
         $scope.patients = Patient.query({type: 1});
         $scope.questionnaires = Questionnaire.query();
 
-
+        $scope.choosePatient = function (pPatient) {
+                $scope.patientChoosen = true;
+                $scope.choosenPatient = pPatient;
+        };
     }]);
 
 patients.directive('patientOverview', ["Questionnaire", "Reply", function (Questionnaire, Reply) {
     return{
         restrict: "E",
         scope: {
-            patients: "=",
+            patient: "=",
             questionnaires: "="
         },
         templateUrl: '/components/formmanagement/patients/patients-overview.html',
 
         link: function (scope, element, attrs) {
 
-            console.log(scope.patients);
+            console.log(scope.patient);
             for (var i = 0; i < 3; ++i) {
                 console.log("test");
-                console.log(scope.patients);
+                console.log(scope.patient);
             }
 
             //scope.questionnaires = Questionnaire.query();
@@ -147,9 +150,6 @@ patients.directive('patientOverview', ["Questionnaire", "Reply", function (Quest
                 scope.showReply = false;
             };
 
-
-            scope.patient = angular.copy(scope.patients[0]);
-            console.log(scope.patient);
         }
     };
 }]);

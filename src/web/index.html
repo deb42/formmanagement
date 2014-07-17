@@ -36,13 +36,13 @@
                 </a>
             </div>
             <div class="col-md-10">
-                <div class="fm-navbar-top"> <h4>Pruritusambulanz</h4></div>
+                <div class="fm-navbar-top">   <h4>   Pruritusambulanz</h4></div>
                 <nav class=" navbar-default" role="navigation">
                     <ul class="nav navbar-nav">
                         <li class="navbar-element navbar-element-left"><a href="#/patients/all"
                                                                           ng-show="isPhysician(session.user)">Patientenübersicht</a>
                         </li>
-                        <li class="navbar-element"><a href="#/patients/new"
+                        <li class="navbar-element navbar-element-selected"><a href="#/patients/new"
                                                       ng-show="isPhysician(session.user)">neuer Patient</a></li>
                         <li class="navbar-element navbar-element-right"><a href="#/patients/today"
                                                                            ng-show="isPhysician(session.user)">heutige
