@@ -19,3 +19,6 @@
 .panel-patient:hover {
   background-color: rgba(0, 109, 176, 0.3);
 }
+.patient-scores {
+  overflow-y: auto;
+}

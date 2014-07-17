@@ -28,44 +28,51 @@
 </head>
 <body class="fm-body">
 <div ng-controller="NavbarCtrl">
-    <div class="fm-navbar">
-        <div class="row">
-            <div class="col-md-2">
-                <a class="navbar-brand" href="#"><img style="height: 100px"
-                                                      src="http://www.klinikum.uni-muenster.de/fileadmin/tpl_ukm_internet/img/ukm_logo_small.png">
-                </a>
-            </div>
-            <div class="col-md-10">
-                <div class="fm-navbar-top">   <h4>   Pruritusambulanz</h4></div>
-                <nav class=" navbar-default" role="navigation">
-                    <ul class="nav navbar-nav">
-                        <li ng-class="getNavActiveClass('/patients/all')"class="navbar-element navbar-element-left"><a href="#/patients/all"
-                                                                          ng-show="isPhysician(session.user)">Patientenübersicht</a>
-                        </li>
-                        <li ng-class="getNavActiveClass('/patients/new')" class="navbar-element"><a href="#/patients/new"
-                                                      ng-show="isPhysician(session.user)">neuer Patient</a></li>
-                        <li ng-class="getNavActiveClass('/patients/today')" class="navbar-element navbar-element-right"><a href="#/patients/today"
-                                                                           ng-show="isPhysician(session.user)">heutige
-                            Patienten</a></li>
-                        <li class="navbar-element navbar-element-left navbar-element-right"><a href="#/patients/today"
-                                                                           ng-show="isPatient(session.user)">Fragebögen
-                        </a></li>
-                    </ul>
-                    <ul class="nav navbar-right">
-                        <li class="dropdown pull-right">
-                            <a class="fm-navbar-right dropdown-toggle" data-toggle="dropdown">{{session.user.name}} <span
-                                    class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a ng-click="logout()">Logout</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+    <div class="fm-navbar" style="position: fixed">
 
-                    <!-- /.navbar-collapse -->
+        <div>
+            <img class="fm-navbar-brand"
+                 src="http://www.klinikum.uni-muenster.de/fileadmin/tpl_ukm_internet/img/ukm_logo_small.png">
+        </div>
+        <div class="fm-navbar-bar">
 
-                    <!-- /.container-fluid -->
-                </nav>
-            </div>
+            <div class="fm-navbar-top"><h4> Pruritusambulanz</h4></div>
+            <ul class="fm-navbar-bottom">
+                <li ng-class="getNavActiveClass('/patients/all')"
+                    class="navbar-element navbar-element-left" ng-show="isPhysician(session.user)">
+                    <a href="#/patients/all">Patientenübersicht</a>
+                </li>
+                <li ng-class="getNavActiveClass('/patients/new')" class="navbar-element"
+                    ng-show="isPhysician(session.user)"><a
+                        href="#/patients/new"
+                        >neuer
+                    Patient</a>
+                </li>
+                <li ng-class="getNavActiveClass('/patients/today')"
+                    class="navbar-element navbar-element-right" ng-show="isPhysician(session.user)">
+                    <a href="#/patients/today">heutige Patienten</a>
+                </li>
+                <li class="navbar-element navbar-element-left navbar-element-right"
+                    ng-show="isPatient(session.user)"><a href="#/patients/today"
+                        >Fragebögen
+                </a></li>
+            </ul>
+
+            </ul>
+            <ul class="nav pull-right">
+                <li class="dropdown pull-right">
+                    <a class="fm-navbar-right dropdown-toggle"
+                       data-toggle="dropdown">{{session.user.name}} <span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a ng-click="logout()">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- /.navbar-collapse -->
+
+            <!-- /.container-fluid -->
         </div>
     </div>
 </div>

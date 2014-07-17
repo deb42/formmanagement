@@ -7343,14 +7343,22 @@ body {
   min-height: 100%;
 }
 body {
-  min-width: 800px;
+  min-width: 1000px;
   overflow-y: scroll;
-  background-image: linear-gradient(to bottom, #ffffff 110px, #006db0);
+  background-image: linear-gradient(to bottom, #ffffff 100px, #006db0);
 }
 .fm-navbar {
   margin-left: 6%;
   margin-right: 6%;
-  background-color: #ffffff;
+  height: 125px;
+  overflow: hidden;
+}
+.fm-navbar-brand {
+  height: 100px;
+  float: left;
+}
+.fm-navbar-bar {
+  margin-left: 150px;
 }
 .fm-navbar-top {
   background-color: #006db0;
@@ -7359,6 +7367,12 @@ body {
   padding: 11px;
   padding-left: 16px;
   color: white;
+}
+.fm-navbar-bottom {
+  list-style: none;
+  padding-left: 0px;
+  display: inline-flex;
+  margin-bottom: -20px;
 }
 .fm-body {
   background-color: #ffffff;
@@ -7373,7 +7387,10 @@ body {
   background-color: #ffffff;
 }
 .navbar-element {
+  padding-left: 10px;
+  padding-right: 10px;
   background-color: #006DB0;
+  height: 50px;
 }
 .navbar-element-left {
   border-bottom-left-radius: 10px;
@@ -7381,8 +7398,11 @@ body {
 .navbar-element-right {
   border-bottom-right-radius: 10px;
 }
-.navbar-element > li > a {
+.navbar-element > a {
   color: #ffffff;
+  display: block;
+  height: 50px;
+  text-decoration: none;
 }
 .navbar-element:hover {
   border-bottom-right-radius: 10px;
@@ -7419,6 +7439,9 @@ body {
 }
 .panel-patient:hover {
   background-color: rgba(0, 109, 176, 0.3);
+}
+.patient-scores {
+  overflow-y: auto;
 }
 .line {
   margin-left: -5px;
