@@ -43,12 +43,11 @@ def check_auth():
     """
     Receives a JSON object that contains the login type
     Examples:
-        {username: "Max Muster", password: 123456}
+        {username: "kreft", password: 123456}
     """
     auth_request = request.get_json()
 
     if "username" in auth_request:
-        print("if")
         user = User.query.filter_by(username=auth_request["username"]).first_or_404()
     else:
         abort(403)
@@ -95,7 +94,6 @@ def get_user(username):
     GET to patient resource: return single patient.
     Use .first_or_404() to automatically raise a 404 error if the resource isn't found.
     """
-    print(username)
     return jsonify(User.query.filter_by(username=username).first_or_404())
 
 
@@ -109,7 +107,7 @@ def get_physicians():
     """
     GET to the list: return list of all physicians.
     """
-    return jsonify(Physician.query.all())
+    return jsonify(Physician.query.filter(Physician.id <> session["user_id"]).all())
 
 
 @api.route("/physicians/<int:id>")
@@ -172,7 +170,6 @@ def get_patient(username):
     GET to patient resource: return single patient.
     Use .first_or_404() to automatically raise a 404 error if the resource isn't found.
     """
-    print(username)
     return jsonify(Patient.query.filter_by(username=username).first_or_404())
 
 
@@ -187,9 +184,7 @@ def update_patient(id):
     This way, we don't even need to check whether the user exists as
     get_patient does this for us.
     """
-    print(id)
     patient = Patient.query.filter_by(id=id).first_or_404()  # Gibt ein patient/physician object zurück.
-    print(patient)
     for attr in patient_modifiable_attrs:
         # Check if Attribute was used in Request
         # Then update
@@ -284,4 +279,15 @@ def update_hads(id):
 """
 
 
+@api.route("/diagnosis/participants", methods=["POST"])
+def add_diagnosis_physician():
+    """
+    POST to the list: add a new reply.
+    The right type will be defined in the function init_reply
+    Don't forget to call db.session.commit()
+    """
+    diagnosisParticipants = DiagnosisParticipants(**request.json)
+    db.session.add(diagnosisParticipants)
+    db.session.commit()
+    return jsonify(diagnosisParticipants)
 

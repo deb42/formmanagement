@@ -6,6 +6,14 @@
             Geburtsdatum: {{patient.birthday}}<br>
         </div>
     </div>
+    <div class="col-md-2">
+        Halllo
+        <button type="button" class="btn btn-default"
+                ng-click="diagnosisParticipants(patient.id)">
+            <i class="fa fa-reply"></i>
+            Diagnose prüfen
+        </button>
+    </div>
 </div> <br><br>
 
 <div ng-show="patient">

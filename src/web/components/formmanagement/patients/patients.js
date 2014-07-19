@@ -61,116 +61,161 @@ patients.controller("PatientsAllCtrl", ["$scope", "Session", "Patient", "Questio
         };
     }]);
 
-patients.directive('patientOverview', ["Questionnaire", "Reply", function (Questionnaire, Reply) {
-    return{
-        restrict: "E",
-        scope: {
-            patient: "=",
-            questionnaires: "="
-        },
-        templateUrl: '/components/formmanagement/patients/patients-overview.html',
+patients.directive('patientOverview', ["Questionnaire", "Reply", "showDiagnosisParticipantsDialog",
+    function (Questionnaire, Reply, showDiagnosisParticipantsDialog) {
+        return{
+            restrict: "E",
+            scope: {
+                patient: "=",
+                questionnaires: "="
+            },
+            templateUrl: '/components/formmanagement/patients/patients-overview.html',
 
-        link: function (scope, element, attrs) {
+            link: function (scope, element, attrs) {
 
-            console.log(scope.patient);
-            for (var i = 0; i < 3; ++i) {
-                console.log("test");
-                console.log(scope.patient);
-            }
-
-            //scope.questionnaires = Questionnaire.query();
-            scope.selectedQuestionnaire = {index: 0};
-
-
-            //scope.patient = {id: patients;
-
-            scope.collapsed = true;
-
-            scope.$watchCollection('[selectedQuestionnaire.index, patient]', function () {
-                if (scope.patient) {
-                    scope.replies = new Array();
-                    for (var i = 0; i < scope.questionnaires.length; ++i) {
-                        scope.replies.push(Reply.query({type: i + 9, id: scope.patient.id}));
-                    }
-                    scope.updateData(scope.replies)
+                for (var i = 0; i < 3; ++i) {
+                    console.log("test");
+                    console.log(scope.patient);
                 }
-            }, true);
 
-            scope.selectQuestionnaire = function (index) {
-                scope.selectedQuestionnaire.index = index;
+                //scope.questionnaires = Questionnaire.query();
+                scope.selectedQuestionnaire = {index: 0};
+
+
+                //scope.patient = {id: patients;
+
                 scope.collapsed = true;
-            };
 
-            scope.toggle_collapse = function (replies) {
-                scope.collapsed = !scope.collapsed;
-                scope.updateData(replies);
-            };
-
-            scope.updateData = function (replies) {
-                var colors = ["green", "blue", "yellow"];
-
-                var dates = function () {
-                    var numberArray = [];
-                    for (var i = 0; i < replies.length; i++) {
-                        numberArray.push(replies[i]["date"]);
+                scope.$watchCollection('[selectedQuestionnaire.index, patient]', function () {
+                    if (scope.patient) {
+                        scope.replies = new Array();
+                        for (var i = 0; i < scope.questionnaires.length; ++i) {
+                            scope.replies.push(Reply.query({type: i + 9, id: scope.patient.id}));
+                        }
+                        scope.updateData(scope.replies)
                     }
-                    return numberArray;
+                }, true);
+
+                scope.selectQuestionnaire = function (index) {
+                    scope.selectedQuestionnaire.index = index;
+                    scope.collapsed = true;
                 };
 
-                var data = {labels: dates(), datasets: [
-                    {pointColor: "#fffff", data: [0]}
-                ]};
+                scope.toggle_collapse = function (replies) {
+                    scope.collapsed = !scope.collapsed;
+                    scope.updateData(replies);
+                };
 
-                for (var j = 0; j < scope.questionnaires[scope.selectedQuestionnaire.index].scores.length; ++j) {
-                    var scores = function () {
+                scope.updateData = function (replies) {
+                    var colors = ["green", "blue", "yellow"];
+
+                    var dates = function () {
                         var numberArray = [];
                         for (var i = 0; i < replies.length; i++) {
-                            numberArray.push(replies[i][scope.questionnaires[scope.selectedQuestionnaire.index].scores[j].type]);
+                            numberArray.push(replies[i]["date"]);
                         }
                         return numberArray;
                     };
 
+                    var data = {labels: dates(), datasets: [
+                        {pointColor: "#fffff", data: [0]}
+                    ]};
 
-                    data.datasets.push(
-                        {
-                            fillColor: colors[j],
-                            strokeColor: colors[j],
-                            pointColor: colors[j],
-                            pointStrokeColor: "#fff",
-                            data: scores()
-                        }
-                    );
+                    for (var j = 0; j < scope.questionnaires[scope.selectedQuestionnaire.index].scores.length; ++j) {
+                        var scores = function () {
+                            var numberArray = [];
+                            for (var i = 0; i < replies.length; i++) {
+                                numberArray.push(replies[i][scope.questionnaires[scope.selectedQuestionnaire.index].scores[j].type]);
+                            }
+                            return numberArray;
+                        };
 
+
+                        data.datasets.push(
+                            {
+                                fillColor: colors[j],
+                                strokeColor: colors[j],
+                                pointColor: colors[j],
+                                pointStrokeColor: "#fff",
+                                data: scores()
+                            }
+                        );
+
+                    }
+                    scope.myChart = {"data": data, "options": { scaleStartValue: 0, datasetFill: false} };
+                };
+
+                scope.chooseReply = function (i) {
+                    scope.selectedReply = i;
+                    scope.showReply = true;
+                };
+
+                scope.closeReply = function () {
+                    scope.showReply = false;
+                };
+
+                scope.diagnosisParticipants = function (patient_id) {
+                    console.log("test");
+                    showDiagnosisParticipantsDialog(patient_id);
                 }
-                scope.myChart = {"data": data, "options": { scaleStartValue: 0, datasetFill: false} };
+            }
+        };
+    }]);
+
+common.factory('showDiagnosisParticipantsDialog', ['$modal', '$http', 'Session', 'Physician', 'DiagnosisParticipants',
+    function ($modal, $http, Session, Physician, DiagnosisParticipants) {
+
+        var DiagnosisParticipantsCtrl = function ($scope, $modalInstance, patient_id) {
+
+            $scope.patient_id = patient_id;
+            $scope.physicians = Physician.query()
+
+            $scope.save = function (physician_id) {
+                DiagnosisParticipants.save({
+                    physician_id: physician_id,
+                    patient_id: patient_id
+                });
+            }
+
+            $scope.back = function () {
+                $modalInstance.close();
+                window.location.reload();
             };
 
-            scope.chooseReply = function (i) {
-                scope.selectedReply = i;
-                scope.showReply = true;
-            };
 
-            scope.closeReply = function () {
-                scope.showReply = false;
-            };
+        };
 
-        }
-    };
-}]);
+        return function showDiagnosisParticipantsDialog(patient_id) {
+            $modal.open({
+                controller: DiagnosisParticipantsCtrl,
+                templateUrl: '/components/formmanagement/patients/diagnosis-participants.html',
+                keyboard: false,
+                backdrop: "static",
+                resolve: {
+                    patient_id: function () {
+                        return patient_id
+                    }
+                }
+            });
+        };
+
+    }])
+;
+
 
 patients.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/patients/new', {
-        templateUrl: '/components/formmanagement/patients/patients-new.html'
+        templateUrl: '/components/formmanagement/patients/selectionmethod/patients-new.html'
     });
 }]);
 
 patients.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/patients/today', {
-        templateUrl: '/components/formmanagement/patients/patients-today.html'
+        templateUrl: '/components/formmanagement/patients/selectionmethod/patients-today.html'
     });
 }]);
 patients.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/patients/all', {
-        templateUrl: '/components/formmanagement/patients/patients-all.html'
+        templateUrl: '/components/formmanagement/patients/selectionmethod/patients-all.html'
     });
 }]);

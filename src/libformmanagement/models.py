@@ -64,6 +64,7 @@ class Patient(User):
     gender = db.Column(db.String(8))
     # questionnaires = db.relationship("Hads", backref="hads", foreign_keys="Hads.patient_id")
     questionnaire_replies = db.relationship("Reply", backref="patient", foreign_keys="Reply.patient_id")
+    diagnosis_review = db.relationship("DiagnosisParticipants", backref="patient")
 
     physician_id = db.Column(db.Integer, db.ForeignKey('physician.id'))
     '''
@@ -79,6 +80,7 @@ class Physician(User):
         'polymorphic_identity': TYPE_PHYSICIAN
     }
     patients = db.relationship("Patient", foreign_keys="Patient.physician_id", backref="physician")
+    diagnosis_review = db.relationship("DiagnosisParticipants", backref="physician")
 
 
 class Administrator(User):
@@ -146,3 +148,11 @@ class Pbi(Reply):
     __mapper_args__ = {
         'polymorphic_identity': TYPE_PBI
     }
+
+class DiagnosisParticipants(db.Model):
+
+    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'), primary_key=True)
+    physician_id = db.Column(db.Integer, db.ForeignKey('physician.id'), primary_key=True)
+
+    def __unicode__(self):
+        return u"[%s @ %s %s]" % (self.patient, self.physician)

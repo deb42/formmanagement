@@ -47,6 +47,9 @@ api.factory("Reply", ["$resource", function ($resource) {
             return $resource("/api/reply/:type/:id", {type: "@type", id: "@id"});
 }]);
 
+api.factory("DiagnosisParticipants", ["$resource", function ($resource) {
+            return $resource("/api/diagnosis/participants", {});
+}]);
 
 api.service("Session", ["$http", "$q", "getUserClass", "Physician",
     function ($http, $q, getUserClass, Physician) {
