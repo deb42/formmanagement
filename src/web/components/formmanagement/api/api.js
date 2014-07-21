@@ -48,7 +48,7 @@ api.factory("Reply", ["$resource", function ($resource) {
 }]);
 
 api.factory("DiagnosisParticipants", ["$resource", function ($resource) {
-            return $resource("/api/diagnosis/participants", {});
+            return $resource("/api/diagnosis/participants/:patient", {patient: "@patient"});
 }]);
 
 api.service("Session", ["$http", "$q", "getUserClass", "Physician",

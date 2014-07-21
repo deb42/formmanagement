@@ -151,7 +151,7 @@ class Pbi(Reply):
 
 class DiagnosisParticipants(db.Model):
 
-    patient_id = db.Column(db.Integer, db.ForeignKey('patient.id'), primary_key=True)
+    patient_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     physician_id = db.Column(db.Integer, db.ForeignKey('physician.id'), primary_key=True)
 
     def __unicode__(self):

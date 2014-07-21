@@ -169,17 +169,39 @@ common.factory('showDiagnosisParticipantsDialog', ['$modal', '$http', 'Session',
 
             $scope.patient_id = patient_id;
             $scope.physicians = Physician.query()
+            $scope.diagnosisParticipants = DiagnosisParticipants.query({patient: patient_id})
 
-            $scope.save = function (physician_id) {
-                DiagnosisParticipants.save({
-                    physician_id: physician_id,
-                    patient_id: patient_id
-                });
-            }
+            $scope.choosenPhysicians = new Array();
+
+            $scope.choosePhysicians = function (physician) {
+                $scope.choosenPhysicians.push(physician)
+            };
+
+            $scope.save = function () {
+
+                for (var i = 0; i < $scope.choosenPhysicians.length; ++i) {
+                    console.log("post")
+                    DiagnosisParticipants.save({
+                        physician_id: $scope.choosenPhysicians[i].id,
+                        patient_id: patient_id
+
+                    })
+                }
+            };
 
             $scope.back = function () {
                 $modalInstance.close();
                 window.location.reload();
+            };
+
+            $scope.filterChoosenPhysician = function (physician) {
+                console.log($.inArray(physician, $scope.choosenPhysicians));
+                if ($.inArray(physician, $scope.choosenPhysicians) === -1 || $scope.diagnosisParticipants) {
+                    return true;
+                } else {
+                    return false;
+                }
+
             };
 
 

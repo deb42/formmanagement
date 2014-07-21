@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source source="LOCAL" name="formmanagement" uuid="6983d0ce-35dc-4137-a2c0-7d2fa1398eca">
+  <data-source source="LOCAL" name="formmanagement" uuid="9e36dcfd-0a3f-4b1b-b3e9-5d1ea8e39af1">
     <database-info product="SQLite" version="3.7.6.3" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native"/>
     <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed"/>
     <schema name="" catalog=""/>
@@ -74,6 +74,13 @@
       <foreign-key name="#FAKE_diagnosis_1" columns="patient_id" ref-table="user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <foreign-key name="#FAKE_diagnosis_2" columns="physician_id" ref-table="user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
     </table>
+    <table name="diagnosis_participants" schema="" catalog="" type="TABLE">
+      <column name="patient_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="physician_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="patient_id,physician_id"/>
+      <foreign-key name="#FAKE_diagnosis_participants_1" columns="physician_id" ref-table="physician" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_diagnosis_participants_2" columns="patient_id" ref-table="patient" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+    </table>
     <table name="diagnosis_proposal" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="physician_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
@@ -136,6 +143,7 @@
       <primary-key columns="id"/>
       <foreign-key name="#FAKE_patient_1" columns="physician_id" ref-table="physician" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <foreign-key name="#FAKE_patient_2" columns="id" ref-table="user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="#FAKE_diagnosis_participants_2" table="diagnosis_participants" schema="" catalog="" columns="patient_id"/>
     </table>
     <table name="pbi" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
@@ -146,6 +154,7 @@
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <primary-key columns="id"/>
       <foreign-key name="#FAKE_physician_1" columns="id" ref-table="user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="#FAKE_diagnosis_participants_1" table="diagnosis_participants" schema="" catalog="" columns="physician_id"/>
       <exported-key name="#FAKE_patient_1" table="patient" schema="" catalog="" columns="physician_id"/>
     </table>
     <table name="questionnaire" schema="" catalog="" type="TABLE">

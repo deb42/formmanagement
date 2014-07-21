@@ -291,3 +291,14 @@ def add_diagnosis_physician():
     db.session.commit()
     return jsonify(diagnosisParticipants)
 
+@api.route("/diagnosis/participants/<int:patient_id>")
+def get_diagnosis_physician(patient_id):
+    """
+    POST to the list: add a new reply.
+    The right type will be defined in the function init_reply
+    Don't forget to call db.session.commit()
+    """
+    print(patient_id)
+    return jsonify(DiagnosisParticipants.query
+                   .options(joinedload("physician"))
+                   .filter_by(patient_id=patient_id).all())

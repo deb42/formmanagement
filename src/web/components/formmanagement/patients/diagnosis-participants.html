@@ -1,11 +1,38 @@
-{{patient_id}}
+<div class="model">
+    <div class="modal-header">
+        <button aria-hidden="true" class="close" ng-click="$close()">&times;</button>
+        <h4 class="modal-title">Diagnose übertragen</h4>
+    </div>
+    <div class="modal-body">
 
-<div class="row">
-    <div ng-repeat="physician in physicians | filter: filter">
-        <div class="panel panel-default panel-patient" ng-click="save(physician.id)">
-            <div class="panel-body">
-                <a class="fa fa-user"></a> {{physician.name}}
+        <h4>Arzt auswählen</h4>
+
+        <div class="row">
+            <div ng-repeat="physician in physicians | filter: filterChoosenPhysician">
+                <div class="panel panel-default panel-patient" ng-click="choosePhysicians(physician)">
+                    <div class="panel-body">
+                        <a class="fa fa-user"></a> {{physician.name}}
+                    </div>
+                </div>
             </div>
         </div>
+
+        <h4>ausgewählte Ärzte</h4>
+
+        <div class="row">
+            <div ng-repeat="physician in choosenPhysicians">
+                <div class="panel panel-default panel-patient" ng-click="choosePhysicians(physician)">
+                    <div class="panel-body">
+                        <a class="fa fa-user"></a> {{physician.name}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="save()">
+            <i class="fa fa-save"></i> übertragen
+        </button>
     </div>
 </div>
