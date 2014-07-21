@@ -2,7 +2,7 @@ import os
 
 # dialect+driver://username:password@host:port/database
 SQLALCHEMY_DATABASE_URI = 'sqlite:///%s' % os.path.abspath("formmanagement.db")
-SQLALCHEMY_ECHO = True
+SQLALCHEMY_ECHO = False
 # Evil as errors during .commit() don't get caught.
 # SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 
@@ -18,10 +18,12 @@ BASIC_AUTH_REALM = "Formmanagement"
 BASIC_AUTH_USERNAME = "formmanagement"
 BASIC_AUTH_PASSWORD = "1234"
 
-# Facebook App Data
-FB_APP_ID = 169367286558343
-FB_APP_SECRET = "fe69090bf1319fb701c6bf846aa445f4"
+## SSL Settings
+#SSL_KEYFILE = ""
+#SSL_CERTFILE = ""
+#SSL_CIPHERS = ""
 
-# Mail Data
-MAIL_SENDER = None
-MAIL_SMTP_SERVER = None
+# Host and Port to bind on.
+# "" binds on all hosts.
+APP_HOST = "localhost"
+APP_PORT = 5000

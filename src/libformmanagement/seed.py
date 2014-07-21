@@ -76,7 +76,6 @@ def seed():
 
     physicians = []
     for i in range(0, 3):
-        print(i)
         physicians.append(
             Physician(
                 username=physician_datasets[i]["username"],
@@ -85,7 +84,6 @@ def seed():
             )
         )
     for i in range(0, 3):
-        print(i)
         db.session.add(physicians[i])
 
     db.session.commit()
@@ -245,3 +243,5 @@ def seed():
         db.session.add(hadsresult)
 
     db.session.commit()
+
+    print("Complete!")
