@@ -298,7 +298,31 @@ def get_diagnosis_physician(patient_id):
     The right type will be defined in the function init_reply
     Don't forget to call db.session.commit()
     """
+    #return jsonify(Physician.query.filter(Physician.id.in_DiagnosisParticipants.query.filter_by(patient_id=patient_id).all(), Physician.id == DiagnosisParticipants.physician_id).all())
     print(patient_id)
+    """
     return jsonify(DiagnosisParticipants.query
                    .options(joinedload("physician"))
-                   .filter_by(patient_id=patient_id).all())
+                   .filter_by(patient_id=patient_id).select("patient").all())
+    """
+
+    return jsonify(Physician.query
+                    .join("diagnosis_review").filter(DiagnosisParticipants.patient_id == patient_id).all())
+
+@api.route("/diagnosis/patients/<int:physician_id>")
+def get_assigned_patients(physician_id):
+    """
+    POST to the list: add a new reply.
+    The right type will be defined in the function init_reply
+    Don't forget to call db.session.commit()
+    """
+    #return jsonify(Physician.query.filter(Physician.id.in_DiagnosisParticipants.query.filter_by(patient_id=patient_id).all(), Physician.id == DiagnosisParticipants.physician_id).all())
+    print(physician_id)
+    """
+    return jsonify(DiagnosisParticipants.query
+                   .options(joinedload("physician"))
+                   .filter_by(patient_id=patient_id).select("patient").all())
+    """
+
+    return jsonify(Patient.query
+                    .join("diagnosis_review").filter(DiagnosisParticipants.physician_id == session["user_id"]).all())

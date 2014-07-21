@@ -27,6 +27,13 @@
                     </div>
                 </div>
             </div>
+            <div ng-repeat="physician in choosenDiagnosisParticipants">
+                <div class="panel panel-default panel-patient" ng-click="">
+                    <div class="panel-body">
+                        <a class="fa fa-user"></a> {{physician.name}}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -54,7 +54,11 @@
                 </li>
                 <li ng-class="getNavActiveClass('/patients/blub')"
                     class="navbar-element navbar-element-right" ng-show="isPhysician(session.user)">
-                    <a href="#/patients/blub">übertragene Patienten</a>
+                    <a href="#/patients/blub">übertragene Patienten
+                        <div class="assign-patients">
+                            {{assignedPatients.length}}
+                        </div>
+                    </a>
                 </li>
                 <li class="navbar-element navbar-element-left navbar-element-right"
                     ng-show="isPatient(session.user)"><a href="#/questionnaire">Fragebögen</a>

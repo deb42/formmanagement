@@ -73,11 +73,6 @@ patients.directive('patientOverview', ["Questionnaire", "Reply", "showDiagnosisP
 
             link: function (scope, element, attrs) {
 
-                for (var i = 0; i < 3; ++i) {
-                    console.log("test");
-                    console.log(scope.patient);
-                }
-
                 //scope.questionnaires = Questionnaire.query();
                 scope.selectedQuestionnaire = {index: 0};
 
@@ -168,8 +163,8 @@ common.factory('showDiagnosisParticipantsDialog', ['$modal', '$http', 'Session',
         var DiagnosisParticipantsCtrl = function ($scope, $modalInstance, patient_id) {
 
             $scope.patient_id = patient_id;
-            $scope.physicians = Physician.query()
-            $scope.diagnosisParticipants = DiagnosisParticipants.query({patient: patient_id})
+            $scope.physicians = Physician.query();
+            $scope.choosenDiagnosisParticipants = DiagnosisParticipants.query({patient: patient_id});
 
             $scope.choosenPhysicians = new Array();
 
@@ -195,12 +190,19 @@ common.factory('showDiagnosisParticipantsDialog', ['$modal', '$http', 'Session',
             };
 
             $scope.filterChoosenPhysician = function (physician) {
-                console.log($.inArray(physician, $scope.choosenPhysicians));
-                if ($.inArray(physician, $scope.choosenPhysicians) === -1 || $scope.diagnosisParticipants) {
-                    return true;
-                } else {
-                    return false;
+                console.log($scope.choosenDiagnosisParticipants)
+                //console.log($.inArray(physician, $scope.choosenDiagnosisParticipants));
+                for (var i = 0; i < $scope.choosenDiagnosisParticipants.length; i++) {
+                    if($scope.choosenDiagnosisParticipants[i].id === physician.id){
+                        return false;
+                    }
                 }
+                for (var i = 0; i < $scope.choosenPhysicians.length; i++) {
+                    if($scope.choosenPhysicians[i].id === physician.id){
+                        return false;
+                    }
+                }
+                return true;
 
             };
 

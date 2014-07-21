@@ -51,6 +51,10 @@ api.factory("DiagnosisParticipants", ["$resource", function ($resource) {
             return $resource("/api/diagnosis/participants/:patient", {patient: "@patient"});
 }]);
 
+api.factory("AssignedPatients", ["$resource", function ($resource) {
+            return $resource("/api/diagnosis/patients/:physician", {physician: "@physician"});
+}]);
+
 api.service("Session", ["$http", "$q", "getUserClass", "Physician",
     function ($http, $q, getUserClass, Physician) {
         var self = this;
