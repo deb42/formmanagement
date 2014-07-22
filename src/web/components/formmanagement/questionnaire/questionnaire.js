@@ -16,6 +16,7 @@ questionaire.controller("questionaireCtrl", ["$scope", "$location", "Session", "
         $scope.session = Session.get();
         $scope.questionnaires = Questionnaire.query();
         $scope.answers = new Array(new Array());
+        $scope.readySave = false;
 
         if ($location.path() === "/questionnaire/new") {
             $scope.new = true;
@@ -27,6 +28,9 @@ questionaire.controller("questionaireCtrl", ["$scope", "$location", "Session", "
         }
 
         $scope.$watch('selectedQuestionnaire.index', function () {
+            if ($scope.selectedQuestionnaire.index === 2) {
+                $scope.readySave = true;
+            }
             if ($location.path() === "/questionnaire/new" && $scope.selectedQuestionnaire.index === 2) {
                 $scope.selectedQuestionnaire.index++;
                 $scope.answers[$scope.selectedQuestionnaire.index] = new Array();
@@ -63,7 +67,7 @@ questionaire.controller("questionaireCtrl", ["$scope", "$location", "Session", "
         $scope.proceed = function () {
             for (var i = 0; i < $scope.questionnaire.content.length; ++i) {
                 if (!$scope.answers[$scope.selectedQuestionnaire.index][i]) {
-                    //alert("fehler");
+                    //alert("Bitte vollständig ausfüllen");
                     //return;
                 }
             }
@@ -73,7 +77,7 @@ questionaire.controller("questionaireCtrl", ["$scope", "$location", "Session", "
 
         $scope.save = function () {
             for (var i = 0; i < $scope.answers.length; ++i) {
-                if($scope.new && i===2){
+                if ($scope.new && i === 2) {
                     ++i;
                 }
                 var reply = new Reply({
@@ -82,6 +86,7 @@ questionaire.controller("questionaireCtrl", ["$scope", "$location", "Session", "
                 );
                 reply.$save({type: i, id: $scope.session.user.id});
             }
+            //$scope.session.logout();
         };
     }]);
 

@@ -51,10 +51,8 @@
             </div>
 
             <div class="row">
-                <button type="button" class="btn btn-default" ng-click="proceed()">Weiter</button>
-            </div>
-            <div class="pull-right">
-                <button type="button" class="btn btn-default" ng-click="save(selecedQuestionaire)">
+                <button type="button" class="btn btn-default" ng-click="proceed()" ng-hide="readySave">Weiter</button>
+                <button type="button" class="btn btn-default" ng-click="save(selecedQuestionaire)" ng-show="readySave">
                     <i class="fa fa-save fa-lg"></i>
                     Speichern
                 </button>
