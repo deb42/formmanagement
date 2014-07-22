@@ -67,8 +67,8 @@ questionaire.controller("questionaireCtrl", ["$scope", "$location", "Session", "
         $scope.proceed = function () {
             for (var i = 0; i < $scope.questionnaire.content.length; ++i) {
                 if (!$scope.answers[$scope.selectedQuestionnaire.index][i]) {
-                    //alert("Bitte vollständig ausfüllen");
-                    //return;
+                    alert("Bitte vollständig ausfüllen");
+                    return;
                 }
             }
             $scope.selectQuesionnaire(++$scope.selectedQuestionnaire.index);
@@ -86,7 +86,7 @@ questionaire.controller("questionaireCtrl", ["$scope", "$location", "Session", "
                 );
                 reply.$save({type: i, id: $scope.session.user.id});
             }
-            Session.logout();
+
         };
     }]);
 
