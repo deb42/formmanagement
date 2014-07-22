@@ -2,8 +2,6 @@
 from __future__ import absolute_import, print_function, division, unicode_literals
 
 from flask import Blueprint, request, abort, session
-from sqlalchemy.orm import joinedload
-from sqlalchemy import func
 from datetime import *
 
 from .questionnaire_api import init_reply
@@ -186,8 +184,6 @@ def update_patient(id):
     """
     patient = Patient.query.filter_by(id=id).first_or_404()  # Gibt ein patient/physician object zurück.
     for attr in patient_modifiable_attrs:
-        # Check if Attribute was used in Request
-        # Then update
         if attr in request.json:
             setattr(patient, attr, request.json[attr])
 
@@ -215,7 +211,7 @@ def get_questionnaires(id):
 
 
 """
-Videos Hads
+ Replies
 """
 
 
@@ -226,10 +222,6 @@ def hads_list():
 
 @api.route("/reply/<int:type>/<int:id>")
 def get_reply(type, id):
-    """
-    GET to hads resource: return single patient.
-    Use .first_or_404() to automatically raise a 404 error if the resource isn't found.
-    """
     return jsonify(Reply.query
                    .with_polymorphic("*")
                    .order_by(Hads.date.asc())
@@ -245,7 +237,6 @@ def add_reply(type, id):
     The right type will be defined in the function init_reply
     Don't forget to call db.session.commit()
     """
-
     type += TYPE_HADS
     patient = Patient.query.filter_by(id=id).first_or_404()
     questionnaire = Questionnaire.query.filter_by(type=type).first_or_404()
@@ -255,38 +246,9 @@ def add_reply(type, id):
     return jsonify(reply)
 
 
-"""
-hads_modifiable_attrs = ["data", "depression_scale", "anxiety_scale"]
-
-
-@api.route("/hads/<int:id>", methods=["POST"])
-def update_hads(id):
-
-    PUT to patient resource: update given patient.
-    Notice how we call get_patient() in the end to return the updated patient.
-    This way, we don't even need to check whether the user exists as
-    get_patient does this for us.
-
-    hads = Hads.query.filter_by(id=id).first_or_404()  # Gibt ein patient/physician object zurück.
-    for attr in hads_modifiable_attrs:
-        # Check if Attribute was used in Request
-        # Then update
-        if attr in request.json:
-            setattr(hads, attr, request.json[attr])
-
-    db.session.commit()
-    return get_hads(id)
-
-"""
-
 
 @api.route("/diagnosis/participants", methods=["POST"])
 def add_diagnosis_physician():
-    """
-    POST to the list: add a new reply.
-    The right type will be defined in the function init_reply
-    Don't forget to call db.session.commit()
-    """
     diagnosisParticipants = DiagnosisParticipants(**request.json)
     db.session.add(diagnosisParticipants)
     db.session.commit()
@@ -294,36 +256,12 @@ def add_diagnosis_physician():
 
 @api.route("/diagnosis/participants/<int:patient_id>")
 def get_diagnosis_physician(patient_id):
-    """
-    POST to the list: add a new reply.
-    The right type will be defined in the function init_reply
-    Don't forget to call db.session.commit()
-    """
-    #return jsonify(Physician.query.filter(Physician.id.in_DiagnosisParticipants.query.filter_by(patient_id=patient_id).all(), Physician.id == DiagnosisParticipants.physician_id).all())
-    print(patient_id)
-    """
-    return jsonify(DiagnosisParticipants.query
-                   .options(joinedload("physician"))
-                   .filter_by(patient_id=patient_id).select("patient").all())
-    """
 
     return jsonify(Physician.query
                     .join("diagnosis_review").filter(DiagnosisParticipants.patient_id == patient_id).all())
 
 @api.route("/diagnosis/patients")
 def get_assigned_patients():
-    """
-    POST to the list: add a new reply.
-    The right type will be defined in the function init_reply
-    Don't forget to call db.session.commit()
-    """
-    #return jsonify(Physician.query.filter(Physician.id.in_DiagnosisParticipants.query.filter_by(patient_id=patient_id).all(), Physician.id == DiagnosisParticipants.physician_id).all())
-    print()
-    """
-    return jsonify(DiagnosisParticipants.query
-                   .options(joinedload("physician"))
-                   .filter_by(patient_id=patient_id).select("patient").all())
-    """
     if not "user_id" in session:
         abort(403)
 

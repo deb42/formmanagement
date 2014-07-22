@@ -71,12 +71,6 @@ class Patient(User):
     diagnosis_review = db.relationship("DiagnosisParticipants", backref="patient")
 
     physician_id = db.Column(db.Integer, db.ForeignKey('physician.id'))
-    '''
-    def __init__(self, birthday, gender, physician_id):
-        self.birthday = birthday
-        self.gender = gender
-        self.physician_id = physician_id
-    '''
 
 class Physician(User):
     id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)

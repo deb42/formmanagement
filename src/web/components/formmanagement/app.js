@@ -54,16 +54,15 @@ formmanagement.run(["Session", "$rootScope", "showLoginDialog", "$location", "is
 
     }]);
 
-formmanagement.controller("NavbarCtrl", ["$scope", "$location", "Session", "isPhysician", "isPatient", "AssignedPatients",
-    function ($scope, $location, Session, isPhysician, isPatient, AssignedPatients) {
+formmanagement.controller("NavbarCtrl", ["$scope", "$location", "Session", "isPhysician", "isPatient", "isAdmin", "AssignedPatients",
+    function ($scope, $location, Session, isPhysician, isPatient, isAdmin, AssignedPatients) {
 
         $scope.session = Session.get();
         $scope.isPhysician = isPhysician;
         $scope.isPatient = isPatient;
+        $scope.isAdmin = isAdmin;
 
-        //if ($scope.session.user) {
-            $scope.assignedPatients = AssignedPatients.query();
-        //}
+        $scope.assignedPatients = AssignedPatients.query();
 
         $scope.getNavActiveClass = function (path) {
             if (path === "/") {
@@ -75,12 +74,6 @@ formmanagement.controller("NavbarCtrl", ["$scope", "$location", "Session", "isPh
                 return "";
             }
         };
-
-        /*$scope.$watch($scope.session, function () {
-         $scope.isPhysician = isPhysician($scope.session.user);
-         console.log($scope.session);
-         })*/
-
         $scope.logout = function () {
             $location.path('/');
             Session.logout();

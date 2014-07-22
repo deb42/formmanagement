@@ -171,6 +171,13 @@ def seed():
     for patient in patients:
         db.session.add(patient)
 
+    admin = Administrator(
+        username="admin",
+        name="Administrator",
+        pw_hash=generate_password_hash('admin')
+    )
+    db.session.add(admin)
+
     json_data = open("./libformmanagement/seed/questionnaires/hads.json")
     hads_data = json.load(json_data)
 

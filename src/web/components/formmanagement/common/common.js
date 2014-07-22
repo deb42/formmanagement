@@ -18,6 +18,13 @@ common.factory('isPhysician', ['UserType', function (UserType) {
     };
 }]);
 
+common.factory('isAdmin', ['UserType', function (UserType) {
+    return function (user) {
+        /* jshint bitwise: false */
+        return (user && (user.type & UserType.Admin));
+    };
+}]);
+
 common.factory('showSingUpDialog', ['$modal', '$http', 'Session', 'Patient',
     function ($modal, $http, Session, Patient) {
 

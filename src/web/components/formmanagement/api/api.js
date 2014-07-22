@@ -14,10 +14,12 @@ var api = angular.module("formmanagement.api", [
 
 var TYPE_PATIENT = 1;
 var TYPE_PHYSICIAN = 2;
-;
+var TYPE_ADMIN = 4;
+
 api.constant("UserType", {
     "Patient": TYPE_PATIENT,
-    "Physician": TYPE_PHYSICIAN
+    "Physician": TYPE_PHYSICIAN,
+    "Admin": TYPE_ADMIN
 });
 api.factory("getUserClass", [ "Patient" , "Physician", function (Patient, Physician) {
     return function getUserClass(type) {
