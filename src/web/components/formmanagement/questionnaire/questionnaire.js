@@ -86,7 +86,7 @@ questionaire.controller("questionaireCtrl", ["$scope", "$location", "Session", "
                 );
                 reply.$save({type: i, id: $scope.session.user.id});
             }
-            //$scope.session.logout();
+            Session.logout();
         };
     }]);
 
