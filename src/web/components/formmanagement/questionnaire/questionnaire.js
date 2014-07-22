@@ -27,7 +27,6 @@ questionaire.controller("questionaireCtrl", ["$scope", "$location", "Session", "
         }
 
         $scope.$watch('selectedQuestionnaire.index', function () {
-            console.log($location.path());
             if ($location.path() === "/questionnaire/new" && $scope.selectedQuestionnaire.index === 2) {
                 $scope.selectedQuestionnaire.index++;
                 $scope.answers[$scope.selectedQuestionnaire.index] = new Array();
@@ -64,8 +63,8 @@ questionaire.controller("questionaireCtrl", ["$scope", "$location", "Session", "
         $scope.proceed = function () {
             for (var i = 0; i < $scope.questionnaire.content.length; ++i) {
                 if (!$scope.answers[$scope.selectedQuestionnaire.index][i]) {
-                    alert("fehler");
-                    return;
+                    //alert("fehler");
+                    //return;
                 }
             }
             $scope.selectQuesionnaire(++$scope.selectedQuestionnaire.index);
@@ -73,7 +72,6 @@ questionaire.controller("questionaireCtrl", ["$scope", "$location", "Session", "
         }
 
         $scope.save = function () {
-            console.log($scope.answers);
             for (var i = 0; i < $scope.answers.length; ++i) {
                 if($scope.new && i===2){
                     ++i;

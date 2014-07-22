@@ -119,13 +119,546 @@
                 }
 
             ]
+        },
+        {
+            "issue": "...weniger nervös zu sein  ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        },
+        {
+            "issue": "...alle Kleidungsstücke tragen zu können  ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        },
+        {
+            "issue": "...sich normal waschen und duschen zu können ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        },
+        {
+            "issue": "...besser schlafen zu können ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        },
+        {
+            "issue": "...an Lebensfreude zu gewinnen ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        },
+        {
+            "issue": "...keine Furcht vor einem Fortschreiten der Krankheit zu haben ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        },
+        {
+            "issue": "...ein normales Alltagsleben führen zu können ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        },
+        {
+            "issue": "...im Alltag leistungsfähiger zu sein ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        },
+        {
+            "issue": "...Ihre Angehörigen und Freunde weniger zu belasten",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        },
+        {
+            "issue": " ...normalen Freizeitaktivitäten nachgehen zu können ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        },
+        {
+            "issue": "...ein normales Berufsleben führen zu können  ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        },
+        {
+            "issue": "...mehr Kontakte mit anderen Menschen haben zu können ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        },
+        {
+            "issue": "...sich mehr zeigen zu mögen ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        },
+        {
+            "issue": "...in der Partnerschaft weniger belastet zu sein ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        },
+        {
+            "issue": "...ein normales Sexualleben führen zu können ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        },
+        {
+            "issue": "...weniger auf Arzt- und Klinikbesuche angewiesen zu sein ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        },
+        {
+            "issue": "...weniger Zeitaufwand mit der täglichen Behandlung zu haben ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        },
+        {
+            "issue": " ...weniger eigene Behandlungskosten zu haben ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        }
+        ,
+        {
+            "issue": "...weniger Nebenwirkungen zu haben ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        },
+        {
+            "issue": " ...eine klare Diagnose und Therapie zu finden ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
+        },
+        {
+            "issue": " ...Vertrauen in die Therapie zu haben ",
+            "answers": [
+                {
+                    "content": "gar nicht"
+                },
+                {
+                    "content": "etwas"
+                },
+                {
+                    "content": "mäßig"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ]
         }
     ],
     "value": [
-        [0,1,2,4,5,0],
-        [0,1,2,4,5,0],
-        [0,1,2,4,5,0],
-        [0,1,2,4,5,0]
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0],
+        [0, 1, 2, 4, 5, 0]
 
     ],
     "scores": [

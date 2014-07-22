@@ -1,20 +1,16 @@
-<div class="row">
-    <div class="col-md-8">
-        <div ng-show="patient">
-            <h3>{{patient.name}}</h3> <br>
-            Geschlecht: {{patient.gender}}<br>
-            Geburtsdatum: {{patient.birthday}}<br>
-        </div>
+<div>
+    <div ng-show="patient">
+        <h3>{{patient.name}}</h3> <br>
+        Geschlecht: {{patient.gender}}<br>
+        Geburtsdatum: {{patient.birthday}}<br>
     </div>
-    <div class="col-md-2">
-        Halllo
-        <button type="button" class="btn btn-default"
-                ng-click="diagnosisParticipants(patient.id)">
-            <i class="fa fa-reply"></i>
-            Diagnose prüfen
-        </button>
-    </div>
-</div> <br><br>
+    <button type="button" class="btn btn-default"
+            ng-click="diagnosisParticipants(patient.id)">
+        <i class="fa fa-paper-plane"></i>
+        Patient übertragen
+    </button>
+</div>
+<br><br>
 
 <div ng-show="patient">
     <ul class="nav nav-tabs" role="tablist">

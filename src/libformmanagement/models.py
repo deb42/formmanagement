@@ -54,6 +54,9 @@ class User(db.Model):
     def check_password(self, password):
         return check_password_hash(self.pw_hash, password)
 
+    def __getitem__(self, item):
+        if item == "id": return self.id
+
 
 class Patient(User):
     id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)

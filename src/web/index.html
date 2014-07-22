@@ -44,17 +44,15 @@
                 </li>
                 <li ng-class="getNavActiveClass('/patients/new')" class="navbar-element"
                     ng-show="isPhysician(session.user)"><a
-                        href="#/patients/new"
-                        >neuer
-                    Patient</a>
+                        href="#/patients/new">neue</a>
                 </li>
                 <li ng-class="getNavActiveClass('/patients/today')"
                     class="navbar-element navbar-element" ng-show="isPhysician(session.user)">
-                    <a href="#/patients/today">heutige Patienten</a>
+                    <a href="#/patients/today">heutig</a>
                 </li>
                 <li ng-class="getNavActiveClass('/patients/assign')"
                     class="navbar-element navbar-element-right" ng-show="isPhysician(session.user)">
-                    <a href="#/patients/assign">übertragene Patienten
+                    <a href="#/patients/assign">übertragen
                         <div class="assign-patients">
                             {{assignedPatients.length}}
                         </div>

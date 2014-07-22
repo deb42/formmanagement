@@ -28,7 +28,7 @@ def dlqi_score(answers, value):
 def pbi_score(answers, value, id):
     pbiNew = PbiNew.query.filter_by(patient_id=id).first_or_404()
     pbi_score = 0
-    for i in range(0,answers.__len__(),1):
+    for i in range(0,answers.__len__()-1,1):
         pbi_score += int(value[i][int(answers[i])] - int(pbiNew.__getitem__("data")[i]))
     return pbi_score
 
@@ -64,7 +64,7 @@ def init_reply(answers, type, patient, value):
             patient=patient,
             date=date.today(),
             data=answers,
-            score = pbi_score_new(answers, value)
+            score = pbi_score(answers, value, patient["id"])
         )
         return pbiFolloupResult
 
@@ -73,7 +73,7 @@ def init_reply(answers, type, patient, value):
             patient=patient,
             date=date.today(),
             data=answers,
-            score = pbi_score(answers, value)
+            score = pbi_score_new(answers, value)
         )
         return pbiNewResult
 

@@ -47,35 +47,38 @@ def seed():
     physician_datasets = (
         {
             "username": "meier",
-            "password": "12345",
-            "name": "Verena Meier"
+            "password": "123456",
+            "name": "Dr. Meier"
         },
         {
             "username": "gaul",
-            "password": "12345",
-            "name": "Anna Gaul"
+            "password": "123456",
+            "name": "Dr. Gaul"
         },
         {
             "username": "hubner",
-            "password": "12345",
-            "name": "Peter Hubner"
+            "password": "123456",
+            "name": "Dr. Hubner"
         },
         {
-            "name": "Herbert Becker"
+            "username": "bayer",
+            "password": "123456",
+            "name": "Dr. Bayer"
         },
         {
-            "name": "Jörg Bayer"
+            "username": "sommer",
+            "password": "123456",
+            "name": "Dr. Sommer"
         },
         {
-            "name": "Oliver Meier"
-        },
-        {
-            "name": "Yannic Wulf"
+            "username": "wulf",
+            "password": "123456",
+            "name": "Dr. Wulf"
         }
     )
 
     physicians = []
-    for i in range(0, 3):
+    for i in range(len(physician_datasets)):
         physicians.append(
             Physician(
                 username=physician_datasets[i]["username"],
@@ -83,7 +86,7 @@ def seed():
                 name=physician_datasets[i]["name"]
             )
         )
-    for i in range(0, 3):
+    for i in range(len(physician_datasets)):
         db.session.add(physicians[i])
 
     db.session.commit()
@@ -100,31 +103,53 @@ def seed():
     patient_datasets = (
         {
             "username": "kreft",
-            "forename": "Siegrun",
-            "surname": "Kreft"
+            "name": "Siegrun Kreft",
+            "birthday": "19.07.1963",
+            "gender": "weiblich"
         },
         {
             "username": "laengerich",
-            "forename": "Lena",
-            "surname": "Laengerich",
+            "name": "Lena Laengerich",
             "birthday": "12.04.1983",
             "gender": "weiblich"
         },
         {
             "username": "becker",
             "forename": "Peter",
-            "surname": "Becker"
+            "name": "Peter Becker"
         },
         {
             "username": "meier3",
-            "forename": "",
-            "surname": "Lilo Meier"
+            "name": "Lilo Meier"
         },
         {
             "username": "meier1",
-            "forename": "",
-            "surname": "Hardmut Meier"
-        }
+            "name": "Hardmut Meier"
+        },
+        {
+            "username": "richter",
+            "name": "Peter Richter"
+        },
+        {
+            "username": "hhimmel",
+            "name": "Harald Himmelkütter"
+        },
+        {
+            "username": "weigle",
+            "name": "Lisa Weigle"
+        },
+        {
+            "username": "kunert",
+            "name": "Günter Kunert"
+        },
+        {
+            "username": "hansen",
+            "name": "Viktoria Hansen"
+        },
+        {
+            "username": "brecht",
+            "name": "Lili Brecht"
+        },
     )
 
     patients = []
@@ -134,7 +159,7 @@ def seed():
             Patient(
                 username=patient_datasets[i]["username"],
                 pw_hash=generate_password_hash('123456'),
-                name=patient_datasets[i]["surname"],
+                name=patient_datasets[i]["name"],
                 gender=patient_datasets[i].get("gender", ""),
                 birthday=patient_datasets[i].get("birthday", ""),
                 email="kunde" + str(i) + "@example.com",
@@ -262,9 +287,9 @@ def seed():
         db.session.add(hadsresult)
 
     answers = []
-    for j in range(0, 4):
-        answers.append(random.randint(0, 3))
-    questionnaire = Questionnaire.query.filter_by(type=TYPE_HADS).first_or_404()
+    for j in range(0, 25):
+        answers.append(random.randint(0, 4))
+    questionnaire = Questionnaire.query.filter_by(type=TYPE_PBI_NEW).first_or_404()
     pbiresult = PbiNew(
         patient=patients[0],
         date=date.today() - timedelta(days=i * 7),
@@ -276,14 +301,14 @@ def seed():
 
     for i in range(1, 30, 2):
         answers = []
-        for j in range(0, 4):
-            answers.append(random.randint(0, 3))
-        questionnaire = Questionnaire.query.filter_by(type=TYPE_HADS).first_or_404()
+        for j in range(0, 25):
+            answers.append(random.randint(0, 4))
+        questionnaire = Questionnaire.query.filter_by(type=TYPE_PBI_FOLLOWUP).first_or_404()
         pbiresult = PbiFollowUp(
             patient=patients[0],
             date=date.today() - timedelta(days=i * 7),
             data=answers,
-            score=pbi_score(answers, questionnaire["value"], 4)
+            score=pbi_score(answers, questionnaire["value"], patients[0]["id"])
         )
         db.session.add(pbiresult)
 
