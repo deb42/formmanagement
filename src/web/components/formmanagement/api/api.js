@@ -52,7 +52,7 @@ api.factory("DiagnosisParticipants", ["$resource", function ($resource) {
 }]);
 
 api.factory("AssignedPatients", ["$resource", function ($resource) {
-            return $resource("/api/diagnosis/patients/:physician", {physician: "@physician"});
+            return $resource("/api/diagnosis/patients");
 }]);
 
 api.service("Session", ["$http", "$q", "getUserClass", "Physician",

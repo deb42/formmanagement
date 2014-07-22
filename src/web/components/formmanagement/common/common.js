@@ -46,6 +46,8 @@ common.factory('showSingUpDialog', ['$modal', '$http', 'Session', 'Patient',
                         username: $scope.patient.username,
                         pw_hash: $scope.patient.password,
                         name: $scope.patient.forename + " " + $scope.patient.surname,
+                        birthday: $scope.patient.birthday,
+                        gender:  $scope.patient.gender,
                         physician_id: 0
                     });
 

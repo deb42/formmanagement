@@ -45,13 +45,21 @@ def init_reply(answers, type, patient, value):
         )
         return dlqiresult
 
-    elif type == TYPE_PBI:
-        pbiresult = Pbi(
+    elif type == TYPE_PBI_FOLLOWUP:
+        pbiFolloupResult = PbiFollowUp(
             patient=patient,
             date=date.today(),
             data=answers,
         )
-        return pbiresult
+        return pbiFolloupResult
+
+    elif type == TYPE_PBI_NEW:
+        pbiNewResult = PbiNew(
+            patient=patient,
+            date=date.today(),
+            data=answers,
+        )
+        return pbiNewResult
 
     else: return 404
 

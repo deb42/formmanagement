@@ -16,8 +16,9 @@
             <div class="row">
                 <ul class="nav nav-tabs" role="tablist">
                     <li ng-repeat="(i, questionnaire) in questionnaires track by $index"
-                        ng-click="selectQuesionnaire(i); selectedQuestionnaire.index = i; updateData(replies)"
-                        ng-class="(selectedQuestionnaire.index == questionnaire.id -1) ? 'active': ''">
+                        ng-class="(selectedQuestionnaire.index == questionnaire.id -1) ? 'active': ''"
+                        ng-show="filterQuestionnaire(questionnaire)"
+                        ng-disabled="true">
                         <a>{{questionnaire.title}}</a>
                     </li>
                 </ul>

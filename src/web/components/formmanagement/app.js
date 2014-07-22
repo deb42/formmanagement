@@ -40,7 +40,12 @@ formmanagement.run(["Session", "$rootScope", "showLoginDialog", "$location", "is
             /* jshint bitwise:false */
             var user = session.user;
             if (user && isPatient(user)) {
-                $location.path("/questionnaire");
+                if (user.physician_id === 0) {
+                    $location.path("/questionnaire/new");
+                } else {
+                    $location.path("/questionnaire/followup");
+                }
+
             }
             if (user && isPhysician(user)) {
                 $location.path("/patients/all");
@@ -55,8 +60,10 @@ formmanagement.controller("NavbarCtrl", ["$scope", "$location", "Session", "isPh
         $scope.session = Session.get();
         $scope.isPhysician = isPhysician;
         $scope.isPatient = isPatient;
-        console.log($scope.session);
-        $scope.assignedPatients = AssignedPatients.query({physician: 3});
+
+        //if ($scope.session.user) {
+            $scope.assignedPatients = AssignedPatients.query();
+        //}
 
         $scope.getNavActiveClass = function (path) {
             if (path === "/") {
@@ -75,6 +82,7 @@ formmanagement.controller("NavbarCtrl", ["$scope", "$location", "Session", "isPh
          })*/
 
         $scope.logout = function () {
+            $location.path('/');
             Session.logout();
         };
     }]);

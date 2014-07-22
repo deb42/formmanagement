@@ -20,9 +20,9 @@ patients.controller("PatientsNewCtrl", ["$scope", "Session", "Patient", "Questio
         $scope.choosePatient = function (pPatient) {
             if (pPatient) {
                 var patient = new Patient({physician_id: $scope.session.user.id})
-                patient.$save({id: pPatient.id})
+                patient.$save({type: pPatient.id})
                 $scope.patientChoosen = true;
-                $scope.choosenPatient = new Array(pPatient);
+                $scope.choosenPatient = pPatient;
             } else {
                 $scope.noNewPatient = true;
             }
@@ -36,6 +36,23 @@ patients.controller("PatientsTodayCtrl", ["$scope", "Session", "Patient", "Quest
 
         $scope.session = Session.get();
         $scope.patients = Patient.query({type: 2}); //1}); //
+        $scope.questionnaires = Questionnaire.query();
+
+        $scope.$watchCollection('[patient]', function () {
+            if ($scope.patient) {
+                $scope.patientChoosen = true;
+                $scope.choosenPatient = $scope.patient;
+            }
+        }, true);
+
+
+    }]);
+
+patients.controller("PatientsAssignCtrl", ["$scope", "Session", "AssignedPatients", "Questionnaire",
+    function ($scope, Session, AssignedPatients, Questionnaire) {
+
+        $scope.session = Session.get();
+        $scope.patients = AssignedPatients.query();
         $scope.questionnaires = Questionnaire.query();
 
         $scope.$watchCollection('[patient]', function () {
@@ -87,7 +104,7 @@ patients.directive('patientOverview', ["Questionnaire", "Reply", "showDiagnosisP
                         for (var i = 0; i < scope.questionnaires.length; ++i) {
                             scope.replies.push(Reply.query({type: i + 9, id: scope.patient.id}));
                         }
-                        scope.updateData(scope.replies)
+                        //scope.updateData(scope.replies)
                     }
                 }, true);
 
@@ -167,21 +184,26 @@ common.factory('showDiagnosisParticipantsDialog', ['$modal', '$http', 'Session',
             $scope.choosenDiagnosisParticipants = DiagnosisParticipants.query({patient: patient_id});
 
             $scope.choosenPhysicians = new Array();
+            $scope.deletedPhysician = new Array();
 
             $scope.choosePhysicians = function (physician) {
                 $scope.choosenPhysicians.push(physician)
             };
 
+            $scope.deletePhysicians = function (physician) {
+                $scope.deletedPhysician.push(physician)
+            };
+
             $scope.save = function () {
 
                 for (var i = 0; i < $scope.choosenPhysicians.length; ++i) {
-                    console.log("post")
                     DiagnosisParticipants.save({
                         physician_id: $scope.choosenPhysicians[i].id,
                         patient_id: patient_id
 
                     })
                 }
+                $modalInstance.close();
             };
 
             $scope.back = function () {
@@ -193,12 +215,12 @@ common.factory('showDiagnosisParticipantsDialog', ['$modal', '$http', 'Session',
                 console.log($scope.choosenDiagnosisParticipants)
                 //console.log($.inArray(physician, $scope.choosenDiagnosisParticipants));
                 for (var i = 0; i < $scope.choosenDiagnosisParticipants.length; i++) {
-                    if($scope.choosenDiagnosisParticipants[i].id === physician.id){
+                    if ($scope.choosenDiagnosisParticipants[i].id === physician.id) {
                         return false;
                     }
                 }
                 for (var i = 0; i < $scope.choosenPhysicians.length; i++) {
-                    if($scope.choosenPhysicians[i].id === physician.id){
+                    if ($scope.choosenPhysicians[i].id === physician.id) {
                         return false;
                     }
                 }
@@ -223,8 +245,7 @@ common.factory('showDiagnosisParticipantsDialog', ['$modal', '$http', 'Session',
             });
         };
 
-    }])
-;
+    }]);
 
 
 patients.config(['$routeProvider', function ($routeProvider) {
@@ -238,8 +259,15 @@ patients.config(['$routeProvider', function ($routeProvider) {
         templateUrl: '/components/formmanagement/patients/selectionmethod/patients-today.html'
     });
 }]);
+
 patients.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/patients/all', {
         templateUrl: '/components/formmanagement/patients/selectionmethod/patients-all.html'
+    });
+}]);
+
+patients.config(['$routeProvider', function ($routeProvider) {
+    $routeProvider.when('/patients/assign', {
+        templateUrl: '/components/formmanagement/patients/selectionmethod/patients-assign.html'
     });
 }]);

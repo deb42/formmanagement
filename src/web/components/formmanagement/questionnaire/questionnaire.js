@@ -10,12 +10,41 @@ var questionaire = angular.module("formmanagement.questionnaire", [
     "formmanagement.api"
 ]);
 
-questionaire.controller("questionaireCtrl", ["$scope", "Session", "Patient", "Physician", "Questionnaire", "Reply",
-    function ($scope, Session, Patient, Physician, Questionnaire, Reply) {
+questionaire.controller("questionaireCtrl", ["$scope", "$location", "Session", "Patient", "Physician", "Questionnaire", "Reply",
+    function ($scope, $location, Session, Patient, Physician, Questionnaire, Reply) {
 
         $scope.session = Session.get();
         $scope.questionnaires = Questionnaire.query();
         $scope.answers = new Array(new Array());
+
+        if ($location.path() === "/questionnaire/new") {
+            $scope.new = true;
+            $scope.followUp = false;
+        }
+        if ($location.path() === "/questionnaire/followup") {
+            $scope.followUp = true;
+            $scope.new = false;
+        }
+
+        $scope.$watch('selectedQuestionnaire.index', function () {
+            console.log($location.path());
+            if ($location.path() === "/questionnaire/new" && $scope.selectedQuestionnaire.index === 2) {
+                $scope.selectedQuestionnaire.index++;
+                $scope.answers[$scope.selectedQuestionnaire.index] = new Array();
+            }
+        }, true);
+
+        $scope.filterQuestionnaire = function (questionnaire) {
+            if (questionnaire.id === 1 || questionnaire.id === 2) {
+                return true;
+            }
+            if (questionnaire.id === 3) {
+                return $scope.followUp;
+            }
+            if (questionnaire.id === 4) {
+                return $scope.new;
+            }
+        };
 
         $scope.selectedQuestionnaire = {"index": 0}
         $scope.selectQuesionnaire = function (index) {
@@ -44,9 +73,11 @@ questionaire.controller("questionaireCtrl", ["$scope", "Session", "Patient", "Ph
         }
 
         $scope.save = function () {
-            console.log($scope.answers.length);
-            for (var i=0; i<$scope.answers.length; ++i) {
-                console.log($scope.answers[i]);
+            console.log($scope.answers);
+            for (var i = 0; i < $scope.answers.length; ++i) {
+                if($scope.new && i===2){
+                    ++i;
+                }
                 var reply = new Reply({
                         data: $scope.answers[i]
                     }
@@ -57,7 +88,13 @@ questionaire.controller("questionaireCtrl", ["$scope", "Session", "Patient", "Ph
     }]);
 
 questionaire.config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/questionnaire', {
+    $routeProvider.when('/questionnaire/new', {
+        templateUrl: '/components/formmanagement/questionnaire/questionnaire.html'
+    });
+}]);
+
+questionaire.config(['$routeProvider', function ($routeProvider) {
+    $routeProvider.when('/questionnaire/followup', {
         templateUrl: '/components/formmanagement/questionnaire/questionnaire.html'
     });
 }]);

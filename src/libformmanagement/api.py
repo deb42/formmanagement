@@ -246,6 +246,7 @@ def add_reply(type, id):
     Don't forget to call db.session.commit()
     """
     type += TYPE_HADS
+    print(type)
     patient = Patient.query.filter_by(id=id).first_or_404()
     questionnaire = Questionnaire.query.filter_by(type=type).first_or_404()
     reply = init_reply(request.json["data"], type, patient, questionnaire["value"])
@@ -309,20 +310,22 @@ def get_diagnosis_physician(patient_id):
     return jsonify(Physician.query
                     .join("diagnosis_review").filter(DiagnosisParticipants.patient_id == patient_id).all())
 
-@api.route("/diagnosis/patients/<int:physician_id>")
-def get_assigned_patients(physician_id):
+@api.route("/diagnosis/patients")
+def get_assigned_patients():
     """
     POST to the list: add a new reply.
     The right type will be defined in the function init_reply
     Don't forget to call db.session.commit()
     """
     #return jsonify(Physician.query.filter(Physician.id.in_DiagnosisParticipants.query.filter_by(patient_id=patient_id).all(), Physician.id == DiagnosisParticipants.physician_id).all())
-    print(physician_id)
+    print()
     """
     return jsonify(DiagnosisParticipants.query
                    .options(joinedload("physician"))
                    .filter_by(patient_id=patient_id).select("patient").all())
     """
+    if not "user_id" in session:
+        abort(403)
 
     return jsonify(Patient.query
                     .join("diagnosis_review").filter(DiagnosisParticipants.physician_id == session["user_id"]).all())

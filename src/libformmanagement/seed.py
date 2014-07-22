@@ -150,7 +150,7 @@ def seed():
     hads_data = json.load(json_data)
 
     hads = Questionnaire(
-        title="hads",
+        title="HADS",
         content=hads_data["content"],
         type=TYPE_HADS,
         value=hads_data["value"],
@@ -163,7 +163,7 @@ def seed():
     dlqi_data = json.load(json_data)
 
     dlqi = Questionnaire(
-        title="dlqi",
+        title="DLQI",
         content=dlqi_data["content"],
         type=10,
         value=dlqi_data["value"],
@@ -176,9 +176,18 @@ def seed():
     pbi_data = json.load(json_data)
 
     pbi = Questionnaire(
-        title="pbi",
+        title="PBI Follow-Up",
         content=pbi_data["content"],
         type=11,
+        value=pbi_data["value"]
+    )
+
+    db.session.add(pbi)
+
+    pbi = Questionnaire(
+        title="PBI Erstaufnahme",
+        content=pbi_data["content"],
+        type=12,
         value=pbi_data["value"]
     )
 

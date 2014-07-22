@@ -29,7 +29,8 @@ remember: TYPE_HADS has to have the lowest number
 
 TYPE_HADS = 0b1001
 TYPE_DLQI = 0b1010
-TYPE_PBI = 0b1011
+TYPE_PBI_FOLLOWUP = 0b1011
+TYPE_PBI_NEW = 0b1100
 
 
 class User(db.Model):
@@ -143,10 +144,16 @@ class Dlqi(Reply):
     score = db.Column(db.Integer)
 
 
-class Pbi(Reply):
+class PbiFollowUp(Reply):
     id = db.Column(db.Integer, db.ForeignKey('reply.id'), primary_key=True)
     __mapper_args__ = {
-        'polymorphic_identity': TYPE_PBI
+        'polymorphic_identity': TYPE_PBI_FOLLOWUP
+    }
+
+class PbiNew(Reply):
+    id = db.Column(db.Integer, db.ForeignKey('reply.id'), primary_key=True)
+    __mapper_args__ = {
+        'polymorphic_identity': TYPE_PBI_NEW
     }
 
 class DiagnosisParticipants(db.Model):
