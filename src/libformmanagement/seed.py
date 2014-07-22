@@ -10,7 +10,7 @@ import json
 
 from .models import *
 from . import app
-from .questionnaire_api import anxiety_scale, depression_scale, dlqi_score
+from .questionnaire_api import anxiety_scale, depression_scale, dlqi_score , pbi_score, pbi_score_new
 
 
 # Flask's jsonify doesn't allow arrays to be returned by default,
@@ -182,6 +182,7 @@ def seed():
         content=pbi_data["content"],
         type=11,
         value=pbi_data["value"],
+        scores=pbi_data["scores"],
         instruction = pbi_data["instruction"]
     )
 
@@ -196,6 +197,7 @@ def seed():
         content=pbi_data["content"],
         type=12,
         value=pbi_data["value"],
+        scores=pbi_data["scores"],
         instruction = pbi_data["instruction"]
     )
 
@@ -258,6 +260,32 @@ def seed():
 
         )
         db.session.add(hadsresult)
+
+    answers = []
+    for j in range(0, 4):
+        answers.append(random.randint(0, 3))
+    questionnaire = Questionnaire.query.filter_by(type=TYPE_HADS).first_or_404()
+    pbiresult = PbiNew(
+        patient=patients[0],
+        date=date.today() - timedelta(days=i * 7),
+        data=answers,
+        score=pbi_score_new(answers, questionnaire["value"])
+    )
+    db.session.add(pbiresult)
+    db.session.commit()
+
+    for i in range(1, 30, 2):
+        answers = []
+        for j in range(0, 4):
+            answers.append(random.randint(0, 3))
+        questionnaire = Questionnaire.query.filter_by(type=TYPE_HADS).first_or_404()
+        pbiresult = PbiFollowUp(
+            patient=patients[0],
+            date=date.today() - timedelta(days=i * 7),
+            data=answers,
+            score=pbi_score(answers, questionnaire["value"], 4)
+        )
+        db.session.add(pbiresult)
 
     db.session.commit()
 

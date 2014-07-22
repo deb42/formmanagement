@@ -245,8 +245,8 @@ def add_reply(type, id):
     The right type will be defined in the function init_reply
     Don't forget to call db.session.commit()
     """
+
     type += TYPE_HADS
-    print(type)
     patient = Patient.query.filter_by(id=id).first_or_404()
     questionnaire = Questionnaire.query.filter_by(type=type).first_or_404()
     reply = init_reply(request.json["data"], type, patient, questionnaire["value"])

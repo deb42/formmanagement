@@ -123,7 +123,9 @@ class Reply(db.Model):
     }
 
     def __repr__(self):
-        return "%s: %s" % (self.patient_id, self.date)
+        return "%s: %s" % (self.patient_id, self.data)
+    def __getitem__(self, item):
+        if item == "data": return self.data
 
 
 class Hads(Reply):
@@ -150,12 +152,14 @@ class PbiFollowUp(Reply):
     __mapper_args__ = {
         'polymorphic_identity': TYPE_PBI_FOLLOWUP
     }
+    score = db.Column(db.Integer)
 
 class PbiNew(Reply):
     id = db.Column(db.Integer, db.ForeignKey('reply.id'), primary_key=True)
     __mapper_args__ = {
         'polymorphic_identity': TYPE_PBI_NEW
     }
+    score = db.Column(db.Integer)
 
 class DiagnosisParticipants(db.Model):
 
