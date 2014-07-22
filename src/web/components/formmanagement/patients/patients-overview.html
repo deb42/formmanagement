@@ -82,12 +82,19 @@
                 <i class="chevron fa fa-fw fa-chevron-down pull-right" ng-hide="collapsed"></i>
 
             </div>
-            <div class="panel-body" ng-hide="collapsed">
-                <!--    <div class="span6"> -->
-                <chart value="myChart" id="myCoolChart"></chart>
-                <!--<button ng-click="updateData(replies[selectedQuestionnaire.index])">
-                    Update Data
-                </button>-->
+            <div class="panel-body" style="overflow-x: auto" ng-hide="collapsed">
+                <div class="row">
+                    <div class="col-md-10">
+                        <chart value="myChart" id="myCoolChart"></chart>
+                    </div>
+                    <div class="col-md-2">
+                        <div ng-repeat="(i,score) in questionnaires[selectedQuestionnaire.index].scores track by $index"
+                             ng-style="{'color': colors[i]}">
+                            {{score.name}}
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 

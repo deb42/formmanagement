@@ -16,6 +16,7 @@ patients.controller("PatientsNewCtrl", ["$scope", "Session", "Patient", "Questio
         $scope.session = Session.get();
         $scope.patients = Patient.query({type: 0});
         $scope.questionnaires = Questionnaire.query();
+        $scope.colors = ["green", "blue", "yellow"];
 
         $scope.choosePatient = function (pPatient) {
             if (pPatient) {
@@ -71,6 +72,7 @@ patients.controller("PatientsAllCtrl", ["$scope", "Session", "Patient", "Questio
         $scope.session = Session.get();
         $scope.patients = Patient.query({type: 1});
         $scope.questionnaires = Questionnaire.query();
+        $scope.colors = ["green", "blue", "yellow"];
 
         $scope.choosePatient = function (pPatient) {
             $scope.patientChoosen = true;
@@ -119,7 +121,7 @@ patients.directive('patientOverview', ["Questionnaire", "Reply", "showDiagnosisP
                 };
 
                 scope.updateData = function (replies) {
-                    var colors = ["green", "blue", "yellow"];
+                    scope.colors = ["green", "blue", "yellow"];
 
                     var dates = function () {
                         var numberArray = [];
@@ -145,9 +147,9 @@ patients.directive('patientOverview', ["Questionnaire", "Reply", "showDiagnosisP
 
                         data.datasets.push(
                             {
-                                fillColor: colors[j],
-                                strokeColor: colors[j],
-                                pointColor: colors[j],
+                                fillColor: scope.colors[j],
+                                strokeColor: scope.colors[j],
+                                pointColor: scope.colors[j],
                                 pointStrokeColor: "#fff",
                                 data: scores()
                             }
