@@ -154,7 +154,8 @@ def seed():
         content=hads_data["content"],
         type=TYPE_HADS,
         value=hads_data["value"],
-        scores=hads_data["scores"]
+        scores=hads_data["scores"],
+        instruction = hads_data["instruction"]
     )
 
     db.session.add(hads)
@@ -167,28 +168,35 @@ def seed():
         content=dlqi_data["content"],
         type=10,
         value=dlqi_data["value"],
-        scores=dlqi_data["scores"]
+        scores=dlqi_data["scores"],
+        instruction = dlqi_data["instruction"]
     )
 
     db.session.add(dlqi)
 
-    json_data = open("./libformmanagement/seed/questionnaires/pbi.json")
+    json_data = open("./libformmanagement/seed/questionnaires/pbi_followup.json")
     pbi_data = json.load(json_data)
 
     pbi = Questionnaire(
         title="PBI Follow-Up",
         content=pbi_data["content"],
         type=11,
-        value=pbi_data["value"]
+        value=pbi_data["value"],
+        instruction = pbi_data["instruction"]
     )
 
     db.session.add(pbi)
+
+    json_data = open("./libformmanagement/seed/questionnaires/pbi_new.json")
+    pbi_data = json.load(json_data)
+
 
     pbi = Questionnaire(
         title="PBI Erstaufnahme",
         content=pbi_data["content"],
         type=12,
-        value=pbi_data["value"]
+        value=pbi_data["value"],
+        instruction = pbi_data["instruction"]
     )
 
     db.session.add(pbi)

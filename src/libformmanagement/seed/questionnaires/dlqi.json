@@ -90,6 +90,7 @@
     "scores": [
         {"name":"Score",
         "type": "score"}
-    ]
+    ],
+    "instruction": "Ziel  dieses  Fragebogens  ist  es,  herauszufinden,  wie  sehr  Ihre  Hauterkrankung  Ihr Leben  IN  DEN  VERGANGENEN  7  TAGEN  beeinflußt  hat.  Bitte  kreuzen  Sie  zu  jeder Frage ein Kästchen an. "
 
 }

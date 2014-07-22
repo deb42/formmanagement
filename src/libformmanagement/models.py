@@ -98,6 +98,7 @@ class Questionnaire(db.Model):
     content = db.Column(utils.JSONType(5000))
     value = db.Column(utils.JSONType(500))
     scores = db.Column(utils.JSONType(500))
+    instruction = db.Column(db.String(5000))
     patient_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 

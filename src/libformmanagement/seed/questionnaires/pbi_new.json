@@ -131,5 +131,6 @@
     "scores": [
         {"name":"",
         "type": ""}
-    ]
+    ],
+    "instruction": "Mit den folgenden Fragen möchten wir erfahren, wie wichtig Ihnen persönlich die unten genannten Ziele bei der aktuellen Behandlung Ihrer Hauterkrankung sind. Bitte kreuzen Sie zu jeder der folgenden Aussagen an, wie wichtig Ihnen dieses Behandlungsziel ist. Falls eine Aussage auf Sie nicht zutrifft, z.B. weil Sie keine Schmerzen haben, kreuzen Sie bitte 'betrifft mich nicht' an.  "
 }

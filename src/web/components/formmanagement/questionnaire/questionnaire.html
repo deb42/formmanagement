@@ -2,7 +2,22 @@
     <div class="content">
         <div ng-show="!init">
 
-            Lorem Ipsum
+            Sehr geehrte Patientin, sehr geehrter Patient!
+            <br><br>
+            Sie werden von uns wegen körperlicher Beschwerden untersucht und behandelt. Zur vollständigen Beurteilung
+            lhrer
+            vermuteten oder bereits bekannten Erkrankung bitten wir Sie in den vorliegenden Fragebögen um einige
+            personliche Angaben.
+            Man weiß heute, daß körperliche Krankheit und seelisches Befinden oft eng zusammenhängen. Deshalb beziehen
+            sich die Fragen ausdrücklich auf lhre allgemeine und seelische Verfassung.
+            Die Beantwortung ist selbstverstandlich freiwillig. Wir bitten Sie jedoch, jede Frage zu beantworten, und
+            zwar so, wie
+            es für Sie persönlich in der letzten Woche am ehesten zutraf. Machen Sie bitte nur ein Kreuz pro Frage und
+            lassen Sie
+            bitte keine Frage aus! Überlegen Sie bitte nicht lange, sondern wähllen Sie die Antwort aus, die Ihnen auf
+            Anhieb am
+            zutreffendsten erscheint! Alle Ihre Antworten unterliegen der ärztlichen Schweigepflicht.
+            <br><br>
 
             <div class="row">
                 <button type="button" class="btn btn-default" ng-click="init = true; selectQuesionnair(0)">
@@ -22,15 +37,11 @@
                         <a>{{questionnaire.title}}</a>
                     </li>
                 </ul>
-
-                <div class="pull-right">
-                    <button type="button" class="btn btn-default" ng-click="save(selecedQuestionaire)">
-                        <i class="fa fa-save fa-lg"></i>
-                        Speichern
-                    </button>
-                </div>
             </div>
-            <br/>
+            <br><br>
+
+            {{questionnaires[selectedQuestionnaire.index].instruction}}
+            <br><br>
 
             <div class="row">
                 <questionnaire-form questionnaire="questionnaires[selectedQuestionnaire.index]"
@@ -41,6 +52,12 @@
 
             <div class="row">
                 <button type="button" class="btn btn-default" ng-click="proceed()">Weiter</button>
+            </div>
+            <div class="pull-right">
+                <button type="button" class="btn btn-default" ng-click="save(selecedQuestionaire)">
+                    <i class="fa fa-save fa-lg"></i>
+                    Speichern
+                </button>
             </div>
         </div>
     </div>
