@@ -25,5 +25,3 @@ BASIC_AUTH_PASSWORD = "1234"
 
 # Host and Port to bind on.
 # "" binds on all hosts.
-APP_HOST = "255.0.0.0"
-APP_PORT = 6996
