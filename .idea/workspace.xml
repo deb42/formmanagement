@@ -3,7 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="07b7f7e2-8f48-478f-b551-a47595ba3548" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/formmanagement.db" afterPath="$PROJECT_DIR$/src/formmanagement.db" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libformmanagement/seed/questionnaires/dlqi.json" afterPath="$PROJECT_DIR$/src/libformmanagement/seed/questionnaires/dlqi.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/formmanagement.py" afterPath="$PROJECT_DIR$/src/formmanagement.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/web/index.html" afterPath="$PROJECT_DIR$/src/web/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/web/components/formmanagement/login/new-patient.html" afterPath="$PROJECT_DIR$/src/web/components/formmanagement/login/new-patient.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/web/components/formmanagement/questionnaire/questionnaire.html" afterPath="$PROJECT_DIR$/src/web/components/formmanagement/questionnaire/questionnaire.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/web/components/formmanagement/questionnaire/questionnaire.js" afterPath="$PROJECT_DIR$/src/web/components/formmanagement/questionnaire/questionnaire.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libformmanagement/questionnaire_api.py" afterPath="$PROJECT_DIR$/src/libformmanagement/questionnaire_api.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="formmanagement.iws" />
@@ -16,7 +22,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/formmanagement$formmanagement.coverage" NAME="formmanagement Coverage Results" MODIFIED="1406040170121" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/formmanagement$formmanagement.coverage" NAME="formmanagement Coverage Results" MODIFIED="1406146912108" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -30,42 +36,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="formmanagement.less" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/web/components/formmanagement/css/formmanagement.less">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1406" max-vertical-offset="1938">
-              <caret line="106" column="19" selection-start-line="106" selection-start-column="19" selection-end-line="106" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="seed.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/libformmanagement/seed.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2601" max-vertical-offset="5406">
-              <caret line="175" column="29" selection-start-line="175" selection-start-column="29" selection-end-line="175" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/libformmanagement/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1224" max-vertical-offset="2941">
-              <caret line="72" column="71" selection-start-line="72" selection-start-column="71" selection-end-line="72" selection-end-column="71" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="api.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/libformmanagement/api.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="4658">
-              <caret line="3" column="52" selection-start-line="3" selection-start-column="52" selection-end-line="3" selection-end-column="52" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="4658">
+              <caret line="23" column="32" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
+              <folding>
+                <element signature="e#18#100#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="questionnaire.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/web/components/formmanagement/questionnaire/questionnaire.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1107" max-vertical-offset="2006">
+              <caret line="81" column="13" selection-start-line="81" selection-start-column="13" selection-end-line="81" selection-end-column="13" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config_dev.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/config_dev.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.3552239" vertical-offset="102" max-vertical-offset="578">
+              <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="formmanagement.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/formmanagement.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
+              <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
+              <folding>
+                <element signature="e#18#100#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -74,17 +84,27 @@
         <entry file="file://$PROJECT_DIR$/src/web/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-8.807693" vertical-offset="825" max-vertical-offset="1700">
-              <caret line="62" column="56" selection-start-line="62" selection-start-column="56" selection-end-line="62" selection-end-column="56" />
+              <caret line="62" column="50" selection-start-line="62" selection-start-column="50" selection-end-line="62" selection-end-column="50" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="questionnaire.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/web/components/formmanagement/questionnaire/questionnaire.js">
+      <file leaf-file-name="questionnaire_api.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/libformmanagement/questionnaire_api.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.49554896" vertical-offset="1329" max-vertical-offset="1870">
-              <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="1496">
+              <caret line="38" column="55" selection-start-line="38" selection-start-column="55" selection-end-line="38" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="new-patient.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/web/components/formmanagement/login/new-patient.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.884615" vertical-offset="287" max-vertical-offset="1632">
+              <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -93,29 +113,32 @@
       <file leaf-file-name="questionnaire.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/web/components/formmanagement/questionnaire/questionnaire.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.6538463" vertical-offset="832" max-vertical-offset="1156">
-              <caret line="53" column="101" selection-start-line="53" selection-start-column="101" selection-end-line="53" selection-end-column="101" />
-              <folding />
+            <state vertical-scroll-proportion="-8.576923" vertical-offset="321" max-vertical-offset="765">
+              <caret line="62" column="48" selection-start-line="62" selection-start-column="48" selection-end-line="62" selection-end-column="48" />
+              <folding>
+                <element signature="tag#div#1;tag#div#0;tag#div#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/web/components/formmanagement/app.js">
+      <file leaf-file-name="dlqi.json" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/libformmanagement/seed/questionnaires/dlqi.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1071" max-vertical-offset="1513">
-              <caret line="62" column="32" selection-start-line="62" selection-start-column="32" selection-end-line="62" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="api.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/web/components/formmanagement/api/api.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="167" max-vertical-offset="3315">
-              <caret line="21" column="23" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="23" />
-              <folding />
+            <state vertical-scroll-proportion="-0.65384614" vertical-offset="17" max-vertical-offset="629">
+              <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
+              <folding>
+                <element signature="e#27#549#0" expanded="false" />
+                <element signature="e#559#1077#0" expanded="false" />
+                <element signature="e#1087#1721#0" expanded="false" />
+                <element signature="e#1731#2362#0" expanded="false" />
+                <element signature="e#2372#3024#0" expanded="false" />
+                <element signature="e#3034#3652#0" expanded="false" />
+                <element signature="e#3662#4295#0" expanded="false" />
+                <element signature="e#4305#4953#0" expanded="false" />
+                <element signature="e#4963#5568#0" expanded="false" />
+                <element signature="e#5578#6282#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -152,7 +175,6 @@
         <option value="$PROJECT_DIR$/src/web/components/formmanagement/patients/patients.html" />
         <option value="$PROJECT_DIR$/src/web/components/formmanagement/patients/all-patients.html" />
         <option value="dbtable:/6f83da5b/6983d0ce-35dc-4137-a2c0-7d2fa1398eca/..user" />
-        <option value="$PROJECT_DIR$/src/web/components/formmanagement/login/new-patient.html" />
         <option value="$PROJECT_DIR$/src/web/components/formmanagement/questionnaire/quesionnaire.css" />
         <option value="$PROJECT_DIR$/src/web/components/formmanagement/css/all.css" />
         <option value="$PROJECT_DIR$/src/web/components/formmanagement/css/formmanager.css" />
@@ -173,17 +195,14 @@
         <option value="dbtable:/6f83da5b/9e36dcfd-0a3f-4b1b-b3e9-5d1ea8e39af1/..diagnosis_participants" />
         <option value="$PROJECT_DIR$/src/libformmanagement/templates/admin_index.html" />
         <option value="$PROJECT_DIR$/src/config_dev.py" />
-        <option value="$PROJECT_DIR$/src/formmanagement.py" />
         <option value="$PROJECT_DIR$/src/web/components/formmanagement/patients/diagnosis-participants.html" />
         <option value="$PROJECT_DIR$/src/web/components/formmanagement/patients/selectionmethod/patients-assign.html" />
         <option value="$PROJECT_DIR$/src/libformmanagement/admin.py" />
         <option value="$PROJECT_DIR$/src/web/components/formmanagement/patients/patients.js" />
         <option value="$PROJECT_DIR$/src/libformmanagement/seed/questionnaires/hads.json" />
-        <option value="$PROJECT_DIR$/src/libformmanagement/seed/questionnaires/dlqi.json" />
         <option value="$PROJECT_DIR$/src/web/components/formmanagement/patients/patients-overview.html" />
         <option value="$PROJECT_DIR$/src/libformmanagement/seed/questionnaires/pbi_new.json" />
         <option value="$PROJECT_DIR$/src/libformmanagement/seed/questionnaires/pbi_followup.json" />
-        <option value="$PROJECT_DIR$/src/libformmanagement/questionnaire_api.py" />
         <option value="$PROJECT_DIR$/src/web/components/formmanagement/css/formmanagement.less" />
         <option value="$PROJECT_DIR$/src/libformmanagement/api.py" />
         <option value="$PROJECT_DIR$/src/libformmanagement/models.py" />
@@ -191,17 +210,19 @@
         <option value="$PROJECT_DIR$/src/web/components/formmanagement/app.js" />
         <option value="$PROJECT_DIR$/src/web/components/formmanagement/api/api.js" />
         <option value="$PROJECT_DIR$/src/web/components/formmanagement/common/common.js" />
-        <option value="$PROJECT_DIR$/src/web/index.html" />
+        <option value="$PROJECT_DIR$/src/formmanagement.py" />
+        <option value="$PROJECT_DIR$/src/web/components/formmanagement/login/new-patient.html" />
         <option value="$PROJECT_DIR$/src/web/components/formmanagement/questionnaire/questionnaire.html" />
+        <option value="$PROJECT_DIR$/src/libformmanagement/seed/questionnaires/dlqi.json" />
+        <option value="$PROJECT_DIR$/src/web/index.html" />
         <option value="$PROJECT_DIR$/src/web/components/formmanagement/questionnaire/questionnaire.js" />
+        <option value="$PROJECT_DIR$/src/libformmanagement/questionnaire_api.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="784" />
+    <option name="width" value="1319" />
+    <option name="height" value="768" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -954,23 +975,23 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <frame x="0" y="0" width="1319" height="768" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924962" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924962" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32671756" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27416918" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2900302" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3140365" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39541984" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32692307" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39389312" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.40219092" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924962" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32671756" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39541984" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1017,17 +1038,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="28" />
+      <option name="time" value="29" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/web/components/fontawesome/less/font-awesome.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="26724">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/web/components/bootstrap/less/labels.less">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1190">
@@ -1150,13 +1164,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/config_dev.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="200" max-vertical-offset="578">
-          <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/web/components/formmanagement/patients/selectionmethod/patients-assign.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="306">
@@ -1203,32 +1210,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-15.3" vertical-offset="0" max-vertical-offset="2720">
           <caret line="78" column="24" selection-start-line="78" selection-start-column="23" selection-end-line="78" selection-end-column="24" />
-          <folding>
-            <element signature="e#117#160#0" expanded="false" />
-            <element signature="e#964#1465#0" expanded="false" />
-            <element signature="e#1069#1464#0" expanded="false" />
-            <element signature="e#1511#2020#0" expanded="false" />
-            <element signature="e#1634#2019#0" expanded="false" />
-            <element signature="e#6318#8905#0" expanded="false" />
-            <element signature="e#8971#9118#0" expanded="false" />
-            <element signature="e#9184#9335#0" expanded="false" />
-            <element signature="e#9401#9548#0" expanded="false" />
-            <element signature="e#9614#9767#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/web/components/formmanagement/login/new-patient.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.5" vertical-offset="1224" max-vertical-offset="1632">
-          <caret line="85" column="56" selection-start-line="85" selection-start-column="56" selection-end-line="85" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/formmanagement.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1281,13 +1262,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/libformmanagement/seed/questionnaires/dlqi.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.153846" vertical-offset="1352" max-vertical-offset="1717">
-          <caret line="92" column="6" selection-start-line="89" selection-start-column="4" selection-end-line="92" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python27/Lib/site-packages/flask_sqlalchemy/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="6205" max-vertical-offset="14807">
@@ -1309,14 +1283,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/libformmanagement/questionnaire_api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0" vertical-offset="646" max-vertical-offset="1479">
-          <caret line="38" column="15" selection-start-line="38" selection-start-column="15" selection-end-line="38" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/libformmanagement/seed/questionnaires/pbi_followup.json">
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
@@ -1324,7 +1290,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="10612" max-vertical-offset="11458">
           <caret line="662" column="6" selection-start-line="662" selection-start-column="6" selection-end-line="662" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1332,38 +1297,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1406" max-vertical-offset="1938">
           <caret line="106" column="19" selection-start-line="106" selection-start-column="19" selection-end-line="106" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/libformmanagement/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="476" max-vertical-offset="2839">
-          <caret line="72" column="71" selection-start-line="72" selection-start-column="71" selection-end-line="72" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/web/components/formmanagement/api/api.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="167" max-vertical-offset="3315">
-          <caret line="21" column="23" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/web/components/formmanagement/common/common.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="2771">
-          <caret line="23" column="54" selection-start-line="23" selection-start-column="54" selection-end-line="23" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/web/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.807693" vertical-offset="825" max-vertical-offset="1700">
-          <caret line="62" column="56" selection-start-line="62" selection-start-column="56" selection-end-line="62" selection-end-column="56" />
           <folding />
         </state>
       </provider>
@@ -1376,18 +1309,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/libformmanagement/api.py">
+    <entry file="file://$PROJECT_DIR$/src/libformmanagement/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="4658">
-          <caret line="3" column="52" selection-start-line="3" selection-start-column="52" selection-end-line="3" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/web/components/formmanagement/questionnaire/questionnaire.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.6538463" vertical-offset="832" max-vertical-offset="1156">
-          <caret line="53" column="101" selection-start-line="53" selection-start-column="101" selection-end-line="53" selection-end-column="101" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="476" max-vertical-offset="2839">
+          <caret line="72" column="71" selection-start-line="72" selection-start-column="71" selection-end-line="72" selection-end-column="71" />
           <folding />
         </state>
       </provider>
@@ -1400,10 +1325,115 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/web/components/formmanagement/api/api.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="167" max-vertical-offset="3315">
+          <caret line="21" column="23" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/libformmanagement/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="174" max-vertical-offset="782">
+          <caret line="31" column="15" selection-start-line="31" selection-start-column="15" selection-end-line="31" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/libformmanagement/api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="4658">
+          <caret line="23" column="32" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
+          <folding>
+            <element signature="e#18#100#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/formmanagement.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
+          <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
+          <folding>
+            <element signature="e#18#100#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/web/components/formmanagement/login/new-patient.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.884615" vertical-offset="287" max-vertical-offset="1632">
+          <caret line="32" column="28" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/web/components/formmanagement/common/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="2771">
+          <caret line="23" column="54" selection-start-line="23" selection-start-column="54" selection-end-line="23" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/web/components/formmanagement/questionnaire/questionnaire.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.576923" vertical-offset="321" max-vertical-offset="765">
+          <caret line="62" column="48" selection-start-line="62" selection-start-column="48" selection-end-line="62" selection-end-column="48" />
+          <folding>
+            <element signature="tag#div#1;tag#div#0;tag#div#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/libformmanagement/seed/questionnaires/dlqi.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.65384614" vertical-offset="17" max-vertical-offset="629">
+          <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
+          <folding>
+            <element signature="e#27#549#0" expanded="false" />
+            <element signature="e#559#1077#0" expanded="false" />
+            <element signature="e#1087#1721#0" expanded="false" />
+            <element signature="e#1731#2362#0" expanded="false" />
+            <element signature="e#2372#3024#0" expanded="false" />
+            <element signature="e#3034#3652#0" expanded="false" />
+            <element signature="e#3662#4295#0" expanded="false" />
+            <element signature="e#4305#4953#0" expanded="false" />
+            <element signature="e#4963#5568#0" expanded="false" />
+            <element signature="e#5578#6282#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/web/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.807693" vertical-offset="825" max-vertical-offset="1700">
+          <caret line="62" column="50" selection-start-line="62" selection-start-column="50" selection-end-line="62" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/web/components/formmanagement/questionnaire/questionnaire.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49554896" vertical-offset="1329" max-vertical-offset="1870">
-          <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1107" max-vertical-offset="2006">
+          <caret line="81" column="13" selection-start-line="81" selection-start-column="13" selection-end-line="81" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/libformmanagement/questionnaire_api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="1496">
+          <caret line="38" column="55" selection-start-line="38" selection-start-column="55" selection-end-line="38" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/config_dev.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3552239" vertical-offset="102" max-vertical-offset="578">
+          <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
           <folding />
         </state>
       </provider>

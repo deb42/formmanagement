@@ -27,7 +27,7 @@
             </div>
         </div>
 
-        <div ng-show="init">
+        <div ng-show="init && !saved">
             <div class="row">
                 <ul class="nav nav-tabs" role="tablist">
                     <li ng-repeat="(i, questionnaire) in questionnaires track by $index"
@@ -57,6 +57,13 @@
                     Speichern
                 </button>
             </div>
+        </div>
+
+        <div ng-show="saved" class="text-center">
+            Vielen Dank für Ihre Zusammenarbeit. <br> <br>
+            <button type="button" class="btn btn-default" ng-click="logout()">
+                Ausloggen
+            </button>
         </div>
     </div>
 </div>
