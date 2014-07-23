@@ -30,13 +30,15 @@ def pbi_score(answers, value, id):
     pbi_score = 0
     for i in range(0,answers.__len__()-1,1):
         pbi_score += int(value[i][int(answers[i])] - int(pbiNew.__getitem__("data")[i]))
+    pbi_score = pbi_score
     return pbi_score
 
 def pbi_score_new(answers, value):
-    pbi_score = 0
+    pbi_score_new = 0
     for i in range(0,answers.__len__(),1):
-        pbi_score += int(value[i][int(answers[i])])
-    return pbi_score
+        pbi_score_new += int(value[i][int(answers[i])])
+        pbi_score_new = pbi_score_new
+    return pbi_score_new
 
 
 def init_reply(answers, type, patient, value):

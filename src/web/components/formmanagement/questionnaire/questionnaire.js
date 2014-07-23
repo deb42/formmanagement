@@ -67,8 +67,7 @@ questionaire.controller("questionaireCtrl", ["$scope", "$location", "Session", "
         $scope.proceed = function () {
             for (var i = 0; i < $scope.questionnaire.content.length; ++i) {
                 if (!$scope.answers[$scope.selectedQuestionnaire.index][i]) {
-                    alert("Bitte vollständig ausfüllen");
-                    return;
+                    $scope.answers[$scope.selectedQuestionnaire.index][i] = 0;
                 }
             }
             $scope.selectQuesionnaire(++$scope.selectedQuestionnaire.index);
@@ -76,6 +75,11 @@ questionaire.controller("questionaireCtrl", ["$scope", "$location", "Session", "
         }
 
         $scope.save = function () {
+            for (var i = 0; i < $scope.questionnaire.content.length; ++i) {
+                if (!$scope.answers[$scope.selectedQuestionnaire.index][i]) {
+                    $scope.answers[$scope.selectedQuestionnaire.index][i] = 0;
+                }
+            }
             for (var i = 0; i < $scope.answers.length; ++i) {
                 if ($scope.new && i === 2) {
                     ++i;
@@ -86,8 +90,12 @@ questionaire.controller("questionaireCtrl", ["$scope", "$location", "Session", "
                 );
                 reply.$save({type: i, id: $scope.session.user.id});
             }
-
+            $scope.saved = true;
         };
+
+        $scope.logout = function () {
+            Session.logout();
+        }
     }]);
 
 questionaire.config(['$routeProvider', function ($routeProvider) {

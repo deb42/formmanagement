@@ -79,11 +79,149 @@
 
             ],
             "choice": ""
+        },
+        {
+            "issue": "Wie sehr hat Ihre Hauterkrankung in den vergangenen 7 Tagen Ihre Aktivitäten mit anderen Menschen oder Ihre Freizeitgestaltung beeinflußt? ",
+            "answers": [
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "ein bißchen"
+                },
+                {
+                    "content": "überhaupt nicht"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ],
+            "choice": ""
+        },
+        {
+            "issue": "Wie sehr hat Ihre Hauterkrankung es Ihnen in den vergangenen 7 Tagen erschwert, sportlich aktiv zu sein? ",
+            "answers": [
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "ein bißchen"
+                },
+                {
+                    "content": "überhaupt nicht"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ],
+            "choice": ""
+        },
+        {
+            "issue": " Ihre Hauterkrankung in den vergangenen 7 Tagen ein Problem bei Ihrer beruflichen Tätigkeit bzw. Ihrem Studium gewesen? ",
+            "answers": [
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "ein bißchen"
+                },
+                {
+                    "content": "überhaupt nicht"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ],
+            "choice": ""
+        },
+        {
+            "issue": "Wie sehr hat Ihre Hauterkrankung in den vergangenen 7 Tagen Probleme im Umgang mit Ihrem Partner, Freunden oder Verwandten verursacht? ",
+            "answers": [
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "ein bißchen"
+                },
+                {
+                    "content": "überhaupt nicht"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ],
+            "choice": ""
+        },
+        {
+            "issue": "Wie sehr hat Ihre Hauterkrankung in den vergangenen 7 Tagen Ihr Liebesleben beeinträchtigt? ",
+            "answers": [
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "ein bißchen"
+                },
+                {
+                    "content": "überhaupt nicht"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ],
+            "choice": ""
+        },
+        {
+            "issue": "Inwieweit war die Behandlung Ihrer Haut in den vergangenen 7 Tagen für Sie mit Problemen verbunden (z. B. weil die Behandlung Zeit in Anspruch nahm oder dadurch Ihr Haushalt unsauber wurde)? ",
+            "answers": [
+                {
+                    "content": "sehr"
+                },
+                {
+                    "content": "ziemlich"
+                },
+                {
+                    "content": "ein bißchen"
+                },
+                {
+                    "content": "überhaupt nicht"
+                },
+                {
+                    "content": "betrifft mich nicht"
+                }
+
+            ],
+            "choice": ""
         }
     ],
     "value": [
         [3, 2, 1, 0],
         [3, 2, 1, 0],
+        [3, 2, 1, 0, 0],
+        [3, 2, 1, 0, 0],
+        [3, 2, 1, 0, 0],
+        [3, 2, 1, 0, 0],
+        [3, 2, 1, 0, 0],
+        [3, 2, 1, 0, 0],
         [3, 2, 1, 0, 0],
         [3, 2, 1, 0, 0]
     ],

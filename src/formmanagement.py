@@ -17,4 +17,4 @@ if __name__ == "__main__":
 
     seed()
 
-    app.run(threaded=True)
+    app.run(threaded=True, port=6996)
