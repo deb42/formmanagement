@@ -60,7 +60,7 @@
                 </li>
                 <li ng-class="getNavActiveClass('/patients/assign')"
                     class="navbar-element navbar-element-left navbar-element-right" ng-show="isAdmin(session.user)">
-                    <a href="http://127.0.0.1:6996/admin">Admin</a>
+                    <a href="/admin">Admin</a>
                 </li>
                 <li class="navbar-element navbar-element-left navbar-element-right"
                     ng-show="isPatient(session.user)"><a href="#/questionnaire">Fragebögen</a>
@@ -69,14 +69,10 @@
 
             </ul>
             <ul class="nav pull-right">
-                <li class="dropdown pull-right">
-                    <a class="fm-navbar-right dropdown-toggle"
-                       data-toggle="dropdown">{{session.user.name}} <span
-                            class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a ng-click="logout()">Logout</a></li>
-                    </ul>
-                </li>
+
+
+                <li><a ng-click="logout()">Logout</a></li>
+
             </ul>
 
             <!-- /.navbar-collapse -->
