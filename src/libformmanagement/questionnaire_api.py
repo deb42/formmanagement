@@ -6,21 +6,24 @@ from datetime import date
 def anxiety_scale(answers, value):
     anxiety_scale = 0
     for i in range(0,answers.__len__(),2):
-        anxiety_scale += int(value[i][int(answers[i])])
+        if int(answers[i]) != -1:
+            anxiety_scale += int(value[i][int(answers[i])])
     return anxiety_scale
 
 
 def depression_scale(answers, value):
     depression_scale = 0
     for i in range(1,answers.__len__(),2):
-        depression_scale += int(value[i][int(answers[i])])
+        if int(answers[i]) != -1:
+            depression_scale += int(value[i][int(answers[i])])
     return depression_scale
 
 
 def dlqi_score(answers, value):
     dlqi_score = 0
     for i in range(0,answers.__len__(),1):
-        dlqi_score += int(value[i][int(answers[i])])
+        if int(answers[i]) != -1:
+            dlqi_score += int(value[i][int(answers[i])])
     return dlqi_score
 
 
@@ -29,15 +32,16 @@ def pbi_score(answers, value, id):
     pbiNew = PbiNew.query.filter_by(patient_id=id).first_or_404()
     pbi_score = 0
     for i in range(0,answers.__len__()-1,1):
-        pbi_score += int(value[i][int(answers[i])] - int(pbiNew.__getitem__("data")[i]))
+        if int(answers[i]) != -1:
+            pbi_score += int(value[i][int(answers[i])] - int(pbiNew.__getitem__("data")[i]))
     pbi_score = pbi_score
     return pbi_score
 
 def pbi_score_new(answers, value):
     pbi_score_new = 0
     for i in range(0,answers.__len__(),1):
-        pbi_score_new += int(value[i][int(answers[i])])
-        pbi_score_new = pbi_score_new
+        if int(answers[i]) != -1:
+            pbi_score_new += int(value[i][int(answers[i])])
     return pbi_score_new
 
 

@@ -67,7 +67,7 @@ questionaire.controller("questionaireCtrl", ["$scope", "$location", "Session", "
         $scope.proceed = function () {
             for (var i = 0; i < $scope.questionnaire.content.length; ++i) {
                 if (!$scope.answers[$scope.selectedQuestionnaire.index][i]) {
-                    $scope.answers[$scope.selectedQuestionnaire.index][i] = 0;
+                    $scope.answers[$scope.selectedQuestionnaire.index][i] = -1;
                 }
             }
             $scope.selectQuesionnaire(++$scope.selectedQuestionnaire.index);
@@ -77,7 +77,7 @@ questionaire.controller("questionaireCtrl", ["$scope", "$location", "Session", "
         $scope.save = function () {
             for (var i = 0; i < $scope.questionnaire.content.length; ++i) {
                 if (!$scope.answers[$scope.selectedQuestionnaire.index][i]) {
-                    $scope.answers[$scope.selectedQuestionnaire.index][i] = 0;
+                    $scope.answers[$scope.selectedQuestionnaire.index][i] = -1;
                 }
             }
             for (var i = 0; i < $scope.answers.length; ++i) {
